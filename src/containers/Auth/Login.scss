@@ -1,0 +1,113 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .login-form {
+    width: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-input-group {
+      margin-bottom: 20px;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #dddfe2;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #64b9e5;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #18adf2;
+      }
+    }
+
+    .login-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-top: 30px;
+    }
+
+    .login-divider {
+      margin: 0 5px;
+      color: #9197a3;
+    }
+
+    .login-link {
+      color: #385898;
+      text-decoration: none;
+
+      &:hover {
+        color: #18adf2;
+        text-decoration: underline;
+      }
+    }
+
+    .social-login {
+      margin-top: 20px;
+      text-align: center;
+
+      .social-login-title {
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      .social-login-icons {
+        display: flex;
+        justify-content: center;
+
+        .social-login-icon {
+          display: inline-block;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: #f1f3f6;
+          margin: 0 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+
+          i {
+            color: #385898;
+          }
+
+          &.facebook-icon i {
+            color: #3b5998;
+          }
+
+          &.twitter-icon i {
+            color: #1da1f2;
+          }
+
+          &.google-icon i {
+            color: #ea4335;
+          }
+        }
+      }
+    }
+  }
+}

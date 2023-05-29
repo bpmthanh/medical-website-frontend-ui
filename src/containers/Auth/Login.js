@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-
-import * as actions from "../store/actions";
-import { KeyCodeUtils, LanguageUtils } from "../utils";
-
-import userIcon from "../../src/assets/images/user.svg";
-import passIcon from "../../src/assets/images/pass.svg";
+// import * as actions from "../store/actions";
+import * as actions from "../../store/actions";
 import "./Login.scss";
-import { FormattedMessage } from "react-intl";
-
-import adminService from "../services/adminService";
 
 class Login extends Component {
   constructor(props) {
@@ -19,64 +12,52 @@ class Login extends Component {
   }
 
   render() {
-    const { username, password, loginError } = this.state;
-    const { lang } = this.props;
-
     return (
-      <div className="login-wrapper">
-        <div className="login-container">
-          <div className="form_login">
-            <h2 className="title">
-              <FormattedMessage id="login.login" />
-            </h2>
-            <div className="form-group icon-true">
-              <img className="icon" src={userIcon} alt="this" />
-              <input
-                placeholder={LanguageUtils.getMessageByKey(
-                  "login.username",
-                  lang
-                )}
-                id="username"
-                name="username"
-                type="text"
-                className="form-control"
-                value={username}
-                onChange={this.onUsernameChange}
-              />
+      <div className="login-container">
+        <div className="login-form">
+          <div className="login-logo">
+            <img
+              src="https://bookingcare.vn/assets/icon/bookingcare-2020.svg"
+              alt="Booking care Logo"
+            />
+          </div>
+          <div className="login-input-group">
+            <input
+              type="text"
+              className="login-input"
+              placeholder="Email hoặc số điện thoại"
+            />
+            <input
+              type="password"
+              className="login-input"
+              placeholder="Mật khẩu"
+            />
+          </div>
+          <button type="submit" className="login-button">
+            Đăng nhập
+          </button>
+          <div className="social-login">
+            <div className="social-login-title">Hoặc đăng nhập với:</div>
+            <div className="social-login-icons">
+              <a href="#" className="social-login-icon facebook-icon">
+                <i className="fab fa-facebook-f" />
+              </a>
+              <a href="#" className="social-login-icon twitter-icon">
+                <i className="fab fa-twitter" />
+              </a>
+              <a href="#" className="social-login-icon google-icon">
+                <i className="fab fa-google" />
+              </a>
             </div>
-
-            <div id="phone-input-container" className="form-group icon-true">
-              <img className="icon" src={passIcon} alt="this" />
-              <input
-                placeholder={LanguageUtils.getMessageByKey(
-                  "login.password",
-                  lang
-                )}
-                id="password"
-                name="password"
-                type="password"
-                className="form-control"
-                value={password}
-                onChange={this.onPasswordChange}
-              />
-            </div>
-
-            {loginError !== "" && (
-              <div className="login-error">
-                <span className="login-error-message">{loginError}</span>
-              </div>
-            )}
-
-            <div className="form-group login">
-              <input
-                ref={this.btnLogin}
-                id="btnLogin"
-                type="submit"
-                className="btn"
-                value={LanguageUtils.getMessageByKey("login.login", lang)}
-                onClick={this.processLogin}
-              />
-            </div>
+          </div>
+          <div className="login-links">
+            <a href="#" className="login-link">
+              Quên mật khẩu?
+            </a>
+            <span className="login-divider">·</span>
+            <a href="#" className="login-link">
+              Tạo tài khoản mới
+            </a>
           </div>
         </div>
       </div>
@@ -86,7 +67,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    lang: state.app.language,
+    language: state.app.language,
   };
 };
 
