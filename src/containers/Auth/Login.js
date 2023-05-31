@@ -4,12 +4,53 @@ import { push } from "connected-react-router";
 // import * as actions from "../store/actions";
 import * as actions from "../../store/actions";
 import "./Login.scss";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.btnLogin = React.createRef();
+    this.state = {
+      userName: "",
+      password: "",
+      isShowPassword: false,
+    };
   }
+
+  handleOnchangeUsername = (event) => {
+    this.setState({
+      userName: event.target.value,
+    });
+  };
+
+  handleOnchangePassword = (event) => {
+    this.setState({
+      password: event.target.value,
+    });
+    const eyeHandle = document.querySelector(".eye-handle");
+    if (event.target.value !== "") {
+      eyeHandle.style.visibility = "visible";
+    } else {
+      eyeHandle.style.visibility = "hidden";
+    }
+  };
+
+  handleLogin = () => {};
+
+  handleShowHidePassword = (event) => {
+    this.setState(
+      (prevState) => ({
+        isShowPassword: !prevState.isShowPassword,
+      }),
+      () => {
+        const eyeHandle = document.querySelector(".eye-handle");
+        if (this.state.isShowPassword) {
+          eyeHandle.classList.replace("fa-eye-slash", "fa-eye");
+        } else {
+          eyeHandle.classList.replace("fa-eye", "fa-eye-slash");
+        }
+      }
+    );
+  };
 
   render() {
     return (
@@ -26,14 +67,30 @@ class Login extends Component {
               type="text"
               className="login-input"
               placeholder="Email hoặc số điện thoại"
+              value={this.state.userName}
+              onChange={(event) => this.handleOnchangeUsername(event)}
             />
-            <input
-              type="password"
-              className="login-input"
-              placeholder="Mật khẩu"
-            />
+            <div className="custom-input-password">
+              <input
+                type={this.state.isShowPassword ? "text" : "password"}
+                className="login-input"
+                placeholder="Mật khẩu"
+                value={this.state.password}
+                onChange={(event) => this.handleOnchangePassword(event)}
+              />
+              <i
+                className="fa-regular fa-eye-slash eye-handle"
+                onClick={(event) => this.handleShowHidePassword(event)}
+              ></i>
+            </div>
           </div>
-          <button type="submit" className="login-button">
+          <button
+            type="submit"
+            className="login-button"
+            onClick={() => {
+              this.handleLogin();
+            }}
+          >
             Đăng nhập
           </button>
           <div className="social-login">

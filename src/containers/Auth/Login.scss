@@ -20,6 +20,17 @@
       margin-bottom: 20px;
     }
 
+    .custom-input-password {
+      position: relative;
+      .eye-handle {
+        position: absolute;
+        top: 16px;
+        right: 10px;
+        cursor: pointer;
+        visibility: hidden;
+      }
+    }
+
     .login-input {
       width: 100%;
       padding: 12px;
@@ -105,6 +116,51 @@
 
           &.google-icon i {
             color: #ea4335;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 20px;
+    height: auto;
+
+    .login-form {
+      width: 100%;
+      padding: 10px;
+      border-radius: 0;
+      box-shadow: none;
+
+      .login-logo {
+        margin-bottom: 10px;
+      }
+
+      .login-input {
+        padding: 10px;
+        margin-bottom: 8px;
+      }
+
+      .login-button {
+        padding: 10px;
+      }
+
+      .social-login {
+        .social-login-title {
+          margin-bottom: 8px;
+        }
+
+        .social-login-icons {
+          .social-login-icon {
+            width: 30px;
+            height: 30px;
+            margin: 0 3px;
+
+            i {
+              font-size: 14px;
+            }
           }
         }
       }
