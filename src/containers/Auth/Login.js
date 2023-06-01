@@ -5,6 +5,8 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import "./Login.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
+import { handleLoginAPI } from "../../services";
+import { userLoginSuccess } from "../../store/actions";
 
 class Login extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class Login extends Component {
       userName: "",
       password: "",
       isShowPassword: false,
+      errMessage: "",
     };
   }
 
@@ -34,7 +37,23 @@ class Login extends Component {
     }
   };
 
-  handleLogin = () => {};
+  handleLogin = async () => {
+    this.setState({ errMessage: "" });
+    try {
+      let userData = await handleLoginAPI(
+        this.state.userName,
+        this.state.password
+      );
+      if (userData && userData.errCode !== 0) {
+        this.setState({ errMessage: userData.message });
+      }
+      if(userData && userData.errCode == 0){
+        this.props.userLoginSuccess(userData);
+      }
+    } catch (e) {
+      this.setState({ errMessage: e.response.data.message });
+    }
+  };
 
   handleShowHidePassword = (event) => {
     this.setState(
@@ -84,6 +103,7 @@ class Login extends Component {
               ></i>
             </div>
           </div>
+          <div className="text-danger">{this.state.errMessage}</div>
           <button
             type="submit"
             className="login-button"
@@ -131,9 +151,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    adminLoginSuccess: (adminInfo) =>
-      dispatch(actions.adminLoginSuccess(adminInfo)),
-    adminLoginFail: () => dispatch(actions.adminLoginFail()),
+    userLoginFail: () => dispatch(actions.adminLoginFail()),
+    userLoginSuccess: (userInfo)=>dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
 
