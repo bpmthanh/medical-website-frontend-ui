@@ -48,10 +48,14 @@ class UserManage extends Component {
                   <td>{element.phoneNumber}</td>
                   <td>
                     <button className="bg-success" type="button">
-                      <a href="/edit-crud?id=<%= dataTable[i].id%>">Edit</a>
+                      <a href={`/api/edit-user?id=${element.id}`}>Edit</a>
                     </button>
-                    <button className="bg-danger" style={{"marginLeft": '20px'}} type="button">
-                      <a href="/delete-crud?id=<%= dataTable[i].id%>">Delete</a>
+                    <button
+                      className="bg-danger"
+                      style={{ marginLeft: "20px" }}
+                      type="button"
+                    >
+                      <a href={`/api/delete-user?id=${element.id}`}>Delete</a>
                     </button>
                   </td>
                 </tr>
