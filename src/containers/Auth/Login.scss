@@ -37,12 +37,17 @@
       border: 1px solid #dddfe2;
       border-radius: 5px;
       margin-bottom: 10px;
+      
+    }
+
+    .login-input::placeholder {
+      color: #000;
     }
 
     .login-button {
       width: 100%;
       padding: 12px;
-      background-color: #64b9e5;
+      background-color: #49BCE2;
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -50,7 +55,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: #18adf2;
+        background-color: #1dacdc;
       }
     }
 
@@ -68,11 +73,10 @@
     }
 
     .login-link {
-      color: #385898;
+      color: #000;
       text-decoration: none;
 
       &:hover {
-        color: #18adf2;
         text-decoration: underline;
       }
     }

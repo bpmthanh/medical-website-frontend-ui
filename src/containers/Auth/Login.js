@@ -85,7 +85,7 @@ class Login extends Component {
             <input
               type="text"
               className="login-input"
-              placeholder="Email hoặc số điện thoại"
+              placeholder="Email or phone"
               value={this.state.userName}
               onChange={(event) => this.handleOnchangeUsername(event)}
             />
@@ -93,7 +93,7 @@ class Login extends Component {
               <input
                 type={this.state.isShowPassword ? "text" : "password"}
                 className="login-input"
-                placeholder="Mật khẩu"
+                placeholder="Password"
                 value={this.state.password}
                 onChange={(event) => this.handleOnchangePassword(event)}
               />
@@ -111,10 +111,10 @@ class Login extends Component {
               this.handleLogin();
             }}
           >
-            Đăng nhập
+            Login
           </button>
           <div className="social-login">
-            <div className="social-login-title">Hoặc đăng nhập với:</div>
+            <div className="social-login-title">Or login with:</div>
             <div className="social-login-icons">
               <a href="#" className="social-login-icon facebook-icon">
                 <i className="fab fa-facebook-f" />
@@ -129,11 +129,11 @@ class Login extends Component {
           </div>
           <div className="login-links">
             <a href="#" className="login-link">
-              Quên mật khẩu?
+              Forgot password?
             </a>
             <span className="login-divider">·</span>
             <a href="#" className="login-link">
-              Tạo tài khoản mới
+              Create a new account
             </a>
           </div>
         </div>
