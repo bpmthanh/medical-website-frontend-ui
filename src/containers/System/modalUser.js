@@ -100,7 +100,7 @@ class ModalUser extends Component {
         </ModalBody>
         <ModalFooter>
           <Button
-            color="primary"
+            color="success"
             onClick={() => {
               this.toggle();
             }}
@@ -108,7 +108,7 @@ class ModalUser extends Component {
             Do something
           </Button>
           <Button
-            color="primary"
+            color="danger"
             onClick={() => {
               this.toggle();
             }}

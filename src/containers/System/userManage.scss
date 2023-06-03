@@ -1,6 +1,6 @@
 .user-container {
   .user-header-title {
-    color: #000;
+    color: #49bce2;
   }
 
   .container {
@@ -23,6 +23,7 @@
 
   .users-table {
     overflow: auto;
+    max-height: 100vh; /* Đặt chiều cao tùy ý */
     #customers {
       font-family: Arial, Helvetica, sans-serif;
       border-collapse: collapse;
@@ -35,7 +36,6 @@
 
       td,
       th {
-        border: 1px solid #ddd;
         padding: 8px;
       }
 
@@ -97,6 +97,7 @@
   @media (max-width: 1024px) {
     .user-header-title {
       font-size: 24px;
+      color: #49bce2;
     }
 
     .container {
@@ -109,6 +110,7 @@
       .del-edit-btn-custom {
         display: flex;
         flex-direction: column;
+        height: 100%;
       }
       .del-edit-btn-custom button {
         margin-top: 10px;
@@ -227,6 +229,11 @@
             background-color: darkblue;
           }
         }
+      }
+    }
+    .modal-footer{
+      button{
+        padding: 0 20px;
       }
     }
   }
