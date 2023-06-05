@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./userManage.scss";
-import { getAllUsers } from "../../services/userService";
+import { getAllUsers, createNewUserReact } from "../../services/userService";
 import ModalUser from "./modalUser";
 class UserManage extends Component {
   constructor(props) {
@@ -14,6 +14,10 @@ class UserManage extends Component {
   }
 
   async componentDidMount() {
+    await this.getAllUsersFromReact();
+  }
+
+  getAllUsersFromReact = async () => {
     try {
       let response = await getAllUsers("All");
       if (response && response.errCode === 0) {
@@ -24,7 +28,7 @@ class UserManage extends Component {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   toggleUSerModal = () => {
     this.setState({
@@ -38,6 +42,21 @@ class UserManage extends Component {
     });
   };
 
+  createNewUser = async (data) => {
+    try {
+      let response = await createNewUserReact(data);
+      if (response && response.errCode !== 0) {
+        alert(response.message)
+      }
+      else{
+        await this.getAllUsersFromReact()
+        this.setState({
+          isOpenModal:false
+        })
+      }
+    } catch (e) {}
+  };
+
   render() {
     return (
       <div className="user-container">
@@ -47,6 +66,7 @@ class UserManage extends Component {
           size="lg"
           centered="center"
           className={"modal-user-container"}
+          createNewUser={this.createNewUser}
         />
         <div className="title text-center user-header-title">Manage user</div>
         <div className="container" style={{ marginBottom: "10px" }}>

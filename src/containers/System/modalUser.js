@@ -4,13 +4,53 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 class ModalUser extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      phoneNumber: "",
+    };
   }
 
   componentDidMount() {}
 
   toggle = () => {
     this.props.toggleFromParent();
+  };
+
+  handleOnchangeInput = (event, id) => {
+    let copyState = { ...this.state };
+    copyState[id] = event.target.value;
+    this.setState({ ...copyState });
+  };
+
+  checkValidateInput = () => {
+    let isValid = true;
+    let arrInput = [
+      "firstName",
+      "lastName",
+      "email",
+      "password",
+      "address",
+      "phoneNumber",
+    ];
+    for (let i = 0; i < arrInput.length; i++) {
+      if (!this.state[arrInput[i]]) {
+        isValid = false;
+        alert("Missing required field " + arrInput[i]);
+        break;
+      }
+    }
+    return isValid;
+  };
+
+  handleAddNewUser = () => {
+    let isValid = this.checkValidateInput();
+    if(isValid===true){
+      this.props.createNewUser(this.state);
+    }
   };
 
   render() {
@@ -25,9 +65,9 @@ class ModalUser extends Component {
         className={this.props.className}
       >
         <ModalHeader
-          toggle={() => {
-            this.toggle();
-          }}
+        // toggle={() => {
+        //   this.toggle();
+        // }}
         >
           Create a new user
         </ModalHeader>
@@ -39,9 +79,11 @@ class ModalUser extends Component {
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="First name"
                   name="firstName"
-                  value=""
+                  value={this.state.firstName}
+                  onChange={(e) => {
+                    this.handleOnchangeInput(e, "firstName");
+                  }}
                 />
               </div>
               <div class="form-group col-md-6">
@@ -49,9 +91,37 @@ class ModalUser extends Component {
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Last name"
                   name="lastName"
-                  value=""
+                  value={this.state.lastName}
+                  onChange={(e) => {
+                    this.handleOnchangeInput(e, "lastName");
+                  }}
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  value={this.state.email}
+                  onChange={(e) => {
+                    this.handleOnchangeInput(e, "email");
+                  }}
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputCity">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  value={this.state.password}
+                  onChange={(e) => {
+                    this.handleOnchangeInput(e, "password");
+                  }}
                 />
               </div>
             </div>
@@ -62,50 +132,35 @@ class ModalUser extends Component {
                   type="text"
                   class="form-control"
                   name="address"
-                  placeholder="1234 Main St"
-                  value=""
+                  value={this.state.address}
+                  onChange={(e) => {
+                    this.handleOnchangeInput(e, "address");
+                  }}
                 />
               </div>
-              <div class="form-group col-md-6">
-                <label for="inputEmail">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="Email"
-                  name="email"
-                  value=""
-                />
-              </div>
-            </div>
-            <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputCity">Phone number</label>
                 <input
                   type="text"
                   class="form-control"
                   name="phoneNumber"
-                  value=""
+                  value={this.state.phoneNumber}
+                  onChange={(e) => {
+                    this.handleOnchangeInput(e, "phoneNumber");
+                  }}
                 />
               </div>
-              <div class="form-group col-md-3">
-                <label for="inputState">Sex</label>
-                <select name="gender" class="form-control">
-                  <option value="1">Male</option>
-                  <option value="0">Female</option>
-                </select>
-              </div>
             </div>
-            <input type="text" name="id" value="" hidden />
           </form>
         </ModalBody>
         <ModalFooter>
           <Button
             color="success"
             onClick={() => {
-              this.toggle();
+              this.handleAddNewUser();
             }}
           >
-            Do something
+            Add new
           </Button>
           <Button
             color="danger"

@@ -7,3 +7,8 @@ export const handleLoginAPI = (email, password) => {
 export const getAllUsers = (inputId) => {
   return axios.get(`/api/get-all-users?id=${inputId}`);
 };
+
+export const createNewUserReact = (data) => {
+  return axios.post(`/api/create-new-user`,data);
+};
+
