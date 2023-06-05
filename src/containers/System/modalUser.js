@@ -38,6 +38,12 @@ class ModalUser extends Component {
     ];
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
+        arrInput[0]='first name'
+        arrInput[1]='last name'
+        arrInput[2]='email'
+        arrInput[3]='password'
+        arrInput[4]='address'
+        arrInput[5]='phone number'
         isValid = false;
         alert("Missing required field " + arrInput[i]);
         break;
