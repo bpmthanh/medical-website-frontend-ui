@@ -46,7 +46,7 @@ class UserManage extends Component {
     try {
       let response = await createNewUserReact(data);
       if (response && response.errCode !== 0) {
-        alert(response.message)
+        alert(response.errMessage)
       }
       else{
         await this.getAllUsersFromReact()
