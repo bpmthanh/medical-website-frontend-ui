@@ -12,3 +12,12 @@ export const createNewUserReact = (data) => {
   return axios.post(`/api/create-new-user`,data);
 };
 
+export const deleteUserReact = (data) => {
+  return axios.delete(`/api/delete-user`,{
+    data: {
+      id:data
+    }
+  });
+};
+
+

@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./userManage.scss";
-import { getAllUsers, createNewUserReact } from "../../services/userService";
+import {
+  getAllUsers,
+  createNewUserReact,
+  deleteUserReact,
+} from "../../services/userService";
 import ModalUser from "./modalUser";
 class UserManage extends Component {
   constructor(props) {
@@ -46,16 +50,31 @@ class UserManage extends Component {
     try {
       let response = await createNewUserReact(data);
       if (response && response.errCode !== 0) {
-        alert(response.errMessage)
-      }
-      else{
-        await this.getAllUsersFromReact()
+        alert(response.errMessage);
+      } else {
+        await this.getAllUsersFromReact();
         this.setState({
-          isOpenModal:false
-        })
+          isOpenModal: false,
+        });
       }
     } catch (e) {}
   };
+
+  handleDeleteUser = async (user) => {
+    try {
+      let response = await deleteUserReact(user.id);
+      if (response && response.errCode !== 0) {
+        alert(response.errMessage);
+      } else {
+        await this.getAllUsersFromReact();
+      }
+    } catch (error) {
+      console.error("An error occurred while deleting the user:", error);
+      alert("An error occurred while deleting the user. Please try again later.");
+    }
+  };
+
+  handleEditUser = () => {};
 
   render() {
     return (
@@ -101,14 +120,22 @@ class UserManage extends Component {
                     <button
                       className="bg-success edit-btn-custom"
                       type="button"
+                      onClick={() => {
+                        this.handleEditUser(element);
+                      }}
                     >
-                      <a href={`/api/edit-user?id=${element.id}`}>Edit</a>
+                      Edit
+                      {/* <a href={`/api/edit-user?id=${element.id}`}>Edit</a> */}
                     </button>
                     <button
                       className="bg-danger delete-btn-custom"
                       type="button"
+                      onClick={() => {
+                        this.handleDeleteUser(element);
+                      }}
                     >
-                      <a href={`/api/delete-user?id=${element.id}`}>Delete</a>
+                      Delete
+                      {/* <a href={`/api/delete-user?id=${element.id}`}>Delete</a> */}
                     </button>
                   </td>
                 </tr>
