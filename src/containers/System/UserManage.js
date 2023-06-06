@@ -6,14 +6,19 @@ import {
   getAllUsers,
   createNewUserReact,
   deleteUserReact,
+  editUserReact,
 } from "../../services/userService";
 import ModalUser from "./modalUser";
+import ModalEditUser from "./modalEditUser";
+
 class UserManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrUsers: [],
       isOpenModal: false,
+      isOpenEditModal: false,
+      idNow: null,
     };
   }
 
@@ -37,6 +42,12 @@ class UserManage extends Component {
   toggleUSerModal = () => {
     this.setState({
       isOpenModal: !this.state.isOpenModal,
+    });
+  };
+
+  toggleUSerEditModal = () => {
+    this.setState({
+      isOpenEditModal: !this.state.isOpenEditModal,
     });
   };
 
@@ -70,11 +81,35 @@ class UserManage extends Component {
       }
     } catch (error) {
       console.error("An error occurred while deleting the user:", error);
-      alert("An error occurred while deleting the user. Please try again later.");
+      alert(
+        "An error occurred while deleting the user. Please try again later."
+      );
     }
   };
 
-  handleEditUser = () => {};
+  handleEditUser = (user) => {
+    this.setState({
+      isOpenEditModal: true,
+      idNow: user.id,
+    });
+  };
+
+  editUser = async (user) => {
+    try {
+      let response = await editUserReact(this.state.idNow, user);
+      console.log(response);
+      if (response && response.errCode !== 0) {
+        alert(response.errMessage);
+      } else {
+        await this.getAllUsersFromReact();
+      }
+    } catch (error) {
+      console.error("An error occurred while deleting the user:", error);
+      alert(
+        "An error occurred while deleting the user. Please try again later."
+      );
+    }
+  };
 
   render() {
     return (
@@ -86,6 +121,15 @@ class UserManage extends Component {
           centered="center"
           className={"modal-user-container"}
           createNewUser={this.createNewUser}
+        />
+
+        <ModalEditUser
+          size="lg"
+          centered="center"
+          className={"modal-edit-user-container"}
+          isOpenModal={this.state.isOpenEditModal}
+          toggleFromParent={this.toggleUSerEditModal}
+          editUser={this.editUser}
         />
         <div className="title text-center user-header-title">Manage user</div>
         <div className="container" style={{ marginBottom: "10px" }}>
