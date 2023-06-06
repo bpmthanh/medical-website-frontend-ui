@@ -50,7 +50,8 @@ class ModalEditUser extends Component {
   };
 
   handleEditModalUser = () => {
-    let isValid = this.checkValidateInput();
+    // let isValid = this.checkValidateInput();
+    let isValid = true
     if (isValid === true) {
       this.props.editUser(this.state);
       this.setState({

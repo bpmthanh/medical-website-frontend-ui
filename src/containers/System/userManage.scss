@@ -22,78 +22,72 @@
   }
 
   .users-table {
-    overflow: auto;
-    max-height: 100vh; /* Đặt chiều cao tùy ý */
     #customers {
       font-family: Arial, Helvetica, sans-serif;
       border-collapse: collapse;
       width: 100%;
       min-width: 768px; /* Thêm min-width tại đây */
       border: 1px solid #ccc; /* Thêm đường bao cho bảng */
+      overflow-x: auto;
+      overflow-y: auto;
 
-      .del-edit-btn-custom button {
-        width: 100%;
-      }
-
-      .del-edit-btn-custom .edit-btn-custom {
-        margin-bottom: 8px;
-      }
-
-      td,
-      th {
-        padding: 8px;
-      }
-
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-
-      tr:hover {
-        background-color: #ddd;
-      }
-
-      th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #ffc10e;
-        color: white;
-      }
-
-      button {
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
-        padding: 0;
-
-        a {
-          color: inherit;
-          text-decoration: none;
+      thead {
+        th {
+          position: sticky;
+          top: 0;
+          background-color: #ffc10e;
+          z-index: 1;
+          padding: 8px;
+          text-align: left;
+          color: white;
         }
       }
 
-      .edit-btn-custom {
-        background-color: #28a745;
-        color: #fff;
-        padding: 6px 12px;
-        border-radius: 4px;
-        transition: background-color 0.3s ease-in-out;
-
-        &:hover {
-          background-color: #218838;
+      tbody {
+        td {
+          padding: 8px;
         }
-      }
 
-      .delete-btn-custom {
-        background-color: #dc3545;
-        color: #fff;
-        padding: 6px 12px;
-        border-radius: 4px;
-        transition: background-color 0.3s ease-in-out;
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
 
-        &:hover {
-          background-color: #c82333;
+        tr:hover {
+          background-color: #ddd;
+        }
+
+        .del-edit-btn-custom button {
+          width: 100%;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+          padding: 0;
+        }
+
+        .del-edit-btn-custom .edit-btn-custom {
+          margin-bottom: 8px;
+          background-color: #28a745;
+          color: #fff;
+          padding: 6px 12px;
+          border-radius: 4px;
+          transition: background-color 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #218838;
+          }
+        }
+
+        .del-edit-btn-custom .delete-btn-custom {
+          background-color: #dc3545;
+          color: #fff;
+          padding: 6px 12px;
+          border-radius: 4px;
+          transition: background-color 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #c82333;
+          }
         }
       }
     }
@@ -234,8 +228,8 @@
         }
       }
     }
-    .modal-footer{
-      button{
+    .modal-footer {
+      button {
         padding: 0 20px;
       }
     }
@@ -307,8 +301,8 @@
         }
       }
     }
-    .modal-footer{
-      button{
+    .modal-footer {
+      button {
         padding: 0 20px;
       }
     }
