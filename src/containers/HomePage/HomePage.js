@@ -5,9 +5,9 @@ import Header from './Header'
 class HomePage extends Component {
   render() {
     return(
-        <div>
+        <React.Fragment>
             <Header/>
-        </div>
+        </React.Fragment>
     )
   }
 }
