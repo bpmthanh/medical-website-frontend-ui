@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import "./Header.scss";
 import "../../styles/global-class.scss";
+import { FormattedMessage } from "react-intl";
 
 class Header extends Component {
   render() {
@@ -17,37 +18,54 @@ class Header extends Component {
             <div className="home-header-content__center-content">
               <div className="menu-list">
                 <a href="#">
-                  Chuyên khoa
-                  <span>Tìm bác sĩ theo chuyên khoa</span>
+                  <FormattedMessage id="home-header.specialty.title" />
+                  <span>
+                    <FormattedMessage id="home-header.specialty.des" />
+                  </span>
                 </a>
               </div>
               <div className="menu-list">
                 <a href="#">
-                  Cơ sở y tế
-                  <span>Chọn bệnh viện phòng khám</span>
+                  <FormattedMessage id="home-header.healthcare-facility.title" />
+                  <span>
+                    <FormattedMessage id="home-header.healthcare-facility.des" />
+                  </span>
                 </a>
               </div>
               <div className="menu-list">
                 <a href="#">
-                  Bác sĩ
-                  <span>Chọn bác sĩ giỏi</span>
+                  <FormattedMessage id="home-header.doctor.title" />
+                  <span>
+                    <FormattedMessage id="home-header.doctor.des" />
+                  </span>
                 </a>
               </div>
               <div className="menu-list">
                 <a href="#">
-                  Gói khám
-                  <span>Khám sức khỏe tổng quát</span>
+                  <FormattedMessage id="home-header.health-check-package.title" />
+                  <span>
+                    <FormattedMessage id="home-header.health-check-package.des" />
+                  </span>
                 </a>
               </div>
             </div>
             <div className="home-header-content__right-content">
-              <a className="support" href="#">
-                <i class="fas fa-phone-square"></i>
-                <span>Hỗ trợ</span>
-              </a>
-              <a className="support" href="#">
-                024-7301-2468
-              </a>
+              <div className="support-container">
+                <a className="support" href="#">
+                  <i class="fas fa-phone-square"></i>
+                  <span>
+                    <FormattedMessage id="home-header.support.title" />
+                  </span>
+                </a>
+                <a className="support" href="#">
+                  024-7301-2468
+                </a>
+              </div>
+
+              <div className="language-container">
+                <span className="language-vi">VI </span>
+                <span className="language-en">/ EN</span>
+              </div>
             </div>
           </div>
         </div>
@@ -55,7 +73,7 @@ class Header extends Component {
         <div className="home-header-masthead">
           <div className="slogan">
             <h1>
-              Nền tảng y tế
+              <FormattedMessage id="banner.slogan.title" />
               <br />
               <b>chăm sóc sức khỏe toàn diện</b>
             </h1>
@@ -266,6 +284,7 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    lang: state.app.language,
   };
 };
 

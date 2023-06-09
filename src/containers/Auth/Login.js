@@ -47,10 +47,11 @@ class Login extends Component {
       if (userData && userData.errCode !== 0) {
         this.setState({ errMessage: userData.message });
       }
-      if(userData && userData.errCode == 0){
+      if(userData && userData.errCode === 0){
         this.props.userLoginSuccess(userData);
       }
     } catch (e) {
+      console.log(e.response.data.message);
       this.setState({ errMessage: e.response.data.message });
     }
   };
