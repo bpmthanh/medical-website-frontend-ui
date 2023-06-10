@@ -4,8 +4,12 @@ import { connect } from "react-redux";
 import "./Header.scss";
 import "../../styles/global-class.scss";
 import { FormattedMessage } from "react-intl";
+import { languages } from "../../utils";
 
 class Header extends Component {
+  changeLanguage = (language) => {
+    
+  };
   render() {
     return (
       <React.Fragment>
@@ -63,8 +67,18 @@ class Header extends Component {
               </div>
 
               <div className="language-container">
-                <span className="language-vi">VI </span>
-                <span className="language-en">/ EN</span>
+                <span
+                  className="language-vi"
+                  onClick={() => this.changeLanguage(languages.VI)}
+                >
+                  VI{" "}
+                </span>
+                <span
+                  className="language-en"
+                  onClick={() => this.changeLanguage(languages.EN)}
+                >
+                  / EN
+                </span>
               </div>
             </div>
           </div>
