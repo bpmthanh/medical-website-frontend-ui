@@ -1,17 +1,17 @@
 import actionTypes from './actionTypes';
 
 export const adminLoginSuccess = (adminInfo) => ({
-    type: actionTypes.ADMIN_LOGIN_SUCCESS,
-    adminInfo: adminInfo
-})
+  type: actionTypes.ADMIN_LOGIN_SUCCESS,
+  adminInfo: adminInfo,
+});
 
 export const adminLoginFail = () => ({
-    type: actionTypes.ADMIN_LOGIN_FAIL
-})
+  type: actionTypes.ADMIN_LOGIN_FAIL,
+});
 
 export const userLoginSuccess = (userInfo) => ({
   type: actionTypes.USER_LOGIN_SUCCESS,
-  userInfo: userInfo
+  userInfo: userInfo,
 });
 
 export const userLoginFail = () => ({

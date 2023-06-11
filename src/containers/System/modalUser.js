@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class ModalUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      address: "",
-      phoneNumber: "",
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      address: '',
+      phoneNumber: '',
     };
   }
 
@@ -29,23 +29,23 @@ class ModalUser extends Component {
   checkValidateInput = () => {
     let isValid = true;
     let arrInput = [
-      "firstName",
-      "lastName",
-      "email",
-      "password",
-      "address",
-      "phoneNumber",
+      'firstName',
+      'lastName',
+      'email',
+      'password',
+      'address',
+      'phoneNumber',
     ];
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
-        arrInput[0] = "first name";
-        arrInput[1] = "last name";
-        arrInput[2] = "email";
-        arrInput[3] = "password";
-        arrInput[4] = "address";
-        arrInput[5] = "phone number";
+        arrInput[0] = 'first name';
+        arrInput[1] = 'last name';
+        arrInput[2] = 'email';
+        arrInput[3] = 'password';
+        arrInput[4] = 'address';
+        arrInput[5] = 'phone number';
         isValid = false;
-        alert("Missing required field " + arrInput[i]);
+        alert('Missing required field ' + arrInput[i]);
         break;
       }
     }
@@ -57,12 +57,12 @@ class ModalUser extends Component {
     if (isValid === true) {
       this.props.createNewUser(this.state);
       this.setState({
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        address: "",
-        phoneNumber: "",
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        phoneNumber: '',
       });
     }
   };
@@ -96,7 +96,7 @@ class ModalUser extends Component {
                   name="firstName"
                   value={this.state.firstName}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "firstName");
+                    this.handleOnchangeInput(e, 'firstName');
                   }}
                 />
               </div>
@@ -108,7 +108,7 @@ class ModalUser extends Component {
                   name="lastName"
                   value={this.state.lastName}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "lastName");
+                    this.handleOnchangeInput(e, 'lastName');
                   }}
                 />
               </div>
@@ -122,7 +122,7 @@ class ModalUser extends Component {
                   name="email"
                   value={this.state.email}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "email");
+                    this.handleOnchangeInput(e, 'email');
                   }}
                 />
               </div>
@@ -134,7 +134,7 @@ class ModalUser extends Component {
                   name="password"
                   value={this.state.password}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "password");
+                    this.handleOnchangeInput(e, 'password');
                   }}
                 />
               </div>
@@ -148,7 +148,7 @@ class ModalUser extends Component {
                   name="address"
                   value={this.state.address}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "address");
+                    this.handleOnchangeInput(e, 'address');
                   }}
                 />
               </div>
@@ -160,7 +160,7 @@ class ModalUser extends Component {
                   name="phoneNumber"
                   value={this.state.phoneNumber}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "phoneNumber");
+                    this.handleOnchangeInput(e, 'phoneNumber');
                   }}
                 />
               </div>

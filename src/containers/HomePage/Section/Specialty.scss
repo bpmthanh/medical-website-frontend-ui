@@ -1,0 +1,79 @@
+@import '../../../styles/_variables.scss';
+
+.section-specialty {
+  height: 300px;
+  //   border: 1px solid red;
+
+  .specialty-content {
+    margin-top: 5%;
+
+    .specialty-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .specialty-header-title {
+      }
+      .specialty-header-des {
+        background: #ebebeb;
+        text-transform: uppercase;
+        display: inline-block;
+        padding: 5px 15px;
+        color: #282e41;
+      }
+    }
+
+    .slick-slider {
+      .slick-prev {
+        left: -25px;
+        z-index: 1;
+        &::before {
+          font-weight: 400;
+          background: #fff;
+          border: 2px solid #d7d7d7;
+          padding: 10px;
+          text-align: center;
+          color: #959595 !important;
+        }
+      }
+
+      .slick-list {
+        margin: 0 -5px;
+        .slick-track {
+          .slick-slide {
+            .specialty-content-detail {
+              //   border: 1px solid green;
+              padding: 0 5px;
+              .image-container {
+                height: 200px; /* Đảm bảo kích thước ảnh được xác định */
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+              }
+
+              .detail-title {
+                color: $six-text-color;
+                font-size: medium;
+                margin-top: 10px;
+              }
+            }
+          }
+        }
+      }
+
+      .slick-next {
+        right: 0px;
+        z-index: 1;
+        &::before {
+          font-weight: 400;
+          background: #fff;
+          border: 2px solid #d7d7d7;
+          padding: 10px;
+          text-align: center;
+          color: #959595 !important;
+        }
+      }
+    }
+  }
+}

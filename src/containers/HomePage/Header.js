@@ -1,10 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import "./Header.scss";
-import "../../styles/global-class.scss";
-import { FormattedMessage } from "react-intl";
-import { languages } from "../../utils";
-import { changeLanguageApp } from "../../store/actions";
+import React, { Component } from 'react';
+
+import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+
+import './Header.scss';
+
+import { changeLanguageApp } from '../../store/actions';
+
+import '../../styles/global-class.scss';
+
+import { languages } from '../../utils';
 
 class Header extends Component {
   changeLanguage = (language) => {
@@ -12,7 +17,7 @@ class Header extends Component {
   };
   render() {
     let language = this.props.language;
-    console.log(language)
+    console.log(language);
     return (
       <React.Fragment>
         <div className="container-layout home-header-container">
@@ -70,15 +75,25 @@ class Header extends Component {
 
               <div className="language-container">
                 <span
-                  className={language === languages.VI? "language-vi action": "language-vi"}
+                  className={
+                    language === languages.VI
+                      ? 'language-vi action'
+                      : 'language-vi'
+                  }
                   onClick={() => this.changeLanguage(languages.VI)}
-                >VI
+                >
+                  VI
                 </span>
                 <span> / </span>
                 <span
-                  className={language === languages.EN? "language-en action": "language-en"}
+                  className={
+                    language === languages.EN
+                      ? 'language-en action'
+                      : 'language-en'
+                  }
                   onClick={() => this.changeLanguage(languages.EN)}
-                >EN
+                >
+                  EN
                 </span>
               </div>
             </div>
@@ -108,7 +123,7 @@ class Header extends Component {
               <a href="#" className="app-store">
                 <img
                   src={
-                    require("../../assets/images/HomePage/app-store-badge-black.svg")
+                    require('../../assets/images/HomePage/app-store-badge-black.svg')
                       .default
                   }
                   alt=""
@@ -117,7 +132,7 @@ class Header extends Component {
               <a href="#" className="gg-store">
                 <img
                   src={
-                    require("../../assets/images/HomePage/google-play-badge.svg")
+                    require('../../assets/images/HomePage/google-play-badge.svg')
                       .default
                   }
                   alt=""
@@ -133,7 +148,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/133537-khamchuyenkhoa.png")
+                        require('../../assets/images/HomePage/133537-khamchuyenkhoa.png')
                           .default
                       }
                       alt=""
@@ -151,7 +166,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/133657-khamtuxa.png")
+                        require('../../assets/images/HomePage/133657-khamtuxa.png')
                           .default
                       }
                       alt=""
@@ -169,7 +184,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/133744-khamtongquat.png")
+                        require('../../assets/images/HomePage/133744-khamtongquat.png')
                           .default
                       }
                       alt=""
@@ -187,7 +202,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/133744-dichvuxetnghiem.png")
+                        require('../../assets/images/HomePage/133744-dichvuxetnghiem.png')
                           .default
                       }
                       alt=""
@@ -205,7 +220,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/133744-suckhoetinhthan.png")
+                        require('../../assets/images/HomePage/133744-suckhoetinhthan.png')
                           .default
                       }
                       alt=""
@@ -223,7 +238,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/104635-khamnhakhoa.png")
+                        require('../../assets/images/HomePage/104635-khamnhakhoa.png')
                           .default
                       }
                       alt=""
@@ -241,7 +256,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/151930-phau-thuat.jpg")
+                        require('../../assets/images/HomePage/151930-phau-thuat.jpg')
                           .default
                       }
                       alt=""
@@ -259,7 +274,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/133744-khamtainha.png")
+                        require('../../assets/images/HomePage/133744-khamtainha.png')
                           .default
                       }
                       alt=""
@@ -277,7 +292,7 @@ class Header extends Component {
                   <div className="wrap-img">
                     <img
                       src={
-                        require("../../assets/images/HomePage/160542-icon-bai-test-suc-khoe.png")
+                        require('../../assets/images/HomePage/160542-icon-bai-test-suc-khoe.png')
                           .default
                       }
                       alt=""

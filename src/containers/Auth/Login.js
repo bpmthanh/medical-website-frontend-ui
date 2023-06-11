@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 // import * as actions from "../store/actions";
-import * as actions from "../../store/actions";
-import "./Login.scss";
-import "@fortawesome/fontawesome-free/css/all.css";
-import { handleLoginAPI } from "../../services";
-import { userLoginSuccess } from "../../store/actions";
+import * as actions from '../../store/actions';
+import './Login.scss';
+import '@fortawesome/fontawesome-free/css/all.css';
+import { handleLoginAPI } from '../../services';
+import { userLoginSuccess } from '../../store/actions';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: "",
-      password: "",
+      userName: '',
+      password: '',
       isShowPassword: false,
-      errMessage: "",
+      errMessage: '',
     };
   }
 
@@ -29,16 +29,16 @@ class Login extends Component {
     this.setState({
       password: event.target.value,
     });
-    const eyeHandle = document.querySelector(".eye-handle");
-    if (event.target.value !== "") {
-      eyeHandle.style.visibility = "visible";
+    const eyeHandle = document.querySelector('.eye-handle');
+    if (event.target.value !== '') {
+      eyeHandle.style.visibility = 'visible';
     } else {
-      eyeHandle.style.visibility = "hidden";
+      eyeHandle.style.visibility = 'hidden';
     }
   };
 
   handleLogin = async () => {
-    this.setState({ errMessage: "" });
+    this.setState({ errMessage: '' });
     try {
       let userData = await handleLoginAPI(
         this.state.userName,
@@ -47,7 +47,7 @@ class Login extends Component {
       if (userData && userData.errCode !== 0) {
         this.setState({ errMessage: userData.message });
       }
-      if(userData && userData.errCode === 0){
+      if (userData && userData.errCode === 0) {
         this.props.userLoginSuccess(userData);
       }
     } catch (e) {
@@ -62,11 +62,11 @@ class Login extends Component {
         isShowPassword: !prevState.isShowPassword,
       }),
       () => {
-        const eyeHandle = document.querySelector(".eye-handle");
+        const eyeHandle = document.querySelector('.eye-handle');
         if (this.state.isShowPassword) {
-          eyeHandle.classList.replace("fa-eye-slash", "fa-eye");
+          eyeHandle.classList.replace('fa-eye-slash', 'fa-eye');
         } else {
-          eyeHandle.classList.replace("fa-eye", "fa-eye-slash");
+          eyeHandle.classList.replace('fa-eye', 'fa-eye-slash');
         }
       }
     );
@@ -92,7 +92,7 @@ class Login extends Component {
             />
             <div className="custom-input-password">
               <input
-                type={this.state.isShowPassword ? "text" : "password"}
+                type={this.state.isShowPassword ? 'text' : 'password'}
                 className="login-input"
                 placeholder="Password"
                 value={this.state.password}
@@ -153,7 +153,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
     userLoginFail: () => dispatch(actions.adminLoginFail()),
-    userLoginSuccess: (userInfo)=>dispatch(actions.userLoginSuccess(userInfo)),
+    userLoginSuccess: (userInfo) =>
+      dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
 

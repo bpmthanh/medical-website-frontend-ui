@@ -1,5 +1,5 @@
-import { languages } from "../../utils";
-import actionTypes from "./actionTypes";
+import { languages } from '../../utils';
+import actionTypes from './actionTypes';
 
 export const appStartUpComplete = () => ({
   type: actionTypes.APP_START_UP_COMPLETE,
@@ -11,6 +11,6 @@ export const setContentOfConfirmModal = (contentOfConfirmModal) => ({
 });
 
 export const changeLanguageApp = (language) => ({
-    type: actionTypes.CHANGE_LANGUAGE,
-    language: language
+  type: actionTypes.CHANGE_LANGUAGE,
+  language: language,
 });

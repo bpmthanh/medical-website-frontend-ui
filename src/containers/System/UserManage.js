@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
-import { connect } from "react-redux";
-import "./userManage.scss";
+import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import './userManage.scss';
 import {
   getAllUsers,
   createNewUserReact,
   deleteUserReact,
   editUserReact,
-} from "../../services/userService";
-import ModalUser from "./modalUser";
-import ModalEditUser from "./modalEditUser";
+} from '../../services/userService';
+import ModalUser from './modalUser';
+import ModalEditUser from './modalEditUser';
 
 class UserManage extends Component {
   constructor(props) {
@@ -19,23 +19,23 @@ class UserManage extends Component {
       isOpenModal: false,
       isOpenEditModal: false,
       idNow: null,
-      tableHeight: "auto", // Chiều cao mặc định là auto
+      tableHeight: 'auto', // Chiều cao mặc định là auto
     };
   }
 
   async componentDidMount() {
     await this.getAllUsersFromReact();
     this.updateTableHeight();
-    window.addEventListener("resize", this.updateTableHeight);
+    window.addEventListener('resize', this.updateTableHeight);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateTableHeight);
+    window.removeEventListener('resize', this.updateTableHeight);
   }
 
   getAllUsersFromReact = async () => {
     try {
-      let response = await getAllUsers("All");
+      let response = await getAllUsers('All');
       if (response && response.errCode === 0) {
         this.setState({
           arrUsers: response.users,
@@ -48,13 +48,13 @@ class UserManage extends Component {
 
   updateTableHeight = () => {
     const windowHeight = window.innerHeight;
-    const tableContainer = document.querySelector(".users-table");
+    const tableContainer = document.querySelector('.users-table');
     const tableContainerRect = tableContainer.getBoundingClientRect();
     const tableContainerTop = tableContainerRect.top;
     const desiredHeight = windowHeight - tableContainerTop - windowHeight * 0.1; // 10vh cách đáy màn hình
 
     this.setState({
-      tableHeight: desiredHeight + "px",
+      tableHeight: desiredHeight + 'px',
     });
   };
 
@@ -99,9 +99,9 @@ class UserManage extends Component {
         await this.getAllUsersFromReact();
       }
     } catch (error) {
-      console.error("An error occurred while deleting the user:", error);
+      console.error('An error occurred while deleting the user:', error);
       alert(
-        "An error occurred while deleting the user. Please try again later."
+        'An error occurred while deleting the user. Please try again later.'
       );
     }
   };
@@ -117,7 +117,7 @@ class UserManage extends Component {
     try {
       // Loại bỏ các thuộc tính có giá trị rỗng
       let filteredUser = Object.fromEntries(
-        Object.entries(user).filter(([_, value]) => value !== "")
+        Object.entries(user).filter(([_, value]) => value !== '')
       );
       let response = await editUserReact(this.state.idNow, filteredUser);
       if (response && response.errCode !== 0) {
@@ -126,9 +126,9 @@ class UserManage extends Component {
         await this.getAllUsersFromReact();
       }
     } catch (error) {
-      console.error("An error occurred while deleting the user:", error);
+      console.error('An error occurred while deleting the user:', error);
       alert(
-        "An error occurred while deleting the user. Please try again later."
+        'An error occurred while deleting the user. Please try again later.'
       );
     }
   };
@@ -141,20 +141,20 @@ class UserManage extends Component {
           toggleFromParent={this.toggleUSerModal}
           size="lg"
           centered="center"
-          className={"modal-user-container"}
+          className={'modal-user-container'}
           createNewUser={this.createNewUser}
         />
 
         <ModalEditUser
           size="lg"
           centered="center"
-          className={"modal-edit-user-container"}
+          className={'modal-edit-user-container'}
           isOpenModal={this.state.isOpenEditModal}
           toggleFromParent={this.toggleUSerEditModal}
           editUser={this.editUser}
         />
         <div className="title text-center user-header-title">Manage user</div>
-        <div className="container" style={{ marginBottom: "10px" }}>
+        <div className="container" style={{ marginBottom: '10px' }}>
           <button
             className="custom-add-new-user-button"
             onClick={() => {
@@ -166,7 +166,7 @@ class UserManage extends Component {
         </div>
         <div
           className="container users-table"
-          style={{ height: this.state.tableHeight, overflowY: "auto" }} // Sử dụng chiều cao và overflowY được tính toán từ state
+          style={{ height: this.state.tableHeight, overflowY: 'auto' }} // Sử dụng chiều cao và overflowY được tính toán từ state
         >
           <table id="customers">
             <thead>

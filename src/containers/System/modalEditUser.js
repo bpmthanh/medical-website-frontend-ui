@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class ModalEditUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      firstName: "",
-      lastName: "",
-      address: "",
-      phoneNumber: "",
+      email: '',
+      firstName: '',
+      lastName: '',
+      address: '',
+      phoneNumber: '',
     };
   }
 
@@ -27,16 +27,16 @@ class ModalEditUser extends Component {
 
   checkValidateInput = () => {
     let isValid = true;
-    let arrInput = ["firstName", "lastName", "email", "address", "phoneNumber"];
+    let arrInput = ['firstName', 'lastName', 'email', 'address', 'phoneNumber'];
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
-        arrInput[0] = "first name";
-        arrInput[1] = "last name";
-        arrInput[2] = "email";
-        arrInput[4] = "address";
-        arrInput[5] = "phone number";
+        arrInput[0] = 'first name';
+        arrInput[1] = 'last name';
+        arrInput[2] = 'email';
+        arrInput[4] = 'address';
+        arrInput[5] = 'phone number';
         isValid = false;
-        alert("Missing required field " + arrInput[i]);
+        alert('Missing required field ' + arrInput[i]);
         break;
       }
     }
@@ -49,11 +49,11 @@ class ModalEditUser extends Component {
     if (isValid === true) {
       this.props.editUser(this.state);
       this.setState({
-        email: "",
-        firstName: "",
-        lastName: "",
-        address: "",
-        phoneNumber: "",
+        email: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        phoneNumber: '',
       });
     }
     this.toggle();
@@ -82,7 +82,7 @@ class ModalEditUser extends Component {
                   name="firstName"
                   value={this.state.firstName}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "firstName");
+                    this.handleOnchangeInput(e, 'firstName');
                   }}
                 />
               </div>
@@ -94,7 +94,7 @@ class ModalEditUser extends Component {
                   name="lastName"
                   value={this.state.lastName}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "lastName");
+                    this.handleOnchangeInput(e, 'lastName');
                   }}
                 />
               </div>
@@ -108,7 +108,7 @@ class ModalEditUser extends Component {
                   name="email"
                   value={this.state.email}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "email");
+                    this.handleOnchangeInput(e, 'email');
                   }}
                 />
               </div>
@@ -122,7 +122,7 @@ class ModalEditUser extends Component {
                   name="address"
                   value={this.state.address}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "address");
+                    this.handleOnchangeInput(e, 'address');
                   }}
                 />
               </div>
@@ -134,7 +134,7 @@ class ModalEditUser extends Component {
                   name="phoneNumber"
                   value={this.state.phoneNumber}
                   onChange={(e) => {
-                    this.handleOnchangeInput(e, "phoneNumber");
+                    this.handleOnchangeInput(e, 'phoneNumber');
                   }}
                 />
               </div>
