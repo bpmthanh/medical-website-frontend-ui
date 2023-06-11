@@ -26,15 +26,24 @@
       "des": "COMPREHENSIVE HEALTHCARE"
     },
     "services": {
-      "title_1": "Specialty Examination",
-      "title_2": "Remote Consultation",
-      "title_3": "General Check-up",
-      "title_4": "Medical Testing",
-      "title_5": "Mental Health",
-      "title_6": "Dental Check-up",
-      "title_7": "Surgical Package",
-      "title_8": "Medical Products",
-      "title_9": "Health Assessment Test"
+      "title_1": "Examination",
+      "des_1": "Specialist",
+      "title_2": "Remote",
+      "des_2": "Examination",
+      "title_3": "General",
+      "des_3": "Examination",
+      "title_4": "Medical",
+      "des_4": "Testing",
+      "title_5": "Mental",
+      "des_5": "Health",
+      "title_6": "Dental",
+      "des_6": "Examination",
+      "title_7": "Surgery",
+      "des_7": "Package",
+      "title_8": "Medical",
+      "des_8": "Products",
+      "title_9": "Health",
+      "des_9": "Test"
     }
   },
   "common": {

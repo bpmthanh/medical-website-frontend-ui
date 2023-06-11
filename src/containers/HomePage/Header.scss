@@ -75,13 +75,23 @@
           }
         }
       }
-      .language-container{
+      .language-container {
         color: $fourth-text-color;
-        .language-vi:hover{
+        .language-vi:hover {
           cursor: pointer;
         }
-        .language-en:hover{
+        .language-vi.action {
+          color: $fifth-text-color;
+          text-decoration: underline;
+          text-decoration-color: $fifth-text-color;
+        }
+        .language-en:hover {
           cursor: pointer;
+        }
+        .language-en.action {
+          color: $fifth-text-color;
+          text-decoration: underline;
+          text-decoration-color: $fifth-text-color;
         }
       }
     }

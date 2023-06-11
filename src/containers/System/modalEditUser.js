@@ -27,13 +27,7 @@ class ModalEditUser extends Component {
 
   checkValidateInput = () => {
     let isValid = true;
-    let arrInput = [
-      "firstName",
-      "lastName",
-      "email",
-      "address",
-      "phoneNumber",
-    ];
+    let arrInput = ["firstName", "lastName", "email", "address", "phoneNumber"];
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         arrInput[0] = "first name";
@@ -51,7 +45,7 @@ class ModalEditUser extends Component {
 
   handleEditModalUser = () => {
     // let isValid = this.checkValidateInput();
-    let isValid = true
+    let isValid = true;
     if (isValid === true) {
       this.props.editUser(this.state);
       this.setState({
@@ -76,18 +70,15 @@ class ModalEditUser extends Component {
         centered={this.props.centered}
         className={this.props.className}
       >
-        <ModalHeader
-        >
-          Edit a user
-        </ModalHeader>
+        <ModalHeader>Edit a user</ModalHeader>
         <ModalBody>
           <form action="/put-crud" className="form" method="POST">
-            <div class="form-row">
-              <div class="form-group col-md-6">
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label for="inputEmail4">First name</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="firstName"
                   value={this.state.firstName}
                   onChange={(e) => {
@@ -95,11 +86,11 @@ class ModalEditUser extends Component {
                   }}
                 />
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <label for="inputPassword4">Last name</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="lastName"
                   value={this.state.lastName}
                   onChange={(e) => {
@@ -108,12 +99,12 @@ class ModalEditUser extends Component {
                 />
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label for="inputEmail">Email</label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   name="email"
                   value={this.state.email}
                   onChange={(e) => {
@@ -122,12 +113,12 @@ class ModalEditUser extends Component {
                 />
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label for="inputAddress">Address</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="address"
                   value={this.state.address}
                   onChange={(e) => {
@@ -135,11 +126,11 @@ class ModalEditUser extends Component {
                   }}
                 />
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <label for="inputCity">Phone number</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="phoneNumber"
                   value={this.state.phoneNumber}
                   onChange={(e) => {

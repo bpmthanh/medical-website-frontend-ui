@@ -38,12 +38,12 @@ class ModalUser extends Component {
     ];
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
-        arrInput[0]='first name'
-        arrInput[1]='last name'
-        arrInput[2]='email'
-        arrInput[3]='password'
-        arrInput[4]='address'
-        arrInput[5]='phone number'
+        arrInput[0] = "first name";
+        arrInput[1] = "last name";
+        arrInput[2] = "email";
+        arrInput[3] = "password";
+        arrInput[4] = "address";
+        arrInput[5] = "phone number";
         isValid = false;
         alert("Missing required field " + arrInput[i]);
         break;
@@ -54,7 +54,7 @@ class ModalUser extends Component {
 
   handleAddNewUser = () => {
     let isValid = this.checkValidateInput();
-    if(isValid===true){
+    if (isValid === true) {
       this.props.createNewUser(this.state);
       this.setState({
         email: "",
@@ -87,12 +87,12 @@ class ModalUser extends Component {
         </ModalHeader>
         <ModalBody>
           <form action="/put-crud" className="form" method="POST">
-            <div class="form-row">
-              <div class="form-group col-md-6">
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label for="inputEmail4">First name</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="firstName"
                   value={this.state.firstName}
                   onChange={(e) => {
@@ -100,11 +100,11 @@ class ModalUser extends Component {
                   }}
                 />
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <label for="inputPassword4">Last name</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="lastName"
                   value={this.state.lastName}
                   onChange={(e) => {
@@ -113,12 +113,12 @@ class ModalUser extends Component {
                 />
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label for="inputEmail">Email</label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   name="email"
                   value={this.state.email}
                   onChange={(e) => {
@@ -126,11 +126,11 @@ class ModalUser extends Component {
                   }}
                 />
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <label for="inputCity">Password</label>
                 <input
                   type="password"
-                  class="form-control"
+                  className="form-control"
                   name="password"
                   value={this.state.password}
                   onChange={(e) => {
@@ -139,12 +139,12 @@ class ModalUser extends Component {
                 />
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label for="inputAddress">Address</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="address"
                   value={this.state.address}
                   onChange={(e) => {
@@ -152,11 +152,11 @@ class ModalUser extends Component {
                   }}
                 />
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <label for="inputCity">Phone number</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   name="phoneNumber"
                   value={this.state.phoneNumber}
                   onChange={(e) => {

@@ -26,15 +26,24 @@
       "des": "CHĂM SÓC SỨC KHỎE TOÀN DIỆN"
     },
     "services": {
-      "title_1": "Khám chuyên khoa",
-      "title_2": "Khám từ xa",
-      "title_3": "Khám tổng quát",
-      "title_4": "Xét nghiệm y học",
-      "title_5": "Sức khỏe tinh thần",
-      "title_6": "Khám nha khoa",
-      "title_7": "Gói phẫu thuật",
-      "title_8": "Sản phẩm y tế",
-      "title_9": "Bài test sức khỏe"
+      "title_1": "Khám",
+      "des_1": "chuyên khoa",
+      "title_2": "Khám",
+      "des_2": "từ xa",
+      "title_3": "Khám",
+      "des_3": "tổng quát",
+      "title_4": "Xét",
+      "des_4": "nghiệm y học",
+      "title_5": "Sức",
+      "des_5": "khỏe tinh thần",
+      "title_6": "Khám",
+      "des_6": "nha khoa",
+      "title_7": "Gói",
+      "des_7": "phẫu thuật",
+      "title_8": "Sản",
+      "des_8": "phẩm y tế",
+      "title_9": "Bài",
+      "des_9": "test sức khỏe"
     }
   },
   "common": {

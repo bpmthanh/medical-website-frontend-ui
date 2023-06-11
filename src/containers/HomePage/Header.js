@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import "./Header.scss";
 import "../../styles/global-class.scss";
 import { FormattedMessage } from "react-intl";
 import { languages } from "../../utils";
+import { changeLanguageApp } from "../../store/actions";
 
 class Header extends Component {
   changeLanguage = (language) => {
-    
+    this.props.changeLanguageAppRedux(language);
   };
   render() {
+    let language = this.props.language;
+    console.log(language)
     return (
       <React.Fragment>
         <div className="container-layout home-header-container">
@@ -56,7 +58,7 @@ class Header extends Component {
             <div className="home-header-content__right-content">
               <div className="support-container">
                 <a className="support" href="#">
-                  <i class="fas fa-phone-square"></i>
+                  <i className="fas fa-phone-square"></i>
                   <span>
                     <FormattedMessage id="home-header.support.title" />
                   </span>
@@ -68,16 +70,15 @@ class Header extends Component {
 
               <div className="language-container">
                 <span
-                  className="language-vi"
+                  className={language === languages.VI? "language-vi action": "language-vi"}
                   onClick={() => this.changeLanguage(languages.VI)}
-                >
-                  VI{" "}
+                >VI
                 </span>
+                <span> / </span>
                 <span
-                  className="language-en"
+                  className={language === languages.EN? "language-en action": "language-en"}
                   onClick={() => this.changeLanguage(languages.EN)}
-                >
-                  / EN
+                >EN
                 </span>
               </div>
             </div>
@@ -89,7 +90,9 @@ class Header extends Component {
             <h1>
               <FormattedMessage id="banner.slogan.title" />
               <br />
-              <b>chăm sóc sức khỏe toàn diện</b>
+              <b>
+                <FormattedMessage id="banner.slogan.des" />
+              </b>
             </h1>
           </div>
 
@@ -137,9 +140,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Khám
+                    <FormattedMessage id="banner.services.title_1" />
                     <br />
-                    chuyên khoa
+                    <FormattedMessage id="banner.services.des_1" />
                   </span>
                 </a>
               </div>
@@ -155,9 +158,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Khám
+                    <FormattedMessage id="banner.services.title_2" />
                     <br />
-                    từ xa
+                    <FormattedMessage id="banner.services.des_2" />
                   </span>
                 </a>
               </div>
@@ -173,9 +176,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Khám
+                    <FormattedMessage id="banner.services.title_3" />
                     <br />
-                    tổng quat
+                    <FormattedMessage id="banner.services.des_3" />
                   </span>
                 </a>
               </div>
@@ -191,8 +194,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Xét nghiệm
-                    <br />y học
+                    <FormattedMessage id="banner.services.title_4" />
+                    <br />
+                    <FormattedMessage id="banner.services.des_4" />
                   </span>
                 </a>
               </div>
@@ -208,9 +212,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Sức khỏe
+                    <FormattedMessage id="banner.services.title_5" />
                     <br />
-                    tinh thần
+                    <FormattedMessage id="banner.services.des_5" />
                   </span>
                 </a>
               </div>
@@ -226,9 +230,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Khám
+                    <FormattedMessage id="banner.services.title_6" />
                     <br />
-                    nha khoa
+                    <FormattedMessage id="banner.services.des_6" />
                   </span>
                 </a>
               </div>
@@ -244,9 +248,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Gói
+                    <FormattedMessage id="banner.services.title_7" />
                     <br />
-                    Phẩu thuật
+                    <FormattedMessage id="banner.services.des_7" />
                   </span>
                 </a>
               </div>
@@ -262,8 +266,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Sản phẩm
-                    <br />y tế
+                    <FormattedMessage id="banner.services.title_8" />
+                    <br />
+                    <FormattedMessage id="banner.services.des_8" />
                   </span>
                 </a>
               </div>
@@ -279,9 +284,9 @@ class Header extends Component {
                     />
                   </div>
                   <span>
-                    Bài test
+                    <FormattedMessage id="banner.services.title_9" />
                     <br />
-                    sức khỏe
+                    <FormattedMessage id="banner.services.des_9" />
                   </span>
                 </a>
               </div>
@@ -298,12 +303,14 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
-    lang: state.app.language,
+    language: state.app.language,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
