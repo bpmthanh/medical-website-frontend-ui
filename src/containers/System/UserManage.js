@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import './userManage.scss';
+import './UserManage.scss';
 import {
   getAllUsers,
   createNewUserReact,

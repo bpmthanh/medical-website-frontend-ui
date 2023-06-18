@@ -10,10 +10,12 @@ class Specialty extends Component {
   render() {
     let settings = {
       dots: true,
-      infinite: false,
-      speed: 500,
+      infinite: true,
+      speed: 1200,
+      autoplay: true,
+      autoplaySpeed: 3000,
       slidesToShow: 1,
-      slidesToScroll: 1,
+      slidesToScroll: 4,
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,
       slidesToShow: 4, // Hiển thị 4 thẻ trên một slide

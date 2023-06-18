@@ -1,14 +1,13 @@
 @import '../../../styles/_variables.scss';
 
 .section-medical-facilities {
-  height: 400px;
-  // border: 1px solid red;
-  // padding: 25px 0;
+  height: auto;
+  padding-bottom: 55px;
   background-color: $seven-text-color;
   display: flex;
 
   .specialty-content {
-    margin-top: 5%;
+    padding-top: 55px;
     align-items: center;
 
     .specialty-header {
@@ -86,6 +85,7 @@
 
 @media (max-width: 768px) {
   .section-medical-facilities {
-    display: initial;
+    height: auto;
+    display: block;
   }
 }

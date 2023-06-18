@@ -13,9 +13,7 @@ import {
 import { path } from '../utils';
 
 import Home from '../routes/Home';
-// import Login from '../routes/Login';
 import Login from './Auth/Login';
-import Header from './Header/Header';
 import System from '../routes/System';
 import HomePage from './HomePage/HomePage';
 
@@ -47,7 +45,7 @@ class App extends Component {
         <Router history={history}>
           <div className="main-container">
             {/* Khi login thi mac dinh no se render ra them thang Header nua*/}
-            {this.props.isLoggedIn && <Header />}
+            
 
             <div className="content-container">
               <CustomScrollbars style={{ height: '100vh', width: '100%' }}>

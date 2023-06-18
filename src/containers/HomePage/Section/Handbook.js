@@ -3,55 +3,37 @@ import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './OutStandingDoctor.scss';
+import './Handbook.scss';
 import '../../../styles/global-class.scss';
 
-const specialtyData = [
+const handbookData = [
   {
     image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/090559-pgs-nguyen-thi-hoai-an.jpg')
+      require('../../../assets/images/HomePage/cam-nang/174013-review-nha-khoa-hoa-hong-phuong-dong.png')
         .default,
     title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
   },
   {
     image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/103841-bs-tuan.png')
+      require('../../../assets/images/HomePage/cam-nang/165157-dia-chi-kham-nhi-quan-7.jpg')
         .default,
     title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
   },
   {
     image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/105401-bsckii-tran-minh-khuyen.jpg')
+      require('../../../assets/images/HomePage/cam-nang/152546-kham-mat-quan5.jpg')
         .default,
     title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
   },
   {
     image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/114430-bshung.jpg')
+      require('../../../assets/images/HomePage/cam-nang/142734-top-dia-chi-kham-tai-mui-hong-hai-ba-trung-uy-tin.png')
         .default,
     title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
-  },
-  {
-    image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/155650-gs-ha-van-quyet.jpg')
-        .default,
-    title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
-  },
-  {
-    image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/180640bac-si-vu-thai-ha.jpg')
-        .default,
-    title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
   },
 ];
 
-class MedicalFacility extends Component {
+class Handbook extends Component {
   render() {
     let settings = {
       dots: true,
@@ -83,14 +65,14 @@ class MedicalFacility extends Component {
     };
 
     return (
-      <div className="section-medical-doctor-outstanding">
+      <div className="section-handbook">
         <div className="container-layout specialty-content">
           <div className="specialty-header">
-            <h2 className="specialty-header-title">Bác sĩ nổi bật tuần qua</h2>
+            <h2 className="specialty-header-title">Cẩm nang</h2>
             <button className="specialty-header-des">Xem thêm</button>
           </div>
           <Slider {...settings}>
-            {specialtyData.map((specialty, index) => (
+            {handbookData.map((specialty, index) => (
               <div className="specialty-content-wrap">
                 <div className="specialty-content-detail" key={index}>
                   <div className="image-container">
@@ -98,7 +80,6 @@ class MedicalFacility extends Component {
                   </div>
                   <div className="detail-title-wrap">
                     <h3 className="detail-title">{specialty.title}</h3>
-                    <span className="detail-des">{specialty.description}</span>
                   </div>
                 </div>
               </div>
@@ -130,4 +111,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default connect(mapStateToProps, mapDispatchToProps)(Handbook);
