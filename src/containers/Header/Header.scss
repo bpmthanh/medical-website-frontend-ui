@@ -14,6 +14,9 @@
     justify-content: space-between;
     .language-wrap {
       margin-right: 20px;
+      .welcome{
+        margin-right: 10px;
+      }
       .language-vi {
         cursor: pointer;
         &.active{

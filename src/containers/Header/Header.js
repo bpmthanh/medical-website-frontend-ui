@@ -6,15 +6,15 @@ import Navigator from '../../components/Navigator';
 import { adminMenu } from './menuApp';
 import './Header.scss';
 import { languages } from '../../utils/constant';
+import { FormattedMessage } from 'react-intl';
 
 class Header extends Component {
-  handleChangeLanguage=(language)=>{
+  handleChangeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
-  }
+  };
 
   render() {
-    const { processLogout,language } = this.props;
-
+    const { processLogout, language, userInfo } = this.props;
     return (
       <div className="header-container">
         {/* thanh navigator */}
@@ -24,11 +24,16 @@ class Header extends Component {
 
         <div className="language-container">
           <div className="language-wrap">
+            <span className="welcome">
+              <FormattedMessage id="home-header.welcome" />
+              &nbsp;
+              {userInfo.user && userInfo.user.firstName
+                ? userInfo.user.firstName
+                : ''}
+            </span>
             <span
               className={
-                language === languages.VI
-                  ? 'language-vi active'
-                  : 'language-vi'
+                language === languages.VI ? 'language-vi active' : 'language-vi'
               }
               onClick={() => {
                 this.handleChangeLanguage(languages.VI);
@@ -39,9 +44,7 @@ class Header extends Component {
             <span> / </span>
             <span
               className={
-                language === languages.EN
-                  ? 'language-en active'
-                  : 'language-en'
+                language === languages.EN ? 'language-en active' : 'language-en'
               }
               onClick={() => {
                 this.handleChangeLanguage(languages.EN);
@@ -64,13 +67,15 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
     language: state.app.language,
+    userInfo: state.user.userInfo,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     processLogout: () => dispatch(actions.processLogout()),
-    changeLanguageAppRedux: (language) => dispatch(actions.changeLanguageApp(language)),
+    changeLanguageAppRedux: (language) =>
+      dispatch(actions.changeLanguageApp(language)),
   };
 };
 
