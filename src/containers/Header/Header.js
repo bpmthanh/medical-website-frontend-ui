@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => {
     processLogout: () => dispatch(actions.processLogout()),
     changeLanguageAppRedux: (language) =>
       dispatch(actions.changeLanguageApp(language)),
-  };
+  };  
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

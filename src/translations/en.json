@@ -19,7 +19,7 @@
     "support": {
       "title": "Support"
     },
-    "welcome": "Welcome"
+    "welcome": "Welcome,"
   },
   "banner": {
     "slogan": {
@@ -74,5 +74,34 @@
       "handbook": "Handbook",
       "manage-handbook": "Handbook Management"
     }
+  },
+  "manage-user": {
+    "title": "Add new user",
+    "email": "Email",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "address": "Address",
+    "phone": "Phone Number",
+    "password": "Password",
+    "gender": {
+      "title": "Gender",
+      "choose": "Choose...",
+      "male": "Male",
+      "female": "Female"
+    },
+    "position": {
+      "title": "Position",
+      "choose": "Choose...",
+      "male": "Add new user",
+      "female": "Add new user"
+    },
+    "role-id": {
+      "title": "Role",
+      "choose": "Choose...",
+      "male": "Add new user",
+      "female": "Add new user"
+    },
+    "image": "Photo",
+    "save": "Save"
   }
 }

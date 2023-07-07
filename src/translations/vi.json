@@ -19,7 +19,7 @@
     "support": {
       "title": "Hỗ trợ"
     },
-    "welcome":"Xin chào"
+    "welcome": "Xin chào,"
   },
   "banner": {
     "slogan": {
@@ -73,5 +73,35 @@
       "handbook": "Cẩm nang",
       "manage-handbook": "Quản lý cẩm nang"
     }
+  },
+  "manage-user": {
+    "title": "Thêm mới người dùng",
+    "email": "Email",
+    "first-name": "Tên",
+    "last-name": "Tên đệm",
+    "address": "Địa chỉ",
+    "phone": "Số điện thoại",
+    "password": "Mật khẩu",
+    "gender": {
+      "title": "Giới tính",
+      "choose": "Chọn...",
+      "male": "Nam",
+      "female": "Nữ"
+    },
+    "position": {
+      "title": "Chức danh",
+      "choose": "Chọn ...",
+      "male": "Thêm mới người dùng",
+      "female": "Thêm mới người dùng"
+    },
+    "role-id": {
+      "title": "Vai trò",
+      "choose": "Chọn ...",
+      "male": "Thêm mới người dùng",
+      "female": "Thêm mới người dùng"
+    },
+    "image": "Ảnh",
+    "save": "Lưu"
+    
   }
 }
