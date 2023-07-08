@@ -1,0 +1,5 @@
+Bài 57
+- Luồng Redux trong dự án
+  + Cách để React lấy data trong redux
+    * mapStateToProps: Nhận vào state của Redux store và trả về một đối tượng chứa các props cần được truyền vào component
+    * mapDispatchToProps: Nhận vào hàm dispatch của Redux và trả về một đối tượng chứa các props chứa các hàm dispatch.

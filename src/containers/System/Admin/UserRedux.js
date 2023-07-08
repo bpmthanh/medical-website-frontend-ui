@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { getAllCodeService } from '../../../services/userService';
 import { languages } from '../../../utils';
+import * as actions from '../../../store/actions';
 
 class UserRedux extends Component {
   state = {};
@@ -13,26 +14,28 @@ class UserRedux extends Component {
     };
   }
   componentDidMount() {
-    try {
-      const fetchData = async () => {
-        const res = await getAllCodeService('gender');
-        console.log(res);
-        if (res && res.errCode == 0) {
-          this.setState({
-            genderArr: res.data,
-          });
-        }
-      };
-
-      fetchData();
-    } catch (e) {
-      console.log(e);
-    }
+    this.props.getGenderStart();
+    // try {
+    //   const fetchData = async () => {
+    //     const res = await getAllCodeService('gender');
+    //     if (res && res.errCode === 0) {
+    //       this.setState({
+    //         genderArr: res.data,
+    //       });
+    //     }
+    //   };
+    //   fetchData();
+    // } catch (error) {
+    //   console.error('Error occurred while fetching gender data:', error);
+    // Thực hiện các xử lý khác tùy thuộc vào yêu cầu của bạn
+    // }
   }
 
   render() {
     let genders = this.state.genderArr;
     let language = this.props.language;
+    let genderRedux = this.props.genderRedux;
+    console.log("Check: ",genderRedux);
     return (
       <div className="user-redux-container">
         <div className="title">
@@ -44,7 +47,7 @@ class UserRedux extends Component {
               <form>
                 <div className="row">
                   <div className="col-md-6">
-                    <label for="inputEmail4">
+                    <label htmlFor="inputEmail4">
                       <FormattedMessage id="manage-user.email" />
                     </label>
                     <input
@@ -55,7 +58,7 @@ class UserRedux extends Component {
                     />
                   </div>
                   <div className="col-md-3">
-                    <label for="inputPassword4">
+                    <label htmlFor="inputPassword4">
                       <FormattedMessage id="manage-user.first-name" />
                     </label>
                     <input
@@ -66,7 +69,7 @@ class UserRedux extends Component {
                     />
                   </div>
                   <div className="col-md-3">
-                    <label for="inputPassword4">
+                    <label htmlFor="inputPassword4">
                       <FormattedMessage id="manage-user.last-name" />
                     </label>
                     <input
@@ -79,7 +82,7 @@ class UserRedux extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-6">
-                    <label for="inputEmail4">
+                    <label htmlFor="inputEmail4">
                       <FormattedMessage id="manage-user.address" />
                     </label>
                     <input
@@ -90,7 +93,7 @@ class UserRedux extends Component {
                     />
                   </div>
                   <div className="col-md-3">
-                    <label for="inputPassword4">
+                    <label htmlFor="inputPassword4">
                       <FormattedMessage id="manage-user.phone" />
                     </label>
                     <input
@@ -101,7 +104,7 @@ class UserRedux extends Component {
                     />
                   </div>
                   <div className="col-md-3">
-                    <label for="inputPassword4">
+                    <label htmlFor="inputPassword4">
                       <FormattedMessage id="manage-user.password" />
                     </label>
                     <input
@@ -114,14 +117,13 @@ class UserRedux extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-3">
-                    <label for="inputState">
+                    <label htmlFor="inputState">
                       <FormattedMessage id="manage-user.gender.title" />
                     </label>
                     <select id="inputState" className="form-control">
-                      {genders &&
-                        genders.length > 0 &&
-                        genders.map((gender, index) => {
-                          console.log(gender);
+                      {genderRedux &&
+                        genderRedux.length > 0 &&
+                        genderRedux.map((gender, index) => {
                           return (
                             <option key={index}>
                               {language === languages.VI
@@ -133,19 +135,19 @@ class UserRedux extends Component {
                     </select>
                   </div>
                   <div className="col-md-3">
-                    <label for="">
+                    <label htmlFor="">
                       <FormattedMessage id="manage-user.position.title" />
                     </label>
                     <select id="" className="form-control"></select>
                   </div>
                   <div className="col-md-3">
-                    <label for="">
+                    <label htmlFor="">
                       <FormattedMessage id="manage-user.role-id.title" />
                     </label>
                     <select id="" className="form-control"></select>
                   </div>
                   <div className="col-md-3">
-                    <label for="inputZip">
+                    <label htmlFor="inputZip">
                       <FormattedMessage id="manage-user.image" />
                     </label>
                     <input
@@ -177,11 +179,14 @@ class UserRedux extends Component {
 const mapStateToProps = (state) => {
   return {
     language: state.app.language,
+    genderRedux: state.admin.genders,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getGenderStart: () => dispatch(actions.fetchGenderStart()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRedux);

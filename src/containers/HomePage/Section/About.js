@@ -44,7 +44,7 @@ class About extends Component {
           <h2 className="about-title">Truyền thông nói về BookingCare</h2>
           <div className="about-content">
             <div className="about-left">
-              <iframe 
+              <iframe
                 src="https://www.youtube-nocookie.com/embed/FyDQljKtWnI?autoplay=1&modestbranding=1"
                 title="W3Schools Free Online Web Tutorials"
                 width="500"

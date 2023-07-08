@@ -20,7 +20,6 @@ export const deleteUserReact = (data) => {
   });
 };
 
-
 export const editUserReact = (dataId, data) => {
   return axios.put('/api/edit-user', {
     id: dataId,
@@ -31,7 +30,6 @@ export const editUserReact = (dataId, data) => {
     phoneNumber: data.phoneNumber,
   });
 };
-
 
 export const getAllCodeService = (type) => {
   return axios.get(`/api/allcode?type=${type}`);

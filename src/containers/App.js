@@ -45,7 +45,6 @@ class App extends Component {
         <Router history={history}>
           <div className="main-container">
             {/* Khi login thi mac dinh no se render ra them thang Header nua*/}
-            
 
             <div className="content-container">
               <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
