@@ -1,0 +1,24 @@
+.wrap-img {
+  .img-upload {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .label-upload {
+      padding: 5px;
+      border-radius: 3px;
+      background-color: #ddd;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    .preview-image {
+      height: 50px;
+      width: 60%;
+      border: 1px solid red;
+      background: center no-repeat;
+      background-size: contain;
+      cursor: pointer;
+    }
+  }
+}

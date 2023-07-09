@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { getAllCodeService } from '../../../services/userService';
 import { languages } from '../../../utils';
 import * as actions from '../../../store/actions';
+import './UserRedux.scss';
 
 class UserRedux extends Component {
   state = {};
@@ -11,10 +12,14 @@ class UserRedux extends Component {
     super(props);
     this.state = {
       genderArr: [],
+      previewImgUrl: null,
     };
   }
+
   componentDidMount() {
     this.props.getGenderStart();
+    this.props.getPositionStart();
+    this.props.getRoleStart();
     // try {
     //   const fetchData = async () => {
     //     const res = await getAllCodeService('gender');
@@ -31,11 +36,28 @@ class UserRedux extends Component {
     // }
   }
 
+  handleOnChangeImage = (event) => {
+    let data = event.target.files;
+    console.log('Check event: ', data);
+    let file = data[0];
+    if (file) {
+      let objectUrl = URL.createObjectURL(file);
+      console.log('Check object url: ', objectUrl);
+      this.setState({
+        previewImgUrl: objectUrl,
+      });
+    }
+  };
+
   render() {
     let genders = this.state.genderArr;
     let language = this.props.language;
     let genderRedux = this.props.genderRedux;
-    console.log("Check: ",genderRedux);
+    let positionRedux = this.props.positionRedux;
+    let roleRedux = this.props.roleRedux;
+    // console.log('Check gender redux: ', genderRedux);
+    // console.log('Check position redux: ', positionRedux);
+    // console.log('Check role redux: ', roleRedux);
     return (
       <div className="user-redux-container">
         <div className="title">
@@ -120,7 +142,7 @@ class UserRedux extends Component {
                     <label htmlFor="inputState">
                       <FormattedMessage id="manage-user.gender.title" />
                     </label>
-                    <select id="inputState" className="form-control">
+                    <select id="inputGenderState" className="form-control">
                       {genderRedux &&
                         genderRedux.length > 0 &&
                         genderRedux.map((gender, index) => {
@@ -138,26 +160,63 @@ class UserRedux extends Component {
                     <label htmlFor="">
                       <FormattedMessage id="manage-user.position.title" />
                     </label>
-                    <select id="" className="form-control"></select>
+                    <select id="inputPositionState" className="form-control">
+                      {positionRedux &&
+                        positionRedux.length > 0 &&
+                        positionRedux.map((position, index) => {
+                          return (
+                            <option key={index}>
+                              {language === languages.VI
+                                ? position.value_vi
+                                : position.value_en}
+                            </option>
+                          );
+                        })}
+                    </select>
                   </div>
                   <div className="col-md-3">
                     <label htmlFor="">
                       <FormattedMessage id="manage-user.role-id.title" />
                     </label>
-                    <select id="" className="form-control"></select>
+                    <select id="inputRoleState" className="form-control">
+                      {roleRedux &&
+                        roleRedux.length > 0 &&
+                        roleRedux.map((role, index) => {
+                          return (
+                            <option key={index}>
+                              {language === languages.VI
+                                ? role.value_vi
+                                : role.value_en}
+                            </option>
+                          );
+                        })}
+                    </select>
                   </div>
                   <div className="col-md-3">
                     <label htmlFor="inputZip">
                       <FormattedMessage id="manage-user.image" />
                     </label>
-                    <input
-                      type="image"
-                      className="form-control"
-                      src="img_submit.gif"
-                      alt="Submit"
-                      width="33"
-                      height="33"
-                    />
+                    <div className="wrap-img">
+                      <input
+                        type="file"
+                        id="previewImg"
+                        hidden
+                        onChange={(event) => {
+                          this.handleOnChangeImage(event);
+                        }}
+                      />
+                      <div className="img-upload">
+                        <label className="label-upload" htmlFor="previewImg">
+                          Tải ảnh <i className="fa-solid fa-upload"></i>
+                        </label>
+                        <div
+                          className="preview-image"
+                          style={{
+                            backgroundImage: `url(${this.state.previewImgUrl})`,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <button
@@ -180,12 +239,16 @@ const mapStateToProps = (state) => {
   return {
     language: state.app.language,
     genderRedux: state.admin.genders,
+    positionRedux: state.admin.positions,
+    roleRedux: state.admin.roles,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getGenderStart: () => dispatch(actions.fetchGenderStart()),
+    getPositionStart: () => dispatch(actions.fetchPositionStart()),
+    getRoleStart: () => dispatch(actions.fetchRoleStart()),
   };
 };
 
