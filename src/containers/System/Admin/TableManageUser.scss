@@ -1,0 +1,18 @@
+.table-manage-user {
+  margin: 40px auto;
+  .table-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 15px;
+    color: #ffc10e;
+  }
+  .action-btn{
+    display: flex;
+    justify-content: space-around;
+    .btn-edit{
+        margin-right: 10px;
+    }
+  }
+}

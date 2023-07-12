@@ -1,6 +1,10 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService } from '../../services/userService';
-
+import {
+  getAllCodeService,
+  createNewUserReact,
+  getAllUsers,
+  deleteUserReact,
+} from '../../services/userService';;
 
 //gender
 export const fetchGenderStart = () => {
@@ -14,7 +18,7 @@ export const fetchGenderStart = () => {
       }
     } catch (error) {
       console.error('Error occurred while fetching gender data:', error);
-      dispatch(fetchGenderStartFailure());
+      // dispatch(fetchGenderStartFailure());
     }
   };
 };
@@ -28,7 +32,6 @@ export const fetchGenderStartFailure = () => ({
   type: actionTypes.FETCH_GENDER_START_FAILURE,
 });
 
-
 // Position
 export const fetchPositionStart = () => {
   return async (dispatch, getState) => {
@@ -41,7 +44,7 @@ export const fetchPositionStart = () => {
       }
     } catch (error) {
       console.error('Error occurred while fetching gender data:', error);
-      dispatch(fetchPositionFailure());
+      // dispatch(fetchPositionFailure());
     }
   };
 };
@@ -67,7 +70,7 @@ export const fetchRoleStart = () => {
       }
     } catch (error) {
       console.error('Error occurred while fetching gender data:', error);
-      dispatch(fetchRoleFailure());
+      // dispatch(fetchRoleFailure());
     }
   };
 };
@@ -79,4 +82,85 @@ export const fetchRoleSuccess = (roleData) => ({
 
 export const fetchRoleFailure = () => ({
   type: actionTypes.FETCH_ROLE_FAILURE,
+});
+
+// save
+export const createNewUser = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await createNewUserReact(data);
+      if (res && res.errCode === 0) {
+        dispatch(saveUserSuccess(res));
+      } else {
+        dispatch(saveUserFailure(res));
+      }
+    } catch (error) {
+      console.error('Error occurred while creating a new user:', error);
+    }
+  };
+};
+
+export const saveUserSuccess = (data) => ({
+  type: actionTypes.SAVE_USER_SUCCESS,
+  data,
+});
+
+export const saveUserFailure = (data) => ({
+  type: actionTypes.SAVE_USER_FAILURE,
+  data,
+});
+
+
+// fetch all user
+export const fetchAllUSersStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllUsers('All');
+      if (res && res.errCode === 0) {
+        dispatch(fetchAllUSersSuccess(res));
+      } else {
+        dispatch(fetchAllUSersFailure(res));
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching all user:', error);
+      // dispatch(fetchAllUSersFailure(error));
+    }
+  };
+};
+
+export const fetchAllUSersSuccess = (data) => ({
+  type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+  data,
+});
+
+export const fetchAllUSersFailure = (data) => ({
+  type: actionTypes.FETCH_ALL_USERS_FAILURE,
+  data,
+});
+
+// delete all user
+export const deleteAUSerStart = (userId) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await deleteUserReact(userId);
+      if (res && res.errCode === 0) {
+        dispatch(deleteAUSerSuccess(res));
+      } else {
+        dispatch(deleteAUSerFailure(res));
+      }
+    } catch (error) {
+      console.error('Error occurred while delete a user:', error);
+      // dispatch(deleteAUSerFailure(error));
+    }
+  };
+};
+
+export const deleteAUSerSuccess = (data) => ({
+  type: actionTypes.DELETE_A_USER_SUCCESS,
+  data,
+});
+
+export const deleteAUSerFailure = (data) => ({
+  type: actionTypes.DELETE_A_USER_FAILURE,
+  data,
 });

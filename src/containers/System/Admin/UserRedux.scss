@@ -1,4 +1,6 @@
 .wrap-img {
+  padding: 10px;
+  border: 1px solid blue;
   .img-upload {
     display: flex;
     align-items: center;
@@ -7,14 +9,15 @@
       padding: 5px;
       border-radius: 3px;
       background-color: #ddd;
+      margin-right: 15px;
       cursor: pointer;
       &:hover {
         opacity: 0.8;
       }
     }
     .preview-image {
-      height: 50px;
-      width: 60%;
+      height: 100px;
+      width: 150px;
       border: 1px solid red;
       background: center no-repeat;
       background-size: contain;
