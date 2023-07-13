@@ -68,16 +68,34 @@ const adminReducer = (state = initialState, action) => {
         users: [],
       };
 
-    //delete a users
+    //delete a user
     case actionTypes.DELETE_A_USER_SUCCESS:
       // if (action.data.errCode === 0) {
       //   alert(action.data.errMessage);
       // }
+      return {
+        ...state,
+      };
       break;
     case actionTypes.DELETE_A_USER_FAILURE:
       // if (action.data.errCode === 1) {
       //   alert(action.data.errMessage);
       // }
+      return {
+        ...state,
+      };
+      break;
+
+    //edit a user
+    case actionTypes.EDIT_A_USER_SUCCESS:
+      if (action.data.errCode === 0) {
+        alert(action.data.errMessage);
+      }
+      break;
+    case actionTypes.EDIT_A_USER_FAILURE:
+      if (action.data.errCode === 1) {
+        alert(action.data.errMessage);
+      }
       break;
 
     default:

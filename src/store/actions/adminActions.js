@@ -4,7 +4,8 @@ import {
   createNewUserReact,
   getAllUsers,
   deleteUserReact,
-} from '../../services/userService';;
+  editUserReact,
+} from '../../services/userService';
 
 //gender
 export const fetchGenderStart = () => {
@@ -110,7 +111,6 @@ export const saveUserFailure = (data) => ({
   data,
 });
 
-
 // fetch all user
 export const fetchAllUSersStart = () => {
   return async (dispatch, getState) => {
@@ -138,7 +138,7 @@ export const fetchAllUSersFailure = (data) => ({
   data,
 });
 
-// delete all user
+// delete a user
 export const deleteAUSerStart = (userId) => {
   return async (dispatch, getState) => {
     try {
@@ -162,5 +162,31 @@ export const deleteAUSerSuccess = (data) => ({
 
 export const deleteAUSerFailure = (data) => ({
   type: actionTypes.DELETE_A_USER_FAILURE,
+  data,
+});
+
+// edit a user
+export const editAUSer = (userData) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await editUserReact(userData.id,userData);
+      if (res && res.errCode === 0) {
+        dispatch(deleteAUSerSuccess(res));
+      } else {
+        dispatch(deleteAUSerFailure(res));
+      }
+    } catch (error) {
+      console.error('Error occurred while delete a user:', error);
+    }
+  };
+};
+
+export const editAUSerSuccess = (data) => ({
+  type: actionTypes.EDIT_A_USER_SUCCESS,
+  data,
+});
+
+export const editAUSerFailure = (data) => ({
+  type: actionTypes.EDIT_A_USER_FAILURE,
   data,
 });

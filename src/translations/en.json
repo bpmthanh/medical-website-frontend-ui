@@ -102,6 +102,7 @@
       "female": "Add new user"
     },
     "image": "Photo",
-    "save": "Save"
+    "save": "Save",
+    "edit": "Save edit"
   }
 }

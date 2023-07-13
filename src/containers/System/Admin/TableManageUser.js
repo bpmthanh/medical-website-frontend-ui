@@ -28,6 +28,10 @@ class TableManageUser extends Component {
     }, 100);
   };
 
+  handleEditUser = (userInfo) => {
+    this.props.handleEditUserFromParent(userInfo);
+  };
+
   render() {
     let arrUsers = this.state.userRedux;
     return (
@@ -64,7 +68,10 @@ class TableManageUser extends Component {
                     <td>{user.roleId}</td>
                     {user.image && <td>{user.image}</td>}
                     <td className="action-btn">
-                      <button className="btn-edit">
+                      <button
+                        className="btn-edit"
+                        onClick={() => this.handleEditUser(user)}
+                      >
                         <i className="fas fa-pencil-alt"></i>
                       </button>
                       <button
