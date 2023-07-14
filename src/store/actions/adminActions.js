@@ -169,7 +169,7 @@ export const deleteAUSerFailure = (data) => ({
 export const editAUSer = (userData) => {
   return async (dispatch, getState) => {
     try {
-      let res = await editUserReact(userData.id,userData);
+      let res = await editUserReact(userData.id, userData);
       if (res && res.errCode === 0) {
         dispatch(deleteAUSerSuccess(res));
       } else {

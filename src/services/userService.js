@@ -31,6 +31,7 @@ export const editUserReact = (dataId, data) => {
     gender: data.gender,
     role: data.role,
     position: data.position,
+    avatar: data.avatar,
   });
 };
 

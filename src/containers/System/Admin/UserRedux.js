@@ -1,7 +1,7 @@
 import React, { Component, isValidElement } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { languages, CRUD_ACTIONS } from '../../../utils';
+import { languages, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import TableManageUser from './TableManageUser';
@@ -11,7 +11,7 @@ class UserRedux extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      previewImgUrl: null,
+      previewImgUrl: '',
       email: '',
       firstName: '',
       lastName: '',
@@ -33,15 +33,15 @@ class UserRedux extends Component {
     this.props.getRoleStart();
   }
 
-  handleOnChangeImage = (event) => {
+  handleOnChangeImage = async (event) => {
     let data = event.target.files;
     let file = data[0];
     if (file) {
+      let base64 = await CommonUtils.getBase64(file);
       let objectUrl = URL.createObjectURL(file);
-      console.log('Check object url: ', objectUrl);
       this.setState({
         previewImgUrl: objectUrl,
-        avatar: file,
+        avatar: base64,
       });
     }
   };
@@ -101,7 +101,7 @@ class UserRedux extends Component {
 
   handleSubmit = () => {
     let action = this.state.action;
-    if (action === CRUD_ACTIONS.CREATE) {
+    if (action === CRUD_ACTIONS.SAVE) {
       let checkIsValid = this.checkValid();
       if (checkIsValid === false) {
         return;
@@ -121,6 +121,7 @@ class UserRedux extends Component {
         avatar: this.state.avatar,
       });
     }
+
     if (action === CRUD_ACTIONS.EDIT) {
       this.props.editAUserRedux({
         id: this.state.id,
@@ -159,6 +160,10 @@ class UserRedux extends Component {
 
   handleEditUserFromParent = (userInfo) => {
     console.log('Check user from child: ', userInfo);
+    let imageBase64 = '';
+    if (userInfo.image) {
+      imageBase64 = new Buffer(userInfo.image,'base64').toString('binary')
+    }
     this.setState({
       email: userInfo.email,
       password: 'HARDCODE',
@@ -170,11 +175,16 @@ class UserRedux extends Component {
       position: userInfo.positionId,
       role: userInfo.roleId,
       id: userInfo.id,
-      // avatar:,
-      // previewImgUrl:,
+      avatar: '',
+      previewImgUrl: imageBase64,
       action: CRUD_ACTIONS.EDIT,
     });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('Previous state: ', prevState);
+    console.log('Current state: ', this.state);
+  }
 
   render() {
     let language = this.props.language;

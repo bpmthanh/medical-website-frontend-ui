@@ -48,7 +48,6 @@ class TableManageUser extends Component {
               <th>Gender</th>
               <th>Position</th>
               <th>Role</th>
-              {arrUsers && arrUsers.image && <th>Photo</th>}
               <th>Actions</th>
             </tr>
           </thead>
@@ -66,7 +65,6 @@ class TableManageUser extends Component {
                     <td>{user.gender}</td>
                     <td>{user.positionId}</td>
                     <td>{user.roleId}</td>
-                    {user.image && <td>{user.image}</td>}
                     <td className="action-btn">
                       <button
                         className="btn-edit"
