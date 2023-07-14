@@ -143,17 +143,17 @@ class UserRedux extends Component {
     }, 100);
 
     this.setState({
-      email: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      address: '',
-      phone: '',
-      gender: 'M',
-      position: 'P0',
-      role: 'R1',
-      avatar: '',
-      previewImgUrl: '',
+      // email: '',
+      // password: '',
+      // firstName: '',
+      // lastName: '',
+      // address: '',
+      // phone: '',
+      // gender: 'M',
+      // position: 'P0',
+      // role: 'R1',
+      // avatar: '',
+      // previewImgUrl: '',
       action: CRUD_ACTIONS.SAVE,
     });
   };
@@ -181,10 +181,10 @@ class UserRedux extends Component {
     });
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('Previous state: ', prevState);
-    console.log('Current state: ', this.state);
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log('Previous state: ', prevState);
+  //   console.log('Current state: ', this.state);
+  // }
 
   render() {
     let language = this.props.language;

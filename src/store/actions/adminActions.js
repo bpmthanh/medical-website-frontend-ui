@@ -5,6 +5,7 @@ import {
   getAllUsers,
   deleteUserReact,
   editUserReact,
+  getTopDoctorHome,
 } from '../../services/userService';
 
 //gender
@@ -121,6 +122,11 @@ export const fetchAllUSersStart = () => {
       } else {
         dispatch(fetchAllUSersFailure(res));
       }
+
+      let resDoctors = await getTopDoctorHome(1);
+      console.log(resDoctors);
+
+
     } catch (error) {
       console.error('Error occurred while fetching all user:', error);
       // dispatch(fetchAllUSersFailure(error));

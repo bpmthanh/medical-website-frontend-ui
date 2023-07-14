@@ -38,3 +38,7 @@ export const editUserReact = (dataId, data) => {
 export const getAllCodeService = (type) => {
   return axios.get(`/api/allcode?type=${type}`);
 };
+
+export const getTopDoctorHome = (limit) => {
+  return axios.get(`/api/top-doctor-home?limit=${limit}`);
+};
