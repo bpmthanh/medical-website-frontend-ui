@@ -27,7 +27,7 @@ export const editUserReact = (dataId, data) => {
     firstName: data.firstName,
     lastName: data.lastName,
     address: data.address,
-    phoneNumber: data.phone,
+    phone: data.phone,
     gender: data.gender,
     role: data.role,
     position: data.position,

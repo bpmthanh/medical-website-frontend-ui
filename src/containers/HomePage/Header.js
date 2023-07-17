@@ -17,7 +17,7 @@ class Header extends Component {
   };
   render() {
     let language = this.props.language;
-    console.log(language);
+    // console.log(language);
     return (
       <React.Fragment>
         <div className="container-layout home-header-container">

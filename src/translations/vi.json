@@ -103,5 +103,9 @@
     "image": "Ảnh",
     "save": "Lưu",
     "edit": "Lưu thay đổi"
+  },
+  "homepage": {
+    "out-standing-doctor":"Bác sĩ nổi bật tuần qua",
+    "more-info":"Xem thêm"
   }
 }

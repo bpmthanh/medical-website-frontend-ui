@@ -38,44 +38,6 @@
         }
       }
 
-      .slick-list {
-        .slick-track {
-          .slick-slide {
-            .specialty-content-wrap {
-              .specialty-content-detail {
-                margin: 0 5px;
-                padding: 15px 0;
-                border: 1px solid #eee;
-                .image-container {
-                  height: 200px;
-                  background-color: #fff;
-                  display: flex;
-                  justify-content: center;
-                  img {
-                    border-radius: 50%;
-                    width: auto;
-                    height: 100%;
-                    object-fit: contain;
-                    object-position: center;
-                  }
-                }
-
-                .detail-title-wrap {
-                  text-align: center;
-                  .detail-title {
-                    color: $six-text-color;
-                    font-size: medium;
-                    margin-top: 10px;
-                  }
-                  .detail-des {
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
       .slick-next {
         right: 0px;
         z-index: 1;
@@ -87,6 +49,55 @@
           text-align: center;
           color: #959595 !important;
         }
+      }
+
+      .slick-list {
+        .slick-track {
+          display: flex !important;
+          .slick-slide {
+            height: inherit !important;
+            div {
+              height: 100%;
+              .specialty-content-wrap {
+                height: 100%;
+                .specialty-content-detail {
+                  height: 100%;
+                  margin: 0 5px;
+                  padding: 15px;
+                  border: 1px solid #eee;
+                  .image-container {
+                    height: 200px;
+                    background-color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    img {
+                      border-radius: 50%;
+                      width: auto;
+                      height: 100%;
+                      object-fit: contain;
+                      object-position: center;
+                    }
+                  }
+
+                  .detail-title-wrap {
+                    text-align: center;
+                    .detail-title {
+                      color: $six-text-color;
+                      font-size: medium;
+                      margin-top: 10px;
+                    }
+                    .detail-des {
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .slick-disabled{
+        display: none!important;
       }
     }
   }

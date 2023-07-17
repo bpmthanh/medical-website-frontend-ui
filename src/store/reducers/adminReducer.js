@@ -5,6 +5,7 @@ const initialState = {
   roles: [],
   positions: [],
   users: [],
+  doctors:[],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -55,19 +56,6 @@ const adminReducer = (state = initialState, action) => {
       }
       break;
 
-    //fetch all users
-    case actionTypes.FETCH_ALL_USERS_SUCCESS:
-      return {
-        ...state,
-        users: action.data,
-      };
-    case actionTypes.FETCH_ALL_USERS_FAILURE:
-      // console.log('Fetch all users failure: ', action.data);
-      return {
-        ...state,
-        users: [],
-      };
-
     //delete a user
     case actionTypes.DELETE_A_USER_SUCCESS:
       // if (action.data.errCode === 0) {
@@ -97,6 +85,32 @@ const adminReducer = (state = initialState, action) => {
         alert(action.data.errMessage);
       }
       break;
+
+    //fetch all users
+    case actionTypes.FETCH_ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        users: action.data,
+      };
+    case actionTypes.FETCH_ALL_USERS_FAILURE:
+      // console.log('Fetch all users failure: ', action.data);
+      return {
+        ...state,
+        users: [],
+      };
+
+    //fetch top doctor
+    case actionTypes.FETCH_TOP_DOCTOR_SUCCESS:
+      return {
+        ...state,
+        doctors: action.data.data,
+      };
+    case actionTypes.FETCH_TOP_DOCTOR_FAILURE:
+      // console.log('Fetch top doctor failure: ', action.data);
+      return {
+        ...state,
+        doctors: [],
+      };
 
     default:
       return state;

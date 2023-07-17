@@ -112,47 +112,15 @@ export const saveUserFailure = (data) => ({
   data,
 });
 
-// fetch all user
-export const fetchAllUSersStart = () => {
-  return async (dispatch, getState) => {
-    try {
-      let res = await getAllUsers('All');
-      if (res && res.errCode === 0) {
-        dispatch(fetchAllUSersSuccess(res));
-      } else {
-        dispatch(fetchAllUSersFailure(res));
-      }
-
-      let resDoctors = await getTopDoctorHome(1);
-      console.log(resDoctors);
-
-
-    } catch (error) {
-      console.error('Error occurred while fetching all user:', error);
-      // dispatch(fetchAllUSersFailure(error));
-    }
-  };
-};
-
-export const fetchAllUSersSuccess = (data) => ({
-  type: actionTypes.FETCH_ALL_USERS_SUCCESS,
-  data,
-});
-
-export const fetchAllUSersFailure = (data) => ({
-  type: actionTypes.FETCH_ALL_USERS_FAILURE,
-  data,
-});
-
 // delete a user
 export const deleteAUSerStart = (userId) => {
   return async (dispatch, getState) => {
     try {
       let res = await deleteUserReact(userId);
       if (res && res.errCode === 0) {
-        dispatch(deleteAUSerSuccess(res));
+        dispatch(editAUSerSuccess(res));
       } else {
-        dispatch(deleteAUSerFailure(res));
+        dispatch(editAUSerFailure(res));
       }
     } catch (error) {
       console.error('Error occurred while delete a user:', error);
@@ -194,5 +162,64 @@ export const editAUSerSuccess = (data) => ({
 
 export const editAUSerFailure = (data) => ({
   type: actionTypes.EDIT_A_USER_FAILURE,
+  data,
+});
+
+// fetch all user
+export const fetchAllUSersStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllUsers('All');
+      console.log('Fetch all users: ', res);
+      if (res && res.errCode === 0) {
+        dispatch(fetchAllUSersSuccess(res));
+      } else {
+        dispatch(fetchAllUSersFailure(res));
+      }
+
+      let resDoctors = await getTopDoctorHome();
+      console.log('Fetch top home doctors: ', resDoctors);
+    } catch (error) {
+      console.error('Error occurred while fetching all user:', error);
+      // dispatch(fetchAllUSersFailure(error));
+    }
+  };
+};
+
+export const fetchAllUSersSuccess = (data) => ({
+  type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+  data,
+});
+
+export const fetchAllUSersFailure = (data) => ({
+  type: actionTypes.FETCH_ALL_USERS_FAILURE,
+  data,
+});
+
+// fetch top doctor
+export const fetchTopDoctor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getTopDoctorHome();
+      // console.log('Fetch top users: ', res);
+      if (res && res.errCode === 0) {
+        dispatch(fetchTopDoctorSuccess(res));
+      } else {
+        dispatch(fetchTopDoctorFailure(res));
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching all user:', error);
+      // dispatch(fetchAllUSersFailure(error));
+    }
+  };
+};
+
+export const fetchTopDoctorSuccess = (data) => ({
+  type: actionTypes.FETCH_TOP_DOCTOR_SUCCESS,
+  data,
+});
+
+export const fetchTopDoctorFailure = (data) => ({
+  type: actionTypes.FETCH_TOP_DOCTOR_FAILURE,
   data,
 });

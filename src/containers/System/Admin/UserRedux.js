@@ -101,12 +101,12 @@ class UserRedux extends Component {
 
   handleSubmit = () => {
     let action = this.state.action;
+
     if (action === CRUD_ACTIONS.SAVE) {
       let checkIsValid = this.checkValid();
       if (checkIsValid === false) {
         return;
       }
-
       //fire action redux
       this.props.createNewUser({
         email: this.state.email,
@@ -159,10 +159,10 @@ class UserRedux extends Component {
   };
 
   handleEditUserFromParent = (userInfo) => {
-    console.log('Check user from child: ', userInfo);
+    // console.log('Check user from parent: ', userInfo);
     let imageBase64 = '';
     if (userInfo.image) {
-      imageBase64 = new Buffer(userInfo.image,'base64').toString('binary')
+      imageBase64 = new Buffer(userInfo.image, 'base64').toString('binary');
     }
     this.setState({
       email: userInfo.email,
@@ -175,7 +175,7 @@ class UserRedux extends Component {
       position: userInfo.positionId,
       role: userInfo.roleId,
       id: userInfo.id,
-      avatar: '',
+      avatar: imageBase64,
       previewImgUrl: imageBase64,
       action: CRUD_ACTIONS.EDIT,
     });
@@ -319,7 +319,7 @@ class UserRedux extends Component {
                         genderRedux.length > 0 &&
                         genderRedux.map((gender, index) => {
                           return (
-                            <option key={index} value={gender.key}>
+                            <option key={index} value={gender.keyMap}>
                               {language === languages.VI
                                 ? gender.value_vi
                                 : gender.value_en}
@@ -344,7 +344,7 @@ class UserRedux extends Component {
                         positionRedux.length > 0 &&
                         positionRedux.map((position, index) => {
                           return (
-                            <option key={index} value={position.key}>
+                            <option key={index} value={position.keyMap}>
                               {language === languages.VI
                                 ? position.value_vi
                                 : position.value_en}
@@ -367,7 +367,7 @@ class UserRedux extends Component {
                         roleRedux.length > 0 &&
                         roleRedux.map((role, index) => {
                           return (
-                            <option key={index} value={role.key}>
+                            <option key={index} value={role.keyMap}>
                               {language === languages.VI
                                 ? role.value_vi
                                 : role.value_en}

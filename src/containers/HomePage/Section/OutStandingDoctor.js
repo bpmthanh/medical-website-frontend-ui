@@ -5,66 +5,70 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './OutStandingDoctor.scss';
 import '../../../styles/global-class.scss';
+import * as actions from '../../../store/actions';
+import { languages } from '../../../utils';
+import { FormattedMessage } from 'react-intl';
 
-const specialtyData = [
-  {
-    image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/090559-pgs-nguyen-thi-hoai-an.jpg')
-        .default,
-    title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
-  },
-  {
-    image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/103841-bs-tuan.png')
-        .default,
-    title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
-  },
-  {
-    image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/105401-bsckii-tran-minh-khuyen.jpg')
-        .default,
-    title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
-  },
-  {
-    image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/114430-bshung.jpg')
-        .default,
-    title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
-  },
-  {
-    image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/155650-gs-ha-van-quyet.jpg')
-        .default,
-    title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
-  },
-  {
-    image:
-      require('../../../assets/images/HomePage/bac-si-noi-bat/180640bac-si-vu-thai-ha.jpg')
-        .default,
-    title: 'Bệnh viện Hữu nghị Việt Đức',
-    description: 'Sức khỏe tâm thần, Tư vấn, trị liệu Tâm lý',
-  },
-];
+class OutStandingDoctor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      arrDoctors: [],
+      isFirstSlide: true,
+      isLastSlide: false,
+    };
+    this.sliderRef = React.createRef();
+  }
 
-class MedicalFacility extends Component {
+  componentDidMount() {
+    this.props.getTopDoctor();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // console.log('Previous props: ', prevProps.doctors);
+    // console.log('Current props: ', this.props.doctors);
+    if (prevProps.doctors !== this.props.doctors) {
+      this.setState({ arrDoctors: this.props.doctors.reverse() });
+    }
+  }
+
+  handleAfterChange = (currentSlide) => {
+    const slider = this.sliderRef.current;
+    // console.log(currentSlide)
+    if (slider) {
+      const slick = slider.innerSlider;
+      this.setState({
+        isFirstItem: currentSlide === 0,
+        isLastItem: currentSlide === slick.props.children.length - 1,
+      });
+    }
+  };
+
   render() {
+    const { arrDoctors, isFirstItem, isLastItem } = this.state;
+    // console.log(isFirstItem, isLastItem);
+    let language = this.props.language;
     let settings = {
       dots: true,
-      infinite: true,
-      speed: 1200,
-      autoplay: true,
-      autoplaySpeed: 3000,
+      infinite: false,
+      speed: 2000,
+      autoplay: false,
+      autoplaySpeed: 4000,
       slidesToShow: 1,
       slidesToScroll: 4,
-      nextArrow: <NextArrow />,
-      prevArrow: <PrevArrow />,
-      slidesToShow: 4, // Hiển thị 4 thẻ trên một slide
+      slidesToShow: 4,
+      adaptiveHeight: true,
+      nextArrow: !isFirstItem && <NextArrow />,
+      prevArrow: !isLastItem && <PrevArrow />,
+      afterChange: this.handleAfterChange,
       responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+          },
+        },
         {
           breakpoint: 768,
           settings: {
@@ -86,23 +90,41 @@ class MedicalFacility extends Component {
       <div className="section-medical-doctor-outstanding">
         <div className="container-layout specialty-content">
           <div className="specialty-header">
-            <h2 className="specialty-header-title">Bác sĩ nổi bật tuần qua</h2>
-            <button className="specialty-header-des">Xem thêm</button>
+            <h2 className="specialty-header-title">
+              <FormattedMessage id="homepage.out-standing-doctor" />
+            </h2>
+            <button className="specialty-header-des">
+              <FormattedMessage id="homepage.more-info" />
+            </button>
           </div>
-          <Slider {...settings}>
-            {specialtyData.map((specialty, index) => (
-              <div className="specialty-content-wrap">
-                <div className="specialty-content-detail" key={index}>
-                  <div className="image-container">
-                    <img src={specialty.image} alt="" />
+          <Slider ref={this.sliderRef} {...settings}>
+            {arrDoctors &&
+              arrDoctors.length > 0 &&
+              arrDoctors.map((item, index) => {
+                let imageBase64;
+                if (item.image) {
+                  imageBase64 = new Buffer(item.image, 'base64').toString(
+                    'binary'
+                  );
+                }
+                let nameVi = `${item.positionData.value_vi}, ${item.lastName} ${item.firstName}`;
+                let nameEn = `${item.positionData.value_en}, ${item.firstName} ${item.lastName}`;
+                return (
+                  <div className="specialty-content-wrap">
+                    <div className="specialty-content-detail" key={index}>
+                      <div className="image-container">
+                        <img src={imageBase64} alt="" />
+                      </div>
+                      <div className="detail-title-wrap">
+                        <h3 className="detail-title">
+                          {language === languages.VI ? nameVi : nameEn}
+                        </h3>
+                        <span className="detail-des">{item.address}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="detail-title-wrap">
-                    <h3 className="detail-title">{specialty.title}</h3>
-                    <span className="detail-des">{specialty.description}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
           </Slider>
         </div>
       </div>
@@ -111,23 +133,34 @@ class MedicalFacility extends Component {
 }
 
 const NextArrow = (props) => (
-  <button className="slick-next" onClick={props.onClick}>
+  <button
+    className={`slick-next${props.isLastItem ? ' slick-disabled' : ''}`}
+    onClick={props.onClick}
+  >
     Next
   </button>
 );
 
 const PrevArrow = (props) => (
-  <button className="slick-prev" onClick={props.onClick}>
+  <button
+    className={`slick-prev${props.isFirstItem ? ' slick-disabled' : ''}`}
+    onClick={props.onClick}
+  >
     Prev
   </button>
 );
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    language: state.app.language,
+    doctors: state.admin.doctors,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getTopDoctor: () => dispatch(actions.fetchTopDoctor()),
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);

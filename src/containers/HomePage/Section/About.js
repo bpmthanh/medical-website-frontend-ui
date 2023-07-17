@@ -49,7 +49,7 @@ class About extends Component {
                 title="W3Schools Free Online Web Tutorials"
                 width="500"
                 height="300"
-                frameborder="0"
+                frameBorder="0"
                 allowfullscreen
               ></iframe>
             </div>

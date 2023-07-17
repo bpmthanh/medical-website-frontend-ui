@@ -104,5 +104,9 @@
     "image": "Photo",
     "save": "Save",
     "edit": "Save edit"
+  },
+  "homepage": {
+    "out-standing-doctor": "Outstanding Doctors of the Week",
+    "more-info": "More Info"
   }
 }

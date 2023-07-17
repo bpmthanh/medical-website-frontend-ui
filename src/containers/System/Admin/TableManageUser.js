@@ -40,6 +40,7 @@ class TableManageUser extends Component {
         <table className="table table-bordered">
           <thead>
             <tr>
+              <th>Rank</th>
               <th>Email</th>
               <th>First Name</th>
               <th>Last name</th>
@@ -57,6 +58,7 @@ class TableManageUser extends Component {
               arrUsers.map((user, index) => {
                 return (
                   <tr key={index}>
+                    <td>{index+1}</td>
                     <td>{user.email}</td>
                     <td>{user.firstName}</td>
                     <td>{user.lastName}</td>
