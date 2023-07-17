@@ -143,17 +143,17 @@ class UserRedux extends Component {
     }, 100);
 
     this.setState({
-      // email: '',
-      // password: '',
-      // firstName: '',
-      // lastName: '',
-      // address: '',
-      // phone: '',
-      // gender: 'M',
-      // position: 'P0',
-      // role: 'R1',
-      // avatar: '',
-      // previewImgUrl: '',
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      address: '',
+      phone: '',
+      gender: 'M',
+      position: 'P0',
+      role: 'R1',
+      avatar: '',
+      previewImgUrl: '',
       action: CRUD_ACTIONS.SAVE,
     });
   };
