@@ -42,3 +42,11 @@ export const getAllCodeService = (type) => {
 export const getTopDoctorHome = (limit) => {
   return axios.get(`/api/top-doctor-home?limit=${limit}`);
 };
+
+export const getAllDoctors = () => {
+  return axios.get(`/api/get-all-doctors`);
+};
+
+export const saveDetailDoctor = (data) => {
+  return axios.post(`/api/save-info-doctors`,data);
+};

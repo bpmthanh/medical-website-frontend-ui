@@ -6,6 +6,8 @@ import {
   deleteUserReact,
   editUserReact,
   getTopDoctorHome,
+  getAllDoctors,
+  saveDetailDoctor,
 } from '../../services/userService';
 
 //gender
@@ -221,5 +223,62 @@ export const fetchTopDoctorSuccess = (data) => ({
 
 export const fetchTopDoctorFailure = (data) => ({
   type: actionTypes.FETCH_TOP_DOCTOR_FAILURE,
+  data,
+});
+
+// fetch all doctor
+export const fetchAllDoctors = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllDoctors();
+      if (res && res.errCode === 0) {
+        dispatch(fetchAllDoctorsSuccess(res));
+      } else {
+        dispatch(fetchAllDoctorsFailure(res));
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching all user:', error);
+      // dispatch(fetchAllUSersFailure(error));
+    }
+  };
+};
+
+export const fetchAllDoctorsSuccess = (data) => ({
+  type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
+  data,
+});
+
+export const fetchAllDoctorsFailure = (data) => ({
+  type: actionTypes.FETCH_ALL_DOCTORS_FAILURE,
+  data,
+});
+
+
+
+
+
+// save detail doctor
+export const saveDetailDoctorRedux = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await saveDetailDoctor(data);
+      if (res && res.errCode === 0) {
+        dispatch(saveDetailDoctorsSuccess(res));
+      } else {
+        dispatch(saveDetailDoctorsFailure(res));
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching all user:', error);
+    }
+  };
+};
+
+export const saveDetailDoctorsSuccess = (data) => ({
+  type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
+  data,
+});
+
+export const saveDetailDoctorsFailure = (data) => ({
+  type: actionTypes.SAVE_DETAIL_DOCTOR_FAILURE,
   data,
 });
