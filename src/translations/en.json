@@ -66,7 +66,7 @@
       "manage-doctor": "Doctor Management",
       "manage-admin": "Admin Management",
       "crud": "User CRUD",
-      "crud-redux": "Redux CRUD",
+      "crud-redux": "Admin management",
       "clinic": "Clinic",
       "manage-clinic": "Clinic Management",
       "specialty": "Specialty",
@@ -74,6 +74,10 @@
       "handbook": "Handbook",
       "manage-handbook": "Handbook Management"
     }
+  },
+  "homepage": {
+    "out-standing-doctor": "Outstanding Doctors of the Week",
+    "more-info": "More Info"
   },
   "manage-user": {
     "title": "Add new user",
@@ -105,8 +109,11 @@
     "save": "Save",
     "edit": "Save edit"
   },
-  "homepage": {
-    "out-standing-doctor": "Outstanding Doctors of the Week",
-    "more-info": "More Info"
+  "manage-doctor": {
+    "title": "Add new doctor information",
+    "doctor-choose": "Choose doctor",
+    "doctor-info": "Doctor information",
+    "save": "Save",
+    "edit": "Save edit"
   }
 }

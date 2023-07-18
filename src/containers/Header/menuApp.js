@@ -3,17 +3,17 @@ export const adminMenu = [
     //quản lý nguời dùng
     name: 'menu.admin.manage-user',
     menus: [
-      {
-        name: 'menu.admin.manage-admin',
-        link: '/system/admin-manage',
-      },
+      // {
+      //   name: 'menu.admin.manage-admin',
+      //   link: '/system/admin-manage',
+      // },
+      // {
+      //   name: 'menu.admin.crud',
+      //   link: '/system/crud-manage',
+      // },
       {
         name: 'menu.admin.manage-doctor',
         link: '/system/doctor-manage',
-      },
-      {
-        name: 'menu.admin.crud',
-        link: '/system/crud-manage',
       },
       {
         name: 'menu.admin.crud-redux',

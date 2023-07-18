@@ -1,0 +1,29 @@
+.manage-doctor-container {
+  .manage-doctor-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 15px;
+    color: #49bce2;
+  }
+  .more-info {
+    display: flex;
+    justify-content: space-between;
+    .content-left {
+        display: flex;
+        flex-direction: column;
+        flex: 40%;
+      .choose-doctor-title {
+      }
+      margin-right: 40px;
+    }
+    .content-right {
+        display: flex;
+        flex-direction: column;
+        flex: 60%;
+    }
+  }
+  .manage-doctor-editor {
+  }
+}
