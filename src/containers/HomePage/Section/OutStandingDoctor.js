@@ -110,8 +110,8 @@ class OutStandingDoctor extends Component {
                 let nameVi = `${item.positionData.value_vi}, ${item.lastName} ${item.firstName}`;
                 let nameEn = `${item.positionData.value_en}, ${item.firstName} ${item.lastName}`;
                 return (
-                  <div className="specialty-content-wrap">
-                    <div className="specialty-content-detail" key={index}>
+                  <div className="specialty-content-wrap" key={index}>
+                    <div className="specialty-content-detail">
                       <div className="image-container">
                         <img src={imageBase64} alt="" />
                       </div>

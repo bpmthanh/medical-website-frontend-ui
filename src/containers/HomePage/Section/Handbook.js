@@ -73,8 +73,8 @@ class Handbook extends Component {
           </div>
           <Slider {...settings}>
             {handbookData.map((specialty, index) => (
-              <div className="specialty-content-wrap">
-                <div className="specialty-content-detail" key={index}>
+              <div className="specialty-content-wrap" key={index}>
+                <div className="specialty-content-detail">
                   <div className="image-container">
                     <img src={specialty.image} alt="" />
                   </div>

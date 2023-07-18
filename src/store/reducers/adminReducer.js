@@ -21,6 +21,7 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
     //position
     case actionTypes.FETCH_POSITION_SUCCESS:
       state.positions = action.data;
@@ -32,6 +33,7 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
     //role
     case actionTypes.FETCH_ROLE_SUCCESS:
       state.roles = action.data;
@@ -43,37 +45,27 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
     //save user
     case actionTypes.SAVE_USER_SUCCESS:
-      // console.log('Save user success: ', action.data);
-      // if (action.data.errCode === 0) {
-      //   alert(action.data.errMessage);
-      // }
-      break;
-    case actionTypes.SAVE_USER_FAILURE:
-      // console.log('Save user failure: ', action.data);
-      if (action.data.errCode === 1) {
-        alert(action.data.errMessage);
+      return {
+        ...state
       }
-      break;
+    case actionTypes.SAVE_USER_FAILURE:
+      alert(action.data.errMessage);
+      return {
+        ...state,
+      };
 
     //delete a user
     case actionTypes.DELETE_A_USER_SUCCESS:
-      // if (action.data.errCode === 0) {
-      //   alert(action.data.errMessage);
-      // }
       return {
         ...state,
       };
-      break;
     case actionTypes.DELETE_A_USER_FAILURE:
-      // if (action.data.errCode === 1) {
-      //   alert(action.data.errMessage);
-      // }
       return {
         ...state,
       };
-      break;
 
     //edit a user
     case actionTypes.EDIT_A_USER_SUCCESS:
@@ -117,7 +109,7 @@ const adminReducer = (state = initialState, action) => {
         ...state,
         allDoctors: action.data.data,
       };
-    case actionTypes.FETCH_ALL_DOCTOR_FAILURE:
+    case actionTypes.FETCH_ALL_DOCTORS_FAILURE:
       return {
         ...state,
         allDoctors: [],
@@ -125,12 +117,10 @@ const adminReducer = (state = initialState, action) => {
 
     //Save detail doctors
     case actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS:
-      console.log("Save detail doctor successfully: ",action.data.errMessage)
       return {
         ...state,
       };
     case actionTypes.SAVE_DETAIL_DOCTOR_FAILURE:
-      console.log('Save detail doctor failure: ', action.data.errMessage);
       return {
         ...state,
       };

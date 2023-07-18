@@ -50,7 +50,7 @@ class About extends Component {
                 width="500"
                 height="300"
                 frameBorder="0"
-                allowfullscreen
+                allowFullScreen
               ></iframe>
             </div>
             <div className="about-right">

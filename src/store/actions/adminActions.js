@@ -22,7 +22,6 @@ export const fetchGenderStart = () => {
       }
     } catch (error) {
       console.error('Error occurred while fetching gender data:', error);
-      // dispatch(fetchGenderStartFailure());
     }
   };
 };
@@ -48,7 +47,6 @@ export const fetchPositionStart = () => {
       }
     } catch (error) {
       console.error('Error occurred while fetching gender data:', error);
-      // dispatch(fetchPositionFailure());
     }
   };
 };
@@ -74,7 +72,6 @@ export const fetchRoleStart = () => {
       }
     } catch (error) {
       console.error('Error occurred while fetching gender data:', error);
-      // dispatch(fetchRoleFailure());
     }
   };
 };
@@ -120,13 +117,12 @@ export const deleteAUSerStart = (userId) => {
     try {
       let res = await deleteUserReact(userId);
       if (res && res.errCode === 0) {
-        dispatch(editAUSerSuccess(res));
+        dispatch(deleteAUSerSuccess(res));
       } else {
-        dispatch(editAUSerFailure(res));
+        dispatch(deleteAUSerFailure(res));
       }
     } catch (error) {
       console.error('Error occurred while delete a user:', error);
-      // dispatch(deleteAUSerFailure(error));
     }
   };
 };
@@ -178,12 +174,8 @@ export const fetchAllUSersStart = () => {
       } else {
         dispatch(fetchAllUSersFailure(res));
       }
-
-      let resDoctors = await getTopDoctorHome();
-      console.log('Fetch top home doctors: ', resDoctors);
     } catch (error) {
       console.error('Error occurred while fetching all user:', error);
-      // dispatch(fetchAllUSersFailure(error));
     }
   };
 };
@@ -203,7 +195,6 @@ export const fetchTopDoctor = () => {
   return async (dispatch, getState) => {
     try {
       let res = await getTopDoctorHome();
-      // console.log('Fetch top users: ', res);
       if (res && res.errCode === 0) {
         dispatch(fetchTopDoctorSuccess(res));
       } else {
@@ -211,7 +202,6 @@ export const fetchTopDoctor = () => {
       }
     } catch (error) {
       console.error('Error occurred while fetching all user:', error);
-      // dispatch(fetchAllUSersFailure(error));
     }
   };
 };
@@ -238,7 +228,6 @@ export const fetchAllDoctors = () => {
       }
     } catch (error) {
       console.error('Error occurred while fetching all user:', error);
-      // dispatch(fetchAllUSersFailure(error));
     }
   };
 };
@@ -252,10 +241,6 @@ export const fetchAllDoctorsFailure = (data) => ({
   type: actionTypes.FETCH_ALL_DOCTORS_FAILURE,
   data,
 });
-
-
-
-
 
 // save detail doctor
 export const saveDetailDoctorRedux = (data) => {
