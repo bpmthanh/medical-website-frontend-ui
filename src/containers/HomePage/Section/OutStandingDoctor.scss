@@ -61,6 +61,7 @@
               .specialty-content-wrap {
                 height: 100%;
                 .specialty-content-detail {
+                  cursor: pointer;
                   height: 100%;
                   margin: 0 5px;
                   padding: 15px;
@@ -96,8 +97,8 @@
         }
       }
 
-      .slick-disabled{
-        display: none!important;
+      .slick-disabled {
+        display: none !important;
       }
     }
   }

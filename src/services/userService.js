@@ -50,3 +50,7 @@ export const getAllDoctors = () => {
 export const saveDetailDoctor = (data) => {
   return axios.post(`/api/save-info-doctors`,data);
 };
+
+export const getDetailInfoDoctor = (id) => {
+  return axios.get(`/api/get-detail-doctor?id=${id}`);
+};

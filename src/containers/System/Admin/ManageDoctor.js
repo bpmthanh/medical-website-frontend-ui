@@ -48,8 +48,12 @@ class ManageDoctor extends Component {
     this.props.saveDetailDoctor({
       contentHTML: this.state.contentHTML,
       contentMarkdown: this.state.contentMarkdown,
-      description: this.state.description,
+      description: this.state.descriptionDoctor,
       doctorId: this.state.doctorId,
+    });
+
+    this.setState({
+      descriptionDoctor: '',
     });
   };
 
@@ -76,7 +80,7 @@ class ManageDoctor extends Component {
               <FormattedMessage id="manage-doctor.doctor-choose" />
             </label>
             <select
-              class="form-select"
+              className="form-select"
               onChange={(event) => this.handleChange(event)}
             >
               {this.state.allDoctorRedux &&

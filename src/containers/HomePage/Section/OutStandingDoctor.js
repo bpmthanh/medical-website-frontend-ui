@@ -8,6 +8,7 @@ import '../../../styles/global-class.scss';
 import * as actions from '../../../store/actions';
 import { languages } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 
 class OutStandingDoctor extends Component {
   constructor(props) {
@@ -42,6 +43,11 @@ class OutStandingDoctor extends Component {
         isLastItem: currentSlide === slick.props.children.length - 1,
       });
     }
+  };
+
+  handleViewDetailDoctor = (data) => {
+    const { history } = this.props;
+    history.push(`detail-doctor/${data.id}`);
   };
 
   render() {
@@ -110,7 +116,11 @@ class OutStandingDoctor extends Component {
                 let nameVi = `${item.positionData.value_vi}, ${item.lastName} ${item.firstName}`;
                 let nameEn = `${item.positionData.value_en}, ${item.firstName} ${item.lastName}`;
                 return (
-                  <div className="specialty-content-wrap" key={index}>
+                  <div
+                    className="specialty-content-wrap"
+                    key={index}
+                    onClick={() => this.handleViewDetailDoctor(item)}
+                  >
                     <div className="specialty-content-detail">
                       <div className="image-container">
                         <img src={imageBase64} alt="" />
@@ -163,4 +173,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(OutStandingDoctor));

@@ -100,216 +100,217 @@ class Header extends Component {
           </div>
         </div>
 
-        <div className="home-header-masthead">
-          <div className="slogan">
-            <h1>
-              <FormattedMessage id="banner.slogan.title" />
-              <br />
-              <b>
-                <FormattedMessage id="banner.slogan.des" />
-              </b>
-            </h1>
-          </div>
-
-          <div className="search-container">
-            <div className="search">
-              <i className="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="Tìm bác sĩ" />
+        {this.props.isShowBanner === true && (
+          <div className="home-header-masthead">
+            <div className="slogan">
+              <h1>
+                <FormattedMessage id="banner.slogan.title" />
+                <br />
+                <b>
+                  <FormattedMessage id="banner.slogan.des" />
+                </b>
+              </h1>
             </div>
-          </div>
 
-          <div className="app-container">
-            <div className="app">
-              <a href="#" className="app-store">
-                <img
-                  src={
-                    require('../../assets/images/HomePage/app-store-badge-black.svg')
-                      .default
-                  }
-                  alt=""
-                />
-              </a>
-              <a href="#" className="gg-store">
-                <img
-                  src={
-                    require('../../assets/images/HomePage/google-play-badge.svg')
-                      .default
-                  }
-                  alt=""
-                />
-              </a>
+            <div className="search-container">
+              <div className="search">
+                <i className="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Tìm bác sĩ" />
+              </div>
             </div>
-          </div>
 
-          <div className="menu-container">
-            <div className="menu">
-              <div className="specialist-examination">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/133537-khamchuyenkhoa.png')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_1" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_1" />
-                  </span>
+            <div className="app-container">
+              <div className="app">
+                <a href="#" className="app-store">
+                  <img
+                    src={
+                      require('../../assets/images/HomePage/app-store-badge-black.svg')
+                        .default
+                    }
+                    alt=""
+                  />
                 </a>
-              </div>
-              <div className="remote-examination">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/133657-khamtuxa.png')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_2" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_2" />
-                  </span>
-                </a>
-              </div>
-              <div className="general-examination">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/133744-khamtongquat.png')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_3" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_3" />
-                  </span>
-                </a>
-              </div>
-              <div className="medical-test">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/133744-dichvuxetnghiem.png')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_4" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_4" />
-                  </span>
-                </a>
-              </div>
-              <div className="mental-health">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/133744-suckhoetinhthan.png')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_5" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_5" />
-                  </span>
-                </a>
-              </div>
-              <div className="dental-examination">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/104635-khamnhakhoa.png')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_6" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_6" />
-                  </span>
-                </a>
-              </div>
-              <div className="surgery-package">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/151930-phau-thuat.jpg')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_7" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_7" />
-                  </span>
-                </a>
-              </div>
-              <div className="medical-products">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/133744-khamtainha.png')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_8" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_8" />
-                  </span>
-                </a>
-              </div>
-              <div className="health-test">
-                <a href="#">
-                  <div className="wrap-img">
-                    <img
-                      src={
-                        require('../../assets/images/HomePage/160542-icon-bai-test-suc-khoe.png')
-                          .default
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <span>
-                    <FormattedMessage id="banner.services.title_9" />
-                    <br />
-                    <FormattedMessage id="banner.services.des_9" />
-                  </span>
+                <a href="#" className="gg-store">
+                  <img
+                    src={
+                      require('../../assets/images/HomePage/google-play-badge.svg')
+                        .default
+                    }
+                    alt=""
+                  />
                 </a>
               </div>
             </div>
-          </div>
 
-          <div className="detail-container"></div>
-        </div>
+            <div className="menu-container">
+              <div className="menu">
+                <div className="specialist-examination">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/133537-khamchuyenkhoa.png')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_1" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_1" />
+                    </span>
+                  </a>
+                </div>
+                <div className="remote-examination">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/133657-khamtuxa.png')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_2" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_2" />
+                    </span>
+                  </a>
+                </div>
+                <div className="general-examination">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/133744-khamtongquat.png')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_3" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_3" />
+                    </span>
+                  </a>
+                </div>
+                <div className="medical-test">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/133744-dichvuxetnghiem.png')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_4" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_4" />
+                    </span>
+                  </a>
+                </div>
+                <div className="mental-health">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/133744-suckhoetinhthan.png')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_5" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_5" />
+                    </span>
+                  </a>
+                </div>
+                <div className="dental-examination">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/104635-khamnhakhoa.png')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_6" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_6" />
+                    </span>
+                  </a>
+                </div>
+                <div className="surgery-package">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/151930-phau-thuat.jpg')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_7" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_7" />
+                    </span>
+                  </a>
+                </div>
+                <div className="medical-products">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/133744-khamtainha.png')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_8" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_8" />
+                    </span>
+                  </a>
+                </div>
+                <div className="health-test">
+                  <a href="#">
+                    <div className="wrap-img">
+                      <img
+                        src={
+                          require('../../assets/images/HomePage/160542-icon-bai-test-suc-khoe.png')
+                            .default
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      <FormattedMessage id="banner.services.title_9" />
+                      <br />
+                      <FormattedMessage id="banner.services.des_9" />
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="detail-container"></div>
+          </div>
+        )}
       </React.Fragment>
     );
   }

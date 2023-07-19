@@ -15,7 +15,7 @@ class HomePage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
+        <Header isShowBanner={true} />
         <Specialty />
         <MedicalFacility />
         <OutStandingDoctor />
