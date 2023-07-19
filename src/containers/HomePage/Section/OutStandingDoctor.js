@@ -47,7 +47,7 @@ class OutStandingDoctor extends Component {
 
   handleViewDetailDoctor = (data) => {
     const { history } = this.props;
-    history.push(`detail-doctor/${data.id}`);
+    history.push(`detail-top-doctor/${data.id}`);
   };
 
   render() {

@@ -11,17 +11,20 @@
     display: flex;
     justify-content: space-between;
     .content-left {
-        display: flex;
-        flex-direction: column;
-        flex: 40%;
+      display: flex;
+      flex-direction: column;
+      flex: 40%;
+      margin-right: 40px;
       .choose-doctor-title {
       }
-      margin-right: 40px;
     }
     .content-right {
-        display: flex;
-        flex-direction: column;
-        flex: 60%;
+      display: flex;
+      flex-direction: column;
+      flex: 60%;
+      .doctor-info {
+        height: 150px;
+      }
     }
   }
   .manage-doctor-editor {

@@ -31,9 +31,9 @@ class DetailDoctor extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     // console.log('Previous props: ', prevProps.doctors);
     // console.log('Current props: ', this.props.doctors);
-    if (prevState.detailDoctor !== this.state.detailDoctor) {
-      console.log(this.state.detailDoctor);
-    }
+    // if (prevState.detailDoctor !== this.state.detailDoctor) {
+    // console.log(this.state.detailDoctor);
+    // }
   }
 
   render() {
@@ -71,7 +71,15 @@ class DetailDoctor extends Component {
             </div>
           </div>
           <div className="schedule-doctor"></div>
-          <div className="detail-info-doctor"></div>
+          <div className="detail-info-doctor">
+            {detailDoctor.Markdown && detailDoctor.Markdown.contentHTML && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: detailDoctor.Markdown.contentHTML,
+                }}
+              ></div>
+            )}
+          </div>
           <div className="comment-doctor"></div>
         </div>
       </>

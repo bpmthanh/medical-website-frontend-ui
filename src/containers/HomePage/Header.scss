@@ -2,7 +2,7 @@
 
 .home-header-container {
   height: 60px;
-  width: 100%;
+  width: 100%!important;
   background: rgba(255, 255, 255, 1);
   // box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.18);
   position: fixed;
@@ -29,6 +29,7 @@
         height: 40px;
         width: 160px;
         margin-left: 10px;
+        cursor: pointer;
       }
     }
     &__center-content {

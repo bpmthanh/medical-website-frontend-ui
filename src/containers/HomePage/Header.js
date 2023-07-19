@@ -10,10 +10,15 @@ import { changeLanguageApp } from '../../store/actions';
 import '../../styles/global-class.scss';
 
 import { languages } from '../../utils';
+import { withRouter } from 'react-router-dom';
 
 class Header extends Component {
   changeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
+  };
+  returnHome = () => {
+    const { history } = this.props;
+    history.push('/home');
   };
   render() {
     let language = this.props.language;
@@ -24,7 +29,10 @@ class Header extends Component {
           <div className="home-header-content">
             <div className="home-header-content__left-content">
               <i className="fa-solid fa-bars"></i>
-              <div className="home-header-content__left-content--menu-icon"></div>
+              <div
+                className="home-header-content__left-content--menu-icon"
+                onClick={() => this.returnHome()}
+              ></div>
             </div>
             <div className="home-header-content__center-content">
               <div className="menu-list">
@@ -329,4 +337,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

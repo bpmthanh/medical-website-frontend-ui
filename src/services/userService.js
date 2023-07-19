@@ -48,6 +48,7 @@ export const getAllDoctors = () => {
 };
 
 export const saveDetailDoctor = (data) => {
+  // console.log(data)
   return axios.post(`/api/save-info-doctors`,data);
 };
 
