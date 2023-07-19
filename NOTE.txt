@@ -7,3 +7,11 @@ Bài 57
 Bài 59
 - Xem life circle của component
 - Sequelize migration: npx sequelize-cli db:migrate --to migration-create-user.js
+
+Bài 68
+
+
+1. `A.hasOne(B, { /* options */ })`: Mối quan hệ "hasOne" định nghĩa rằng một đối tượng của mô hình "A" chỉ có một đối tượng liên quan của mô hình "B". Đây là quan hệ một một, trong đó mô hình "A" chứa khóa ngoại để tham chiếu đến mô hình "B".
+2. `A.belongsTo(B, { /* options */ })`: Mối quan hệ "belongsTo" định nghĩa rằng một đối tượng của mô hình "A" thuộc về một đối tượng liên quan của mô hình "B". Đây là quan hệ một một, trong đó mô hình "A" chứa khóa ngoại để xác định mối quan hệ với mô hình "B".
+3. `A.hasMany(B, { /* options */ })`: Mối quan hệ "hasMany" định nghĩa rằng một đối tượng của mô hình "A" có nhiều đối tượng liên quan của mô hình "B". Đây là quan hệ một nhiều, trong đó mô hình "B" chứa khóa ngoại để tham chiếu đến mô hình "A".
+4. `A.belongsToMany(B, { through: 'C', /* options */ })`: Mối quan hệ "belongsToMany" định nghĩa rằng một đối tượng của mô hình "A" có thể thuộc về nhiều đối tượng liên quan của mô hình "B", và ngược lại. Để thực hiện quan hệ này, cần sử dụng một bảng trung gian "C" thông qua các quan hệ many-to-many giữa "A" và "B".
