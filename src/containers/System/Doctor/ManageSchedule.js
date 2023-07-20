@@ -11,8 +11,9 @@ import {
 } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {saveBulkScheduleDoctor} from '../../../services/userService';
 
 class ManageSchedule extends Component {
   constructor(props) {
@@ -94,51 +95,24 @@ class ManageSchedule extends Component {
     }
   };
 
-  handleSaveSchedule = () => {
+  handleSaveSchedule = async () => {
     let { rangeTime, doctorId, currentDate } = this.state;
-    let formattedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+    let formattedDate = new Date(currentDate).getTime();
     let selectedTime;
     let result = [];
 
     if (!moment(currentDate).isValid()) {
-      toast.error('Lack of date!', {
-        position: 'bottom-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      });
+      toast.error('Lack of date!');
       return;
     }
     if (!doctorId) {
-      toast.error('Lack of doctor!', {
-        position: 'bottom-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      });
+      toast.error('Lack of doctor!');
       return;
     }
     if (rangeTime && rangeTime.length > 0) {
       selectedTime = rangeTime.filter((item) => item.isSelected === true);
       if (selectedTime.length === 0) {
-        toast.error('Lack of time!', {
-          position: 'bottom-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
-        });
+        toast.error('Lack of time!');
         return;
       }
       if (selectedTime && selectedTime.length > 0) {
@@ -146,22 +120,13 @@ class ManageSchedule extends Component {
           let object = {};
           object.doctorId = doctorId;
           object.date = formattedDate;
-          object.time = time.keyMap;
+          object.timeType = time.keyMap;
           result.push(object);
         });
       }
     }
-     toast.success('Save successfully!', {
-       position: 'bottom-right',
-       autoClose: 2000,
-       hideProgressBar: false,
-       closeOnClick: true,
-       pauseOnHover: true,
-       draggable: true,
-       progress: undefined,
-       theme: 'light',
-     });
-     return;
+    let res = await saveBulkScheduleDoctor(result);
+    toast.success('Save successfully!');
   };
 
   render() {
