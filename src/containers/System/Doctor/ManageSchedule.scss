@@ -1,0 +1,34 @@
+.manage-schedule-container {
+  .title {
+  }
+  .container {
+    margin-top: 30px;
+    .row {
+      .choose-wrap {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        .choose-doctor {
+          padding: 0;
+          width: 40%;
+        }
+        .choose-date {
+          display: flex;
+          flex-direction: column;
+          width: 30%;
+        }
+      }
+      .pick-hour-container {
+        margin: 20px 0;
+        padding: 0px;
+
+        // border: 1px solid #49BCE2;
+        button{
+            padding: 0 10px;
+            margin: 5px;
+            border: 1px solid;
+        }
+      }
+    }
+  }
+}

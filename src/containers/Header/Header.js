@@ -25,7 +25,6 @@ class Header extends Component {
     let menu = [];
     if (userInfo && !_.isEmpty(userInfo)) {
       let role = userInfo.user.roleId;
-      console.log(role)
       if (role === USER_ROLE.ADMIN) {
         menu = adminMenu;
       }

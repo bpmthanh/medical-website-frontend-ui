@@ -63,7 +63,12 @@
     },
     "doctor": {
       "manage-schedule": "Appointment management",
-      "schedule": "Appointment schedule"
+      "manage-schedule-title": "Management schedule",
+      "schedule": "Appointment schedule",
+      "choose-doctor": "Choose doctor",
+      "choose-date": "Choose date",
+      "save": "Save",
+      "edit": "Save edit"
     }
   },
   "homepage": {

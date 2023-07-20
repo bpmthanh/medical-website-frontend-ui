@@ -63,7 +63,12 @@
     },
     "doctor": {
       "manage-schedule": "Quản lý khám bệnh",
-      "schedule": "Lịch khám bệnh"
+      "manage-schedule-title": "Quản lý lịch khám bệnh",
+      "schedule": "Lịch khám bệnh",
+      "choose-doctor": "Chọn bác sĩ",
+      "choose-date": "Chọn ngày",
+      "save": "Lưu",
+      "edit": "Lưu thay đổi"
     }
   },
   "homepage": {

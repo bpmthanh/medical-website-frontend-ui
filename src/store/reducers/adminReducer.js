@@ -7,6 +7,7 @@ const initialState = {
   users: [],
   doctors: [],
   allDoctors: [],
+  scheduleHours: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -49,8 +50,8 @@ const adminReducer = (state = initialState, action) => {
     //save user
     case actionTypes.SAVE_USER_SUCCESS:
       return {
-        ...state
-      }
+        ...state,
+      };
     case actionTypes.SAVE_USER_FAILURE:
       alert(action.data.errMessage);
       return {
@@ -121,6 +122,17 @@ const adminReducer = (state = initialState, action) => {
         ...state,
       };
     case actionTypes.SAVE_DETAIL_DOCTOR_FAILURE:
+      return {
+        ...state,
+      };
+
+    //schedule hours
+    case actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_SUCCESS:
+      state.scheduleHours = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_FAILURE:
       return {
         ...state,
       };

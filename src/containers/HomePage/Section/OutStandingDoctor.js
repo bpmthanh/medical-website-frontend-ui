@@ -129,7 +129,7 @@ class OutStandingDoctor extends Component {
                         <h3 className="detail-title">
                           {language === languages.VI ? nameVi : nameEn}
                         </h3>
-                        <span className="detail-des">{item.address}</span>
+                        {/* <span className="detail-des">{item.address}</span> */}
                       </div>
                     </div>
                   </div>

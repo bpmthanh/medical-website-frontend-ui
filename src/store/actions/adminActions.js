@@ -267,3 +267,31 @@ export const saveDetailDoctorsFailure = (data) => ({
   type: actionTypes.SAVE_DETAIL_DOCTOR_FAILURE,
   data,
 });
+
+
+// fetch all code shedule hours
+export const fetchAllCodeScheduleStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllCodeService('Time');
+      // console.log('Fetch all users: ', res);
+      if (res && res.errCode === 0) {
+        dispatch(fetchAllCodeScheduleSuccess(res.data));
+      } else {
+        dispatch(fetchAllCodeScheduleFailure(res));
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching all user:', error);
+    }
+  };
+};
+
+export const fetchAllCodeScheduleSuccess = (data) => ({
+  type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_SUCCESS,
+  data,
+});
+
+export const fetchAllCodeScheduleFailure = (data) => ({
+  type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_FAILURE,
+  data,
+});

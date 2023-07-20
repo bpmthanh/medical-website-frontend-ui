@@ -72,6 +72,12 @@ class Login extends Component {
     );
   };
 
+  handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      this.handleLogin();
+    }
+  };
+
   render() {
     return (
       <div className="login-container">
@@ -97,6 +103,7 @@ class Login extends Component {
                 placeholder="Password"
                 value={this.state.password}
                 onChange={(event) => this.handleOnchangePassword(event)}
+                onKeyDown={(event) => this.handleKeyDown(event)}
               />
               <i
                 className="fa-regular fa-eye-slash eye-handle"
