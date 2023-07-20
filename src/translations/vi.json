@@ -48,20 +48,8 @@
     }
   },
   "menu": {
-    "system": {
-      "header": "Hệ thống",
-      "system-administrator": {
-        "header": "Quản trị hệ thống",
-        "user-manage": "Quản lý người sử dụng",
-        "user-redux": "Quản lý người sử dụng bằng redux",
-        "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
-      },
-      "system-parameter": {
-        "header": "Tham số hệ thống"
-      }
-    },
     "admin": {
-      "manage-user": "Quản lý người dùng",
+      "manage-user": "Người dùng",
       "manage-doctor": "Quản lý bác sĩ",
       "manage-admin": "Quản lý admin",
       "crud": "CRUD người dùng",
@@ -72,6 +60,10 @@
       "manage-specialty": "Quản lý chuyên khoa",
       "handbook": "Cẩm nang",
       "manage-handbook": "Quản lý cẩm nang"
+    },
+    "doctor": {
+      "manage-schedule": "Quản lý khám bệnh",
+      "schedule": "Lịch khám bệnh"
     }
   },
   "homepage": {

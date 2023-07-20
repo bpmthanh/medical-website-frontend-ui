@@ -168,7 +168,7 @@ export const fetchAllUSersStart = () => {
   return async (dispatch, getState) => {
     try {
       let res = await getAllUsers('All');
-      console.log('Fetch all users: ', res);
+      // console.log('Fetch all users: ', res);
       if (res && res.errCode === 0) {
         dispatch(fetchAllUSersSuccess(res));
       } else {

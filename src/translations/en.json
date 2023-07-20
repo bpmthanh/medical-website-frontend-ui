@@ -48,31 +48,22 @@
     }
   },
   "menu": {
-    "system": {
-      "header": "System",
-      "system-administrator": {
-        "header": "System Administrator",
-        "user-manage": "User manage",
-        "product-manage": "Package manage",
-        "user-redux": "Manage user using redux",
-        "register-package-group-or-account": "Register service package for group/account"
-      },
-      "system-parameter": {
-        "header": "System-parameter"
-      }
-    },
     "admin": {
-      "manage-user": "User Management",
-      "manage-doctor": "Doctor Management",
-      "manage-admin": "Admin Management",
+      "manage-user": "User",
+      "manage-doctor": "Doctor management",
+      "manage-admin": "Admin management",
       "crud": "User CRUD",
       "crud-redux": "Admin management",
       "clinic": "Clinic",
-      "manage-clinic": "Clinic Management",
+      "manage-clinic": "Clinic management",
       "specialty": "Specialty",
-      "manage-specialty": "Specialty Management",
+      "manage-specialty": "Specialty management",
       "handbook": "Handbook",
-      "manage-handbook": "Handbook Management"
+      "manage-handbook": "Handbook management"
+    },
+    "doctor": {
+      "manage-schedule": "Appointment management",
+      "schedule": "Appointment schedule"
     }
   },
   "homepage": {
