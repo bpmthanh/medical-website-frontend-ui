@@ -3,10 +3,16 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import './ManageSchedule.scss';
 import * as actions from '../../../store/actions';
-import { languages, CRUD_ACTIONS, CommonUtils } from '../../../utils';
+import {
+  languages,
+  CRUD_ACTIONS,
+  CommonUtils,
+  dateFormat,
+} from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
-import FormattedDate from '../../../components/Formating/FormattedDate';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class ManageSchedule extends Component {
   constructor(props) {
@@ -32,8 +38,14 @@ class ManageSchedule extends Component {
       });
     }
     if (prevProps.doctorSchedule !== this.props.doctorSchedule) {
+      let data = this.props.doctorSchedule;
+      if (data && data.length > 0) {
+        data.map((item, index) => {
+          item.isSelected = false;
+        });
+      }
       this.setState({
-        rangeTime: this.props.doctorSchedule.reverse(),
+        rangeTime: this.props.doctorSchedule,
       });
     }
   };
@@ -69,9 +81,92 @@ class ManageSchedule extends Component {
     });
   };
 
+  handleBtnTime = (time) => {
+    let { rangeTime } = this.state;
+
+    if (rangeTime && rangeTime.length > 0) {
+      rangeTime.map((item) => {
+        if (time.id === item.id) {
+          item.isSelected = !item.isSelected;
+        }
+      });
+      this.setState({ rangeTime });
+    }
+  };
+
+  handleSaveSchedule = () => {
+    let { rangeTime, doctorId, currentDate } = this.state;
+    let formattedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+    let selectedTime;
+    let result = [];
+
+    if (!moment(currentDate).isValid()) {
+      toast.error('Lack of date!', {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      return;
+    }
+    if (!doctorId) {
+      toast.error('Lack of doctor!', {
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      return;
+    }
+    if (rangeTime && rangeTime.length > 0) {
+      selectedTime = rangeTime.filter((item) => item.isSelected === true);
+      if (selectedTime.length === 0) {
+        toast.error('Lack of time!', {
+          position: 'bottom-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        return;
+      }
+      if (selectedTime && selectedTime.length > 0) {
+        selectedTime.map((time) => {
+          let object = {};
+          object.doctorId = doctorId;
+          object.date = formattedDate;
+          object.time = time.keyMap;
+          result.push(object);
+        });
+      }
+    }
+     toast.success('Save successfully!', {
+       position: 'bottom-right',
+       autoClose: 2000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: 'light',
+     });
+     return;
+  };
+
   render() {
     let rangeTime = this.state.rangeTime;
-    console.log(rangeTime);
+    // console.log(rangeTime);
     return (
       <React.Fragment>
         <div className="manage-schedule-container">
@@ -115,11 +210,24 @@ class ManageSchedule extends Component {
                 </div>
               </div>
               <div className="col-12 pick-hour-container">
+                <p className="choose-time">
+                  <FormattedMessage id="menu.doctor.choose-hour" />
+                </p>
                 {rangeTime &&
                   rangeTime.length > 0 &&
                   rangeTime.map((item, index) => {
                     return (
-                      <button className="btn btn-outline-dark" key={index}>
+                      <button
+                        className={
+                          item.isSelected === true
+                            ? 'btn btn-success'
+                            : 'btn btn-outline-dark'
+                        }
+                        key={index}
+                        onClick={() => {
+                          this.handleBtnTime(item);
+                        }}
+                      >
                         {this.props.language === languages.VI
                           ? item.value_vi
                           : item.value_en}
@@ -130,6 +238,7 @@ class ManageSchedule extends Component {
               <button
                 className="btn btn-primary"
                 style={{ padding: '0 15px', margin: '10px 0 0 0', width: '8%' }}
+                onClick={this.handleSaveSchedule}
               >
                 <FormattedMessage id="menu.doctor.save" />
               </button>
