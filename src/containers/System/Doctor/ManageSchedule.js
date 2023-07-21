@@ -11,9 +11,9 @@ import {
 } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {saveBulkScheduleDoctor} from '../../../services/userService';
+import { saveBulkScheduleDoctor } from '../../../services/userService';
 
 class ManageSchedule extends Component {
   constructor(props) {
@@ -125,7 +125,11 @@ class ManageSchedule extends Component {
         });
       }
     }
-    let res = await saveBulkScheduleDoctor(result);
+    let res = await saveBulkScheduleDoctor({
+      arrSchedule: result,
+      doctorId: doctorId,
+      date: formattedDate,
+    });
     toast.success('Save successfully!');
   };
 
