@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../Header';
-import './DoctorDetail.scss';
+import './DetailDoctor.scss';
 import { getDetailInfoDoctor } from '../../../../services/userService';
 import { languages, CRUD_ACTIONS, CommonUtils } from '../../../../utils';
+import DoctorSchedule from './DoctorSchedule';
 
 class DetailDoctor extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class DetailDoctor extends Component {
     return (
       <>
         <Header isShowBanner={false} />
-        <div className="doctor-detail-container container">
+        <div className="doctor-detail-container">
           <div className="intro-doctor">
             <div
               className="content-left"
@@ -70,7 +71,12 @@ class DetailDoctor extends Component {
               </div>
             </div>
           </div>
-          <div className="schedule-doctor"></div>
+          <div className="schedule-doctor vung-bao">
+            <div className='content-left'>
+              <DoctorSchedule/>
+            </div>
+            <div className='content-right'></div>
+          </div>
           <div className="detail-info-doctor">
             {detailDoctor.Markdown && detailDoctor.Markdown.contentHTML && (
               <div

@@ -1,0 +1,28 @@
+.doctor-schedule-container {
+  display: flex;
+  flex-direction: column;
+  .all-schedule {
+    .form-select {
+      width: 120px;
+    }
+    margin-bottom: 20px;
+  }
+  .all-available-time {
+    .schedule {
+    }
+    .time {
+      button {
+        background: #fff8ae;
+        margin-right: 8px;
+        min-width: 20%;
+        display: inline-block;
+        vertical-align: middle;
+        white-space: nowrap;
+        text-align: center;
+        color: #333;
+        font-weight: bolder;
+        margin: 0 8px 8px 0;
+      }
+    }
+  }
+}
