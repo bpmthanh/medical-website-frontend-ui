@@ -21,7 +21,7 @@ class ManageSchedule extends Component {
     this.state = {
       allDoctorRedux: [],
       doctorId: '',
-      currentDate: '',
+      currentDate: new Date(),
       rangeTime: [],
     };
   }
@@ -135,7 +135,7 @@ class ManageSchedule extends Component {
 
   render() {
     let rangeTime = this.state.rangeTime;
-    // console.log(rangeTime);
+    let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
     return (
       <React.Fragment>
         <div className="manage-schedule-container">
@@ -173,7 +173,7 @@ class ManageSchedule extends Component {
                   </label>
                   <DatePicker
                     onChange={this.handleOnchangeDatePicker}
-                    minDate={new Date()}
+                    minDate={yesterday}
                     value={this.state.currentDate}
                   />
                 </div>

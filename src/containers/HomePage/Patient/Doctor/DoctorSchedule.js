@@ -16,7 +16,26 @@ class DoctorSchedule extends Component {
   }
 
   componentDidMount = async () => {
-    this.setDaysArray();
+    let allDays = this.setDaysArray();
+    // console.log(allDays);
+    if (allDays && allDays.length > 0) {
+      let date = allDays[0].label;
+      let parts = date.split('-');
+      date = parts[1].trim();
+      let [ngay, thang, nam] = date
+        .split('/')
+        .map((part) => parseInt(part, 10));
+      let ngayDaDinhDang = new Date(nam, thang - 1, ngay);
+      let doctorId = this.props.doctorId;
+
+      let res = await getScheduleDoctorByDate(
+        doctorId,
+        ngayDaDinhDang.getTime()
+      );
+      this.setState({
+        allAvailableTime: res.data,
+      });
+    }
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -46,16 +65,14 @@ class DoctorSchedule extends Component {
     for (let i = 0; i < 7; i++) {
       let object = {};
       if (this.props.language === languages.VI) {
-        // Sử dụng locale tiếng Việt và áp dụng formatting hook
         moment.updateLocale('vi', viFormattingHook);
         object.label = moment(new Date())
           .add(i, 'days')
           .format('dddd - DD/MM/YYYY')
           .replace(/^t/g, 'T')
-          .replace('chủ nhật', 'Chủ nhật');;
+          .replace('chủ nhật', 'Chủ nhật');
       } else {
-        // Sử dụng locale tiếng Anh
-        moment.updateLocale('en');
+        moment.locale('en'); // Sử dụng locale tiếng Anh
         object.label = moment(new Date())
           .add(i, 'days')
           .format('dddd - DD/MM/YYYY');
@@ -64,6 +81,7 @@ class DoctorSchedule extends Component {
       arrDate.push(object);
     }
     this.setState({ allDays: arrDate });
+    return arrDate;
   };
 
   handleOnchangeSelect = async (event) => {
