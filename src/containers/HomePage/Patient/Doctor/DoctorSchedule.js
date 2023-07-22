@@ -4,13 +4,14 @@ import './DoctorSchedule.scss';
 import { languages } from '../../../../utils';
 import moment from 'moment';
 import 'moment/locale/vi';
-import {getScheduleDoctorByDate} from '../../../../services/userService';
+import { getScheduleDoctorByDate } from '../../../../services/userService';
 
 class DoctorSchedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allDays: [],
+      allAvailableTime: [],
     };
   }
 
@@ -20,44 +21,44 @@ class DoctorSchedule extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.language !== prevProps.language) {
-      let arrDate = [];
-      for (let i = 0; i < 7; i++) {
-        let object = {};
-        if (this.props.language === languages.VI) {
-          // Sử dụng locale tiếng Việt
-          moment.locale('vi');
-          object.label = moment(new Date())
-            .add(i, 'days')
-            .format('dddd - DD/MM');
-        } else {
-          // Sử dụng locale tiếng Anh
-          moment.locale('en');
-          object.label = moment(new Date())
-            .add(i, 'days')
-            .format('dddd - DD/MM');
-        }
-        object.value = moment(new Date())
-          .add(i, 'days')
-          .startOf('day')
-          .valueOf();
-        arrDate.push(object);
-      }
-      this.setState({ allDays: arrDate });
+      this.setDaysArray();
     }
   }
 
   setDaysArray = () => {
     let arrDate = [];
+    const viFormattingHook = {
+      // Định nghĩa hook cho tiếng Việt
+      longDateFormat: {
+        LT: 'HH:mm',
+        LTS: 'HH:mm:ss',
+        L: 'DD/MM/YYYY',
+        LL: 'D MMMM YYYY',
+        LLL: 'D MMMM YYYY HH:mm',
+        LLLL: 'dddd, D MMMM YYYY HH:mm',
+        // Tùy chỉnh cách định dạng "dddd"
+        dddd: function (format) {
+          return format.charAt(0).toUpperCase() + this.format(format.slice(1));
+        },
+      },
+    };
+
     for (let i = 0; i < 7; i++) {
       let object = {};
       if (this.props.language === languages.VI) {
-        // Sử dụng locale tiếng Việt
-        moment.locale('vi');
-        object.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+        // Sử dụng locale tiếng Việt và áp dụng formatting hook
+        moment.updateLocale('vi', viFormattingHook);
+        object.label = moment(new Date())
+          .add(i, 'days')
+          .format('dddd - DD/MM/YYYY')
+          .replace(/^t/g, 'T')
+          .replace('chủ nhật', 'Chủ nhật');;
       } else {
         // Sử dụng locale tiếng Anh
-        moment.locale('en');
-        object.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+        moment.updateLocale('en');
+        object.label = moment(new Date())
+          .add(i, 'days')
+          .format('dddd - DD/MM/YYYY');
       }
       object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
       arrDate.push(object);
@@ -65,13 +66,35 @@ class DoctorSchedule extends Component {
     this.setState({ allDays: arrDate });
   };
 
+  handleOnchangeSelect = async (event) => {
+    let date = event.target.value;
+    let parts = date.split('-');
+    date = parts[1].trim();
+    let [ngay, thang, nam] = date.split('/').map((part) => parseInt(part, 10));
+    let ngayDaDinhDang = new Date(nam, thang - 1, ngay);
+    let doctorId = this.props.doctorId;
+
+    let res = await getScheduleDoctorByDate(doctorId, ngayDaDinhDang.getTime());
+    console.log('Check response: ', res);
+
+    if (res && res.errCode === 0) {
+      this.setState({
+        allAvailableTime: res.data,
+      });
+    }
+  };
+
   render() {
-    let { allDays } = this.state;
+    let { allDays, allAvailableTime } = this.state;
     return (
       <>
         <div className="doctor-schedule-container">
           <div className="all-schedule">
-            <select className="form-select" onChange={null} value={null}>
+            <select
+              className="form-select"
+              onChange={(event) => this.handleOnchangeSelect(event)}
+              value={null}
+            >
               {allDays &&
                 allDays.length > 0 &&
                 allDays.map((item, index) => {
@@ -93,15 +116,23 @@ class DoctorSchedule extends Component {
               LỊCH KHÁM
             </p>
             <div className="time">
-              <button className="btn btn-success">09:00</button>
-              <button className="btn btn-success">09:00</button>
-              <button className="btn btn-success">09:00</button>
-              <button className="btn btn-success">09:00</button>
-              <button className="btn btn-success">09:00</button>
-              <button className="btn btn-success">09:00</button>
-              <button className="btn btn-success">09:00</button>
-              <button className="btn btn-success">09:00</button>
-              <button className="btn btn-success">09:00</button>
+              {allAvailableTime && allAvailableTime.length > 0 ? (
+                allAvailableTime.map((item, index) => {
+                  return (
+                    <button key={index} className="btn btn-success">
+                      {this.props.language === languages.VI
+                        ? item.timeTypeData.value_vi
+                        : item.timeTypeData.value_en}
+                    </button>
+                  );
+                })
+              ) : (
+                <p style={{ color: 'red' }}>
+                  {this.props.language === languages.VI
+                    ? 'Không có lịch hẹn trong thời gian này, vui lòng chọn khoảng thời gian khác!'
+                    : 'No appointments available at this time, please choose a different time slot!'}
+                </p>
+              )}
             </div>
           </div>
         </div>

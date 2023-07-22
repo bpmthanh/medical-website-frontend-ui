@@ -56,7 +56,7 @@ export const getDetailInfoDoctor = (id) => {
   return axios.get(`/api/get-detail-doctor?id=${id}`);
 };
 
-export const getScheduleDoctorByDate = (id, date) => {
+export const getScheduleDoctorByDate = (id,date) => {
   return axios.get(
     `/api/get-schedule-doctor-by-date?doctorId=${id}&date=${date}`
   );

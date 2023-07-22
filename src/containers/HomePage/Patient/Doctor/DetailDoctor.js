@@ -72,10 +72,10 @@ class DetailDoctor extends Component {
             </div>
           </div>
           <div className="schedule-doctor vung-bao">
-            <div className='content-left'>
-              <DoctorSchedule/>
+            <div className="content-left">
+              <DoctorSchedule doctorId={this.props.match.params.id} />
             </div>
-            <div className='content-right'></div>
+            <div className="content-right"></div>
           </div>
           <div className="detail-info-doctor">
             {detailDoctor.Markdown && detailDoctor.Markdown.contentHTML && (

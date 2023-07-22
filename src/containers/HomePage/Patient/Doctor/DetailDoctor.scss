@@ -30,7 +30,6 @@
     .content-left {
       width: 120px;
       height: 120px;
-      //   border: 1px solid green;
       background-position: center;
       background-repeat: no-repeat;
       background-size: 120px 120px;
@@ -59,6 +58,7 @@
     display: flex;
     .content-left {
       flex: 50%;
+      border-right: 1.5px solid #ddd;
     }
     .content-right {
       flex: 50%;
