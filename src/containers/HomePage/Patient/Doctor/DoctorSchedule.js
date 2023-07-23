@@ -4,6 +4,7 @@ import './DoctorSchedule.scss';
 import { languages } from '../../../../utils';
 import moment from 'moment';
 import 'moment/locale/vi';
+import { FormattedMessage } from 'react-intl';
 import { getScheduleDoctorByDate } from '../../../../services/userService';
 
 class DoctorSchedule extends Component {
@@ -62,22 +63,31 @@ class DoctorSchedule extends Component {
       },
     };
 
+    const currentDate = moment().startOf('day');
+    const todayLabel =
+      this.props.language === languages.VI ? 'Hôm nay' : 'Today';
+
     for (let i = 0; i < 7; i++) {
       let object = {};
+      const currentDay = moment().add(i, 'days').startOf('day');
+
       if (this.props.language === languages.VI) {
         moment.updateLocale('vi', viFormattingHook);
-        object.label = moment(new Date())
-          .add(i, 'days')
+        object.label = currentDay
           .format('dddd - DD/MM/YYYY')
           .replace(/^t/g, 'T')
           .replace('chủ nhật', 'Chủ nhật');
       } else {
         moment.locale('en'); // Sử dụng locale tiếng Anh
-        object.label = moment(new Date())
-          .add(i, 'days')
-          .format('dddd - DD/MM/YYYY');
+        object.label = currentDay.format('dddd - DD/MM/YYYY');
       }
-      object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
+
+      object.value = currentDay.valueOf();
+
+      if (currentDay.isSame(currentDate, 'day')) {
+        object.label = todayLabel + ' - ' + currentDay.format('DD/MM/YYYY');
+      }
+
       arrDate.push(object);
     }
     this.setState({ allDays: arrDate });
@@ -131,26 +141,35 @@ class DoctorSchedule extends Component {
                 style={{ paddingRight: '5px' }}
                 aria-hidden="true"
               ></i>
-              LỊCH KHÁM
+              <FormattedMessage id="patient.detail-doctor.schedule" />
             </p>
             <div className="time">
-              {allAvailableTime && allAvailableTime.length > 0 ? (
-                allAvailableTime.map((item, index) => {
-                  return (
-                    <button key={index} className="btn btn-success">
-                      {this.props.language === languages.VI
-                        ? item.timeTypeData.value_vi
-                        : item.timeTypeData.value_en}
-                    </button>
-                  );
-                })
-              ) : (
-                <p style={{ color: 'red' }}>
-                  {this.props.language === languages.VI
-                    ? 'Không có lịch hẹn trong thời gian này, vui lòng chọn khoảng thời gian khác!'
-                    : 'No appointments available at this time, please choose a different time slot!'}
-                </p>
-              )}
+              <div className="time-content-btn">
+                {allAvailableTime && allAvailableTime.length > 0 ? (
+                  allAvailableTime.map((item, index) => {
+                    return (
+                      <button key={index} className="btn btn-success">
+                        {this.props.language === languages.VI
+                          ? item.timeTypeData.value_vi
+                          : item.timeTypeData.value_en}
+                      </button>
+                    );
+                  })
+                ) : (
+                  <p style={{ color: 'red' }}>
+                    {this.props.language === languages.VI
+                      ? 'Không có lịch hẹn trong thời gian này, vui lòng chọn khoảng thời gian khác!'
+                      : 'No appointments available at this time, please choose a different time slot!'}
+                  </p>
+                )}
+              </div>
+              <div className="booking-free">
+                <span>
+                  <FormattedMessage id="patient.detail-doctor.choose" />{' '}
+                  <i className="far fa-hand-point-up"></i>{' '}
+                  <FormattedMessage id="patient.detail-doctor.book-free" />
+                </span>
+              </div>
             </div>
           </div>
         </div>

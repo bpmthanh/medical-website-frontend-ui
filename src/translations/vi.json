@@ -112,5 +112,12 @@
     "doctor-info": "Thông tin bác sĩ",
     "save": "Lưu",
     "edit": "Lưu thay đổi"
+  },
+  "patient": {
+    "detail-doctor": {
+      "schedule": "Lịch khám",
+      "choose": "Chọn",
+      "book-free": "và đặt (miễn phí)"
+    }
   }
 }

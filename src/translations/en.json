@@ -112,5 +112,12 @@
     "doctor-info": "Doctor information",
     "save": "Save",
     "edit": "Save edit"
+  },
+  "patient": {
+    "detail-doctor": {
+      "schedule": "Schedule",
+      "choose": "Choose",
+      "book-free":"and book (free)"
+    }
   }
 }

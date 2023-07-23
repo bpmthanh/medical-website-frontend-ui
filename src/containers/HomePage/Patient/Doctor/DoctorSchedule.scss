@@ -13,8 +13,7 @@
       background-color: #f9f9f9;
       font-weight: bold;
       color: #337ab7;
-      option{
-
+      option {
       }
     }
     margin-bottom: 20px;
@@ -23,20 +22,25 @@
     .schedule {
     }
     .time {
-      button {
-        background: #fff8ae;
-        margin-right: 8px;
-        min-width: 30%;
-        display: inline-block;
-        vertical-align: middle;
-        white-space: nowrap;
-        text-align: center;
-        color: #333;
-        font-weight: bolder;
-        margin: 0 8px 8px 0;
-        &:hover {
-          cursor: pointer;
-          box-shadow: 0px 0px 0px 2px #33b0e3 inset;
+      .booking-free {
+        margin-top: 15px;
+      }
+      .time-content-btn {
+        button {
+          background: #fff8ae;
+          margin-right: 8px;
+          min-width: 30%;
+          display: inline-block;
+          vertical-align: middle;
+          white-space: nowrap;
+          text-align: center;
+          color: #333;
+          font-weight: bolder;
+          margin: 0 8px 8px 0;
+          &:hover {
+            cursor: pointer;
+            box-shadow: 0px 0px 0px 2px #33b0e3 inset;
+          }
         }
       }
     }
