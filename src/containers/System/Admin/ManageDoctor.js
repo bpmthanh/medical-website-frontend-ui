@@ -7,7 +7,10 @@ import MdEditor from 'react-markdown-editor-lite';
 import { FormattedMessage } from 'react-intl';
 import 'react-markdown-editor-lite/lib/index.css';
 import { languages, CRUD_ACTIONS, CommonUtils } from '../../../utils';
-import { getDetailInfoDoctor } from '../../../services/userService';
+import {
+  getDetailInfoDoctor,
+  getAllCodeService,
+} from '../../../services/userService';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -15,18 +18,39 @@ class ManageDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allDoctorRedux: '',
+      allDoctorRedux: [],
       contentMarkdown: '',
       contentHTML: '',
       descriptionDoctor: '',
       doctorId: '',
       actionSaveData: true,
       action: CRUD_ACTIONS.CREATE,
+      listPrice: [],
+      listPayment: [],
+      listProvince: [],
+      selectedPrice: '',
+      selectedPayment: '',
+      selectedProvince: '',
+      nameClinic: '',
+      addressClinic: '',
+      note: '',
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.props.fetchAllDoctors();
+    this.fetchMoreInforDoctor();
+  };
+
+  fetchMoreInforDoctor = async () => {
+    let resPriceFetch = await getAllCodeService('price');
+    let resPaymentFetch = await getAllCodeService('payment');
+    let resProvinceFetch = await getAllCodeService('province');
+    this.setState({
+      listPrice: resPriceFetch.data,
+      listPayment: resPaymentFetch.data,
+      listProvince: resProvinceFetch.data,
+    });
   };
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
@@ -35,6 +59,14 @@ class ManageDoctor extends Component {
         allDoctorRedux: this.props.allDoctors.reverse(),
         doctorId: this.props.allDoctors[0].id,
       });
+    }
+    if (
+      prevState.resPriceFetch !== this.state.resPriceFetch ||
+      prevState.resPaymentFetch !== this.state.resPaymentFetch ||
+      prevState.resProvinceFetch !== this.state.resProvinceFetch
+    ) {
+      this.fetchMoreInforDoctor();
+      
     }
   };
 
@@ -98,6 +130,11 @@ class ManageDoctor extends Component {
   };
 
   render() {
+    console.log(
+      this.state.listPrice,
+      this.state.listPayment,
+      this.state.listProvince
+    );
     return (
       <div className="container manage-doctor-container">
         <p className="manage-doctor-title">
@@ -105,7 +142,7 @@ class ManageDoctor extends Component {
         </p>
         <div className="more-info">
           <div className="content-left form-group">
-            <label className="choose-doctor-title">
+            <label className="choose-doctor-title col-12">
               <FormattedMessage id="manage-doctor.doctor-choose" />
             </label>
             <select
@@ -125,6 +162,67 @@ class ManageDoctor extends Component {
                   );
                 })}
             </select>
+
+            <div className="col-12 choose-price">
+              <label>Chọn giá</label>
+              <select className="form-select" onChange={null} value={null}>
+                {this.state.listPrice &&
+                  this.state.listPrice.length > 0 &&
+                  this.state.listPrice.map((item, index) => {
+                    return (
+                      <option key={index} value={item.keyMap}>
+                        {this.props.language === languages.VI
+                          ? `${item.value_vi} VND`
+                          : `${item.value_en} USD`}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div className="col-12 choose-payment-method">
+              <label>Chọn phương thức thanh toán</label>
+              <select className="form-select" onChange={null} value={null}>
+                {this.state.listPayment &&
+                  this.state.listPayment.length > 0 &&
+                  this.state.listPayment.map((item, index) => {
+                    return (
+                      <option key={index} value={item.keyMap}>
+                        {this.props.language === languages.VI
+                          ? item.value_vi
+                          : item.value_en}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div className="col-12 choose-province">
+              <label>Chọn tỉnh thành</label>
+              <select className="form-select" onChange={null} value={null}>
+                {this.state.listProvince &&
+                  this.state.listProvince.length > 0 &&
+                  this.state.listProvince.map((item, index) => {
+                    return (
+                      <option key={index} value={item.keyMap}>
+                        {this.props.language === languages.VI
+                          ? item.value_vi
+                          : item.value_en}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div className="col-12 clinic-name">
+              <label>Tên phòng khám</label>
+              <input className="form-control" />
+            </div>
+            <div className="col-12 clinic-address">
+              <label>Địa chỉ phòng khám</label>
+              <input className="form-control" />
+            </div>
+            <div className="col-12 note">
+              <label>Ghi chú</label>
+              <input className="form-control" />
+            </div>
           </div>
           <div className="content-right form-group">
             <label className="choose-doctor-title">
@@ -174,6 +272,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    // fetchDoctorPrice: () => dispatch(actions.fetchDoctorPrice()),
+    // fetchDoctorPayment: () => dispatch(actions.fetchDoctorPayment()),
+    // fetchDoctorProvince: () => dispatch(actions.fetchDoctorProvince()),
+    // fetchClinic: () => dispatch(actions.fetchClinic()),
+    // fetchClinicAddress: () => dispatch(actions.fetchClinicAddress()),
+    // fetchNote: () => dispatch(actions.fetchNote()),
     fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
     saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctorRedux(data)),
   };

@@ -1,15 +1,15 @@
 Bài 57
-- Luồng Redux trong dự án
-  + Cách để React lấy data trong redux
-    * mapStateToProps: Nhận vào state của Redux store và trả về một đối tượng chứa các props cần được truyền vào component
-    * mapDispatchToProps: Nhận vào hàm dispatch của Redux và trả về một đối tượng chứa các props chứa các hàm dispatch.
+1. Luồng Redux trong dự án
+  - Cách để React lấy data trong redux
+    + mapStateToProps: Nhận vào state của Redux store và trả về một đối tượng chứa các props cần được truyền vào component
+    + mapDispatchToProps: Nhận vào hàm dispatch của Redux và trả về một đối tượng chứa các props chứa các hàm dispatch.
 
 Bài 59
-- Xem life circle của component
-- Sequelize migration: npx sequelize-cli db:migrate --to migration-create-user.js
+1. Xem life circle của component
+2. Sequelize migration: npx sequelize-cli db:migrate --to migration-create-user.js
 
 Bài 68
-1. Mối quan hệ "hasOne": Mỗi phần tử trong mô hình "User" chỉ ứng với một phần tử trong mô hình "Profile". Nghĩa là một "User" có duy nhất một "Profile", và mỗi "Profile" thuộc về duy nhất một "User". Mối quan hệ này giữa "User" và "Profile" thể hiện quan hệ một một (1-1).
-2. Mối quan hệ "belongsTo": Mỗi phần tử trong mô hình "Comment" chỉ ứng với một phần tử trong mô hình "Post". Nghĩa là một "Comment" chỉ thuộc về duy nhất một "Post", và mỗi "Post" có thể có nhiều "Comment". Mối quan hệ này giữa "Comment" và "Post" thể hiện quan hệ một một (1-1).
-3. Mối quan hệ "hasMany": Mỗi phần tử trong mô hình "Author" có thể ứng với nhiều phần tử trong mô hình "Book". Nghĩa là một "Author" có thể có nhiều "Book" và mỗi "Book" thuộc về duy nhất một "Author". Mối quan hệ này giữa "Author" và "Book" thể hiện quan hệ một nhiều (1-nhiều).
-4. Mối quan hệ "belongsToMany": Mối quan hệ "belongsToMany" thể hiện một mối quan hệ nhiều nhiều (nhiều-nhiều) giữa hai mô hình. Nó cho phép mỗi phần tử trong mô hình A có thể liên kết với nhiều phần tử trong mô hình B và ngược lại. Để thực hiện quan hệ này, cần sử dụng một bảng trung gian để lưu trữ các cặp liên kết giữa A và B.
+1. Mối quan hệ "hasOne": Mô hình "User" có một quan hệ "hasOne" với mô hình "Profile". Mỗi "User" chỉ có một "Profile", và mỗi "Profile" thuộc về duy nhất một "User".
+2. Mối quan hệ "belongsTo": Mô hình "Comment" có một quan hệ "belongsTo" với mô hình "Post". Mỗi "Comment" chỉ thuộc về duy nhất một "Post", và mỗi "Post" có thể có nhiều "Comment".
+3. Mối quan hệ "hasMany": Mô hình "Author" có một quan hệ "hasMany" với mô hình "Book". Mỗi "Author" có thể có nhiều "Book" và mỗi "Book" thuộc về duy nhất một "Author".
+4. Mối quan hệ "belongsToMany": Mô hình "A" và "B" có mối quan hệ "belongsToMany", thể hiện một mối quan hệ nhiều-nhiều giữa hai mô hình. Mỗi phần tử trong mô hình "A" có thể liên kết với nhiều phần tử trong mô hình "B", và ngược lại. Để thực hiện quan hệ này, cần sử dụng một bảng trung gian để lưu trữ các cặp liên kết giữa "A" và "B".
