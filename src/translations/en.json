@@ -117,7 +117,13 @@
     "detail-doctor": {
       "schedule": "Schedule",
       "choose": "Choose",
-      "book-free":"and book (free)"
+      "book-free": "and book (free)",
+      "choose-price": "Choose price",
+      "payment-method": "Choose payment method",
+      "province": "Choose province",
+      "clinic-name": "Clinic name",
+      "clinic-address": "Clinic address",
+      "note": "Note"
     }
   }
 }

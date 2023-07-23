@@ -66,7 +66,6 @@ class ManageDoctor extends Component {
       prevState.resProvinceFetch !== this.state.resProvinceFetch
     ) {
       this.fetchMoreInforDoctor();
-      
     }
   };
 
@@ -87,24 +86,40 @@ class ManageDoctor extends Component {
       contentMarkdown: this.state.contentMarkdown,
       description: this.state.descriptionDoctor,
       action: actionSaveData === true ? CRUD_ACTIONS.CREATE : CRUD_ACTIONS.EDIT,
+      
+      selectedPrice: this.state.selectedPrice,
+      selectedPayment: this.state.selectedPayment,
+      selectedProvince: this.state.selectedProvince,
+      nameClinic: this.state.nameClinic,
+      addressClinic: this.state.addressClinic,
+      note: this.state.note,
     });
 
     this.setState({
       actionSaveData: true,
-      // descriptionDoctor: '',
-      // contentMarkdown: '',
-      // doctorId: this.state.allDoctorRedux[0].id,
+      descriptionDoctor: '',
+      contentMarkdown: '',
+      doctorId: this.state.allDoctorRedux[0].id,
       action: CRUD_ACTIONS.CREATE,
+
+      // selectedPrice: ,
+      // selectedPayment: ,
+      // selectedProvince: ,
+      // nameClinic: '',
+      // addressClinic: '',
+      // note: '',
     });
   };
 
   handleOnchangeDesc = (event) => {
+    let stateCopy = { ...this.state };
+    stateCopy[event.target.name] = event.target.value;
     this.setState({
-      descriptionDoctor: event.target.value,
+      ...stateCopy,
     });
   };
 
-  handleChange = async (e) => {
+  handleOnchangeDoctor = async (e) => {
     this.setState({
       doctorId: e.target.value,
     });
@@ -129,12 +144,27 @@ class ManageDoctor extends Component {
     }
   };
 
-  render() {
-    console.log(
-      this.state.listPrice,
-      this.state.listPayment,
-      this.state.listProvince
+  handleOnchangeSelectedInfor = (event) => {
+    const selectedObject = JSON.parse(
+      event.target.selectedOptions[0].getAttribute('data-item')
     );
+    let stateCopy = { ...this.state };
+    stateCopy[event.target.name] = selectedObject.keyMap;
+    this.setState({
+      ...stateCopy,
+    });
+  };
+
+  handleOnchangeText = (event) => {
+    let stateCopy = { ...this.state };
+    stateCopy[event.target.name] = event.target.value;
+    this.setState({
+      ...stateCopy,
+    });
+  };
+
+  render() {
+    console.log('check state:', this.state);
     return (
       <div className="container manage-doctor-container">
         <p className="manage-doctor-title">
@@ -147,7 +177,7 @@ class ManageDoctor extends Component {
             </label>
             <select
               className="form-select"
-              onChange={(event) => this.handleChange(event)}
+              onChange={(event) => this.handleOnchangeDoctor(event)}
               value={this.state.doctorId}
             >
               {this.state.allDoctorRedux &&
@@ -164,13 +194,24 @@ class ManageDoctor extends Component {
             </select>
 
             <div className="col-12 choose-price">
-              <label>Chọn giá</label>
-              <select className="form-select" onChange={null} value={null}>
+              <label>
+                <FormattedMessage id="patient.detail-doctor.choose-price" />
+              </label>
+              <select
+                className="form-select"
+                onChange={(event) => this.handleOnchangeSelectedInfor(event)}
+                value={null}
+                name="selectedPrice"
+              >
                 {this.state.listPrice &&
                   this.state.listPrice.length > 0 &&
                   this.state.listPrice.map((item, index) => {
                     return (
-                      <option key={index} value={item.keyMap}>
+                      <option
+                        key={index}
+                        value={item.keyMap}
+                        data-item={JSON.stringify(item)}
+                      >
                         {this.props.language === languages.VI
                           ? `${item.value_vi} VND`
                           : `${item.value_en} USD`}
@@ -180,13 +221,24 @@ class ManageDoctor extends Component {
               </select>
             </div>
             <div className="col-12 choose-payment-method">
-              <label>Chọn phương thức thanh toán</label>
-              <select className="form-select" onChange={null} value={null}>
+              <label>
+                <FormattedMessage id="patient.detail-doctor.payment-method" />
+              </label>
+              <select
+                className="form-select"
+                onChange={(event) => this.handleOnchangeSelectedInfor(event)}
+                value={null}
+                name="selectedPayment"
+              >
                 {this.state.listPayment &&
                   this.state.listPayment.length > 0 &&
                   this.state.listPayment.map((item, index) => {
                     return (
-                      <option key={index} value={item.keyMap}>
+                      <option
+                        key={index}
+                        value={item.keyMap}
+                        data-item={JSON.stringify(item)}
+                      >
                         {this.props.language === languages.VI
                           ? item.value_vi
                           : item.value_en}
@@ -196,13 +248,24 @@ class ManageDoctor extends Component {
               </select>
             </div>
             <div className="col-12 choose-province">
-              <label>Chọn tỉnh thành</label>
-              <select className="form-select" onChange={null} value={null}>
+              <label>
+                <FormattedMessage id="patient.detail-doctor.province" />
+              </label>
+              <select
+                className="form-select"
+                onChange={(event) => this.handleOnchangeSelectedInfor(event)}
+                value={null}
+                name="selectedProvince"
+              >
                 {this.state.listProvince &&
                   this.state.listProvince.length > 0 &&
                   this.state.listProvince.map((item, index) => {
                     return (
-                      <option key={index} value={item.keyMap}>
+                      <option
+                        key={index}
+                        value={item.keyMap}
+                        data-item={JSON.stringify(item)}
+                      >
                         {this.props.language === languages.VI
                           ? item.value_vi
                           : item.value_en}
@@ -212,16 +275,34 @@ class ManageDoctor extends Component {
               </select>
             </div>
             <div className="col-12 clinic-name">
-              <label>Tên phòng khám</label>
-              <input className="form-control" />
+              <label>
+                <FormattedMessage id="patient.detail-doctor.clinic-name" />
+              </label>
+              <input
+                className="form-control"
+                name="nameClinic"
+                onChange={(e) => this.handleOnchangeText(e)}
+              />
             </div>
             <div className="col-12 clinic-address">
-              <label>Địa chỉ phòng khám</label>
-              <input className="form-control" />
+              <label>
+                <FormattedMessage id="patient.detail-doctor.clinic-address" />
+              </label>
+              <input
+                className="form-control"
+                name="addressClinic"
+                onChange={(e) => this.handleOnchangeText(e)}
+              />
             </div>
             <div className="col-12 note">
-              <label>Ghi chú</label>
-              <input className="form-control" />
+              <label>
+                <FormattedMessage id="patient.detail-doctor.note" />
+              </label>
+              <input
+                className="form-control"
+                name="note"
+                onChange={(e) => this.handleOnchangeText(e)}
+              />
             </div>
           </div>
           <div className="content-right form-group">
@@ -231,6 +312,7 @@ class ManageDoctor extends Component {
             <textarea
               className="doctor-info"
               value={this.state.descriptionDoctor}
+              name="descriptionDoctor"
               onChange={(event) => this.handleOnchangeDesc(event)}
             ></textarea>
           </div>
@@ -272,12 +354,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // fetchDoctorPrice: () => dispatch(actions.fetchDoctorPrice()),
-    // fetchDoctorPayment: () => dispatch(actions.fetchDoctorPayment()),
-    // fetchDoctorProvince: () => dispatch(actions.fetchDoctorProvince()),
-    // fetchClinic: () => dispatch(actions.fetchClinic()),
-    // fetchClinicAddress: () => dispatch(actions.fetchClinicAddress()),
-    // fetchNote: () => dispatch(actions.fetchNote()),
     fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
     saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctorRedux(data)),
   };

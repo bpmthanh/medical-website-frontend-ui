@@ -117,7 +117,13 @@
     "detail-doctor": {
       "schedule": "Lịch khám",
       "choose": "Chọn",
-      "book-free": "và đặt (miễn phí)"
+      "book-free": "và đặt (miễn phí)",
+      "choose-price": "Chọn giá khám bệnh",
+      "payment-method": "Chọn phương thức thanh toán",
+      "province": "Chọn tỉnh thành",
+      "clinic-name": "Tên phòng khám",
+      "clinic-address": "Địa chỉ phòng khám",
+      "note": "Ghi chú"
     }
   }
 }
