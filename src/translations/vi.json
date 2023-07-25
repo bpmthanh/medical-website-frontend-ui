@@ -124,6 +124,12 @@
       "clinic-name": "Tên phòng khám",
       "clinic-address": "Địa chỉ phòng khám",
       "note": "Ghi chú"
+    },
+    "extra-info-doctor": {
+      "clinic-address": "Địa chỉ phòng khám",
+      "clinic-price": "Giá khám",
+      "detail": "Xem chi tiết",
+      "hidden": "Ẩn bảng giá"
     }
   }
 }

@@ -30,7 +30,11 @@ class DoctorExtraInfo extends Component {
       <>
         <div className="doctor-extra-info-container">
           <div className="content-up">
-            <div className="text-address">ĐỊA CHỈ KHÁM</div>
+            <div className="text-address">
+              <FormattedMessage
+                id={'patient.extra-info-doctor.clinic-address'}
+              />
+            </div>
             <div className="name-clinic">
               Phòng khám Bệnh viện Đại học Y Dược 1
             </div>
@@ -40,7 +44,7 @@ class DoctorExtraInfo extends Component {
           </div>
           <div className="content-down">
             <div className="price">
-              Giá khám
+              <FormattedMessage id={'patient.extra-info-doctor.clinic-price'} />
               <span
                 className="icon"
                 style={{
@@ -70,7 +74,8 @@ class DoctorExtraInfo extends Component {
                 }}
                 onClick={this.showTableContainer}
               >
-                &nbsp; Xem chi tiết
+                &nbsp;&nbsp;
+                <FormattedMessage id={'patient.extra-info-doctor.detail'} />
               </span>
             </div>
             <div
@@ -80,7 +85,11 @@ class DoctorExtraInfo extends Component {
               }}
             >
               <div className="table-price">
-                <div className="left">Giá khám</div>
+                <div className="left">
+                  <FormattedMessage
+                    id={'patient.extra-info-doctor.clinic-price'}
+                  />
+                </div>
                 <div className="right">250.000đ</div>
               </div>
               <div className="table-price-des">
@@ -99,7 +108,7 @@ class DoctorExtraInfo extends Component {
               }}
               onClick={this.showTableContainer}
             >
-              Ẩn bảng giá
+              <FormattedMessage id={'patient.extra-info-doctor.hidden'} />
             </div>
           </div>
         </div>

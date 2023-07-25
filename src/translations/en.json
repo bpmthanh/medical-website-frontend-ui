@@ -124,6 +124,12 @@
       "clinic-name": "Clinic name",
       "clinic-address": "Clinic address",
       "note": "Note"
+    },
+    "extra-info-doctor": {
+      "clinic-address": "Clinic address",
+      "clinic-price": "Clinic price",
+      "detail": "View details",
+      "hidden": "Hide price table"
     }
   }
 }
