@@ -11,7 +11,7 @@ import {
 } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { saveBulkScheduleDoctor } from '../../../services/userService';
 

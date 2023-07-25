@@ -10,7 +10,10 @@ import { languages, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import {
   getDetailInfoDoctor,
   getAllCodeService,
+  saveDetailDoctor,
 } from '../../../services/userService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -57,7 +60,7 @@ class ManageDoctor extends Component {
     if (prevProps.allDoctors !== this.props.allDoctors) {
       this.setState({
         allDoctorRedux: this.props.allDoctors.reverse(),
-        doctorId: this.props.allDoctors[0].id,
+        // doctorId: this.props.allDoctors[0].id,
       });
     }
     if (
@@ -70,45 +73,54 @@ class ManageDoctor extends Component {
   };
 
   handleEditorChange = ({ html, text }) => {
-    // console.log('handleEditorChange', html, text);
     this.setState({
       contentHTML: html,
       contentMarkdown: text,
     });
   };
 
-  handleSave = () => {
-    // console.log('Check state: ', this.state);
+  handleSave = async () => {
     let { actionSaveData } = this.state;
-    this.props.saveDetailDoctor({
+    let res = await saveDetailDoctor({
       doctorId: this.state.doctorId,
       contentHTML: this.state.contentHTML,
       contentMarkdown: this.state.contentMarkdown,
       description: this.state.descriptionDoctor,
-      action: actionSaveData === true ? CRUD_ACTIONS.CREATE : CRUD_ACTIONS.EDIT,
-      
+
       selectedPrice: this.state.selectedPrice,
       selectedPayment: this.state.selectedPayment,
       selectedProvince: this.state.selectedProvince,
       nameClinic: this.state.nameClinic,
       addressClinic: this.state.addressClinic,
       note: this.state.note,
-    });
 
-    this.setState({
-      actionSaveData: true,
-      descriptionDoctor: '',
-      contentMarkdown: '',
-      doctorId: this.state.allDoctorRedux[0].id,
-      action: CRUD_ACTIONS.CREATE,
-
-      // selectedPrice: ,
-      // selectedPayment: ,
-      // selectedProvince: ,
-      // nameClinic: '',
-      // addressClinic: '',
-      // note: '',
+      action: actionSaveData === true ? CRUD_ACTIONS.CREATE : CRUD_ACTIONS.EDIT,
     });
+    if (res.errCode === 1) {
+      toast.error('Lack of parameter!');
+      return;
+    } else {
+      if (this.state.actionSaveData === true) {
+        toast.success('Create doctor information successfully!');
+      } else {
+        toast.success('Edit doctor information successfully!');
+      }
+      this.setState({
+        actionSaveData: true,
+        descriptionDoctor: '',
+        contentMarkdown: '',
+        doctorId: '',
+
+        selectedPrice: '',
+        selectedPayment: '',
+        selectedProvince: '',
+        nameClinic: '',
+        addressClinic: '',
+        note: '',
+
+        action: CRUD_ACTIONS.CREATE,
+      });
+    }
   };
 
   handleOnchangeDesc = (event) => {
@@ -124,12 +136,21 @@ class ManageDoctor extends Component {
       doctorId: e.target.value,
     });
     let res = await getDetailInfoDoctor(e.target.value);
+    console.log(res.data);
     if (res.data.Markdown) {
       this.setState({
         descriptionDoctor: res.data.Markdown.description,
         contentMarkdown: res.data.Markdown.contentMarkdown,
         contentHTML: res.data.Markdown.contentHTML,
         doctorId: res.data.Markdown.doctorId,
+
+        selectedPrice: res.data.Doctor_Infor.priceTypeData.keyMap,
+        selectedPayment: res.data.Doctor_Infor.paymentTypeData.keyMap,
+        selectedProvince: res.data.Doctor_Infor.provinceTypeData.keyMap,
+        nameClinic: res.data.Doctor_Infor.nameClinic,
+        addressClinic: res.data.Doctor_Infor.addressClinic,
+        note: res.data.Doctor_Infor.note,
+
         action: CRUD_ACTIONS.EDIT,
         actionSaveData: false,
       });
@@ -164,7 +185,7 @@ class ManageDoctor extends Component {
   };
 
   render() {
-    console.log('check state:', this.state);
+    console.log(this.state);
     return (
       <div className="container manage-doctor-container">
         <p className="manage-doctor-title">
@@ -180,6 +201,11 @@ class ManageDoctor extends Component {
               onChange={(event) => this.handleOnchangeDoctor(event)}
               value={this.state.doctorId}
             >
+              <option value="" disabled selected>
+                {this.props.language === languages.VI
+                  ? 'Chọn bác sĩ'
+                  : 'Choose doctor'}
+              </option>
               {this.state.allDoctorRedux &&
                 this.state.allDoctorRedux.length > 0 &&
                 this.state.allDoctorRedux.map((doctor, index) => {
@@ -200,9 +226,14 @@ class ManageDoctor extends Component {
               <select
                 className="form-select"
                 onChange={(event) => this.handleOnchangeSelectedInfor(event)}
-                value={null}
+                value={this.state.selectedPrice}
                 name="selectedPrice"
               >
+                <option value="" disabled selected>
+                  {this.props.language === languages.VI
+                    ? 'Chọn giá khám bệnh'
+                    : 'Choose price'}
+                </option>
                 {this.state.listPrice &&
                   this.state.listPrice.length > 0 &&
                   this.state.listPrice.map((item, index) => {
@@ -227,9 +258,14 @@ class ManageDoctor extends Component {
               <select
                 className="form-select"
                 onChange={(event) => this.handleOnchangeSelectedInfor(event)}
-                value={null}
+                value={this.state.selectedPayment}
                 name="selectedPayment"
               >
+                <option value="" disabled selected>
+                  {this.props.language === languages.VI
+                    ? 'Chọn phương thức thanh toán'
+                    : 'Choose payment method'}
+                </option>
                 {this.state.listPayment &&
                   this.state.listPayment.length > 0 &&
                   this.state.listPayment.map((item, index) => {
@@ -254,9 +290,14 @@ class ManageDoctor extends Component {
               <select
                 className="form-select"
                 onChange={(event) => this.handleOnchangeSelectedInfor(event)}
-                value={null}
+                value={this.state.selectedProvince}
                 name="selectedProvince"
               >
+                <option value="" disabled selected>
+                  {this.props.language === languages.VI
+                    ? 'Chọn tỉnh thành'
+                    : 'Choose province'}
+                </option>
                 {this.state.listProvince &&
                   this.state.listProvince.length > 0 &&
                   this.state.listProvince.map((item, index) => {
@@ -282,6 +323,7 @@ class ManageDoctor extends Component {
                 className="form-control"
                 name="nameClinic"
                 onChange={(e) => this.handleOnchangeText(e)}
+                value={this.state.nameClinic}
               />
             </div>
             <div className="col-12 clinic-address">
@@ -292,6 +334,7 @@ class ManageDoctor extends Component {
                 className="form-control"
                 name="addressClinic"
                 onChange={(e) => this.handleOnchangeText(e)}
+                value={this.state.addressClinic}
               />
             </div>
             <div className="col-12 note">
@@ -302,6 +345,7 @@ class ManageDoctor extends Component {
                 className="form-control"
                 name="note"
                 onChange={(e) => this.handleOnchangeText(e)}
+                value={this.state.note}
               />
             </div>
           </div>
@@ -355,7 +399,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
-    saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctorRedux(data)),
   };
 };
 

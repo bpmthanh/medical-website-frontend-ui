@@ -1,5 +1,14 @@
 .manage-doctor-container {
   margin-bottom: 20px;
+  select:required:invalid {
+    color: gray;
+  }
+  option[value=''][disabled] {
+    display: none;
+  }
+  option {
+    color: black;
+  }
   .manage-doctor-title {
     text-align: center;
     text-transform: uppercase;
