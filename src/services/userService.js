@@ -62,6 +62,12 @@ export const getScheduleDoctorByDate = (id,date) => {
   );
 };
 
+export const getDoctorInfoById = (id) => {
+  return axios.get(
+    `/api/get-extra-info-doctor-by-id?doctorId=${id}`
+  );
+};
+
 export const saveBulkScheduleDoctor = (data) => {
   return axios.post(`/api/bulk-create-schedule`, data);
 };

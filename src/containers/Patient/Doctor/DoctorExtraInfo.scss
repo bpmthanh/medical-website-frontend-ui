@@ -66,6 +66,10 @@
         border-top: 1px solid #ddd;
         vertical-align: middle;
         background: #eee;
+        .table-payment-method{
+          color: red;
+          font-weight: 600;
+        }
       }
     }
     .hidden {

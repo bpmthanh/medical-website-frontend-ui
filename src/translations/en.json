@@ -129,7 +129,8 @@
       "clinic-address": "Clinic address",
       "clinic-price": "Clinic price",
       "detail": "View details",
-      "hidden": "Hide price table"
+      "hidden": "Hide price table",
+      "payment-method": "The recipient can pay by: "
     }
   }
 }

@@ -129,7 +129,8 @@
       "clinic-address": "Địa chỉ phòng khám",
       "clinic-price": "Giá khám",
       "detail": "Xem chi tiết",
-      "hidden": "Ẩn bảng giá"
+      "hidden": "Ẩn bảng giá",
+      "payment-method": "Người nhận có thể thanh toán bằng: "
     }
   }
 }

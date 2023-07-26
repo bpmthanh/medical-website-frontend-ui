@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from '../../Header';
+import Header from '../../../containers/HomePage/Header';
 import './DetailDoctor.scss';
-import { getDetailInfoDoctor } from '../../../../services/userService';
-import { languages, CRUD_ACTIONS, CommonUtils } from '../../../../utils';
+import { getDetailInfoDoctor } from '../../../services/userService';
+import { languages, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfo from './DoctorExtraInfo';
 

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './DoctorSchedule.scss';
-import { languages } from '../../../../utils';
+import { languages, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import moment from 'moment';
 import 'moment/locale/vi';
 import { FormattedMessage } from 'react-intl';
-import { getScheduleDoctorByDate } from '../../../../services/userService';
+import { getScheduleDoctorByDate } from '../../../services/userService';
+import BookingModal from './Model/BookingModal';
 
 class DoctorSchedule extends Component {
   constructor(props) {
@@ -13,12 +14,22 @@ class DoctorSchedule extends Component {
     this.state = {
       allDays: [],
       allAvailableTime: [],
+      isShowModal: false,
     };
   }
 
+  showModal = () => {
+    this.setState((prevState) => ({
+      isShowModal: !prevState.isShowModal,
+    }));
+  };
+
+  receiveDataFromChild = (data) => {
+    this.setState({ isShowModal: !data });
+  };
+
   componentDidMount = async () => {
     let allDays = this.setDaysArray();
-    // console.log(allDays);
     if (allDays && allDays.length > 0) {
       let date = allDays[0].label;
       let parts = date.split('-');
@@ -113,7 +124,7 @@ class DoctorSchedule extends Component {
   };
 
   render() {
-    let { allDays, allAvailableTime } = this.state;
+    let { allDays, allAvailableTime, isShowModal } = this.state;
     return (
       <>
         <div className="doctor-schedule-container">
@@ -148,7 +159,11 @@ class DoctorSchedule extends Component {
                 {allAvailableTime && allAvailableTime.length > 0 ? (
                   allAvailableTime.map((item, index) => {
                     return (
-                      <button key={index} className="btn btn-success">
+                      <button
+                        key={index}
+                        className="btn btn-success"
+                        onClick={this.showModal}
+                      >
                         {this.props.language === languages.VI
                           ? item.timeTypeData.value_vi
                           : item.timeTypeData.value_en}
@@ -173,6 +188,10 @@ class DoctorSchedule extends Component {
             </div>
           </div>
         </div>
+        <BookingModal
+          isOpen={isShowModal}
+          sendDataToParent={this.receiveDataFromChild}
+        />
       </>
     );
   }

@@ -1,0 +1,29 @@
+.booking-modal-container {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0 auto;
+  .modal-content {
+    width: 80%;
+    .modal-header {
+      .modal-title {
+        color:#000
+      }
+      .close {
+        border: none;
+        background: transparent;
+        font-size: 29px;
+      }
+    }
+    .modal-footer {
+      .btn {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      .btn-secondary{
+        background-color: red;
+      }
+    }
+  }
+}

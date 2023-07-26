@@ -1,23 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './DoctorExtraInfo.scss';
-import { languages } from '../../../../utils';
+import { languages, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import moment from 'moment';
 import 'moment/locale/vi';
 import { FormattedMessage } from 'react-intl';
-import { getScheduleDoctorByDate } from '../../../../services/userService';
+import { getDoctorInfoById } from '../../../services/userService';
+import NumberFormat, { PatternFormat } from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 
 class DoctorExtraInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       hiddenTableContainer: true,
+      dataRes: {},
     };
   }
 
-  componentDidMount = async () => {};
+  componentDidMount = async () => {
+    let res = await getDoctorInfoById(this.props.doctorId);
+    console.log(res);
+    this.setState({
+      dataRes: res.data,
+    });
+  };
 
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  componentDidUpdate = async (prevProps, prevState, snapshot) => {
+    if (prevState.dataRes !== this.state.dataRes) {
+      let res = await getDoctorInfoById(this.props.doctorId);
+      this.setState({
+        dataRes: res.data,
+      });
+    }
+  };
 
   showTableContainer = () => {
     this.setState((prevState) => ({
@@ -26,6 +42,7 @@ class DoctorExtraInfo extends Component {
   };
 
   render() {
+    let dataRes = this.state.dataRes;
     return (
       <>
         <div className="doctor-extra-info-container">
@@ -35,12 +52,8 @@ class DoctorExtraInfo extends Component {
                 id={'patient.extra-info-doctor.clinic-address'}
               />
             </div>
-            <div className="name-clinic">
-              Phòng khám Bệnh viện Đại học Y Dược 1
-            </div>
-            <div className="detail-address">
-              20-22 Dương Quang Trung, Phường 12, Quận 10, Tp. HCM
-            </div>
+            <div className="name-clinic">{dataRes.nameClinic}</div>
+            <div className="detail-address">{dataRes.addressClinic}</div>
           </div>
           <div className="content-down">
             <div className="price">
@@ -63,7 +76,23 @@ class DoctorExtraInfo extends Component {
                     : 'none',
                 }}
               >
-                250000đ.
+                {dataRes &&
+                  dataRes.priceTypeData &&
+                  (this.props.language === languages.VI ? (
+                    <NumberFormat
+                      value={dataRes.priceTypeData.value_vi}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      suffix={' VND'}
+                    />
+                  ) : (
+                    <NumberFormat
+                      value={dataRes.priceTypeData.value_en}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      suffix={' USD'}
+                    />
+                  ))}
               </span>
               <span
                 className="watch-detail"
@@ -90,15 +119,44 @@ class DoctorExtraInfo extends Component {
                     id={'patient.extra-info-doctor.clinic-price'}
                   />
                 </div>
-                <div className="right">250.000đ</div>
+                <div className="right">
+                  {dataRes &&
+                    dataRes.priceTypeData &&
+                    (this.props.language === languages.VI ? (
+                      <NumberFormat
+                        value={dataRes.priceTypeData.value_vi}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        suffix={' VND'}
+                      />
+                    ) : (
+                      <NumberFormat
+                        value={dataRes.priceTypeData.value_en}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        suffix={' USD'}
+                      />
+                    ))}
+                </div>
               </div>
               <div className="table-price-des">
-                Người bệnh được ưu tiên khám qua BookingCare. Giá khám cho người
-                nước ngoài là 30 USD
+                {dataRes &&
+                  dataRes.note &&
+                  (this.props.language === languages.VI
+                    ? dataRes.note
+                    : dataRes.note)}
               </div>
               <div className="table-payment">
-                Người bệnh có thể thanh toán chi phí bằng phương thức tiền mặt
-                và quẹt thẻ
+                <FormattedMessage
+                  id={'patient.extra-info-doctor.payment-method'}
+                />
+                <span className="table-payment-method">
+                  {dataRes &&
+                    dataRes.paymentTypeData &&
+                    (this.props.language === languages.VI
+                      ? dataRes.paymentTypeData.value_vi
+                      : dataRes.paymentTypeData.value_en)}
+                </span>
               </div>
             </div>
             <div
