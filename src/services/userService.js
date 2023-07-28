@@ -48,7 +48,6 @@ export const getAllDoctors = () => {
 };
 
 export const saveDetailDoctor = (data) => {
-  // console.log(data)
   return axios.post(`/api/save-info-doctors`,data);
 };
 
@@ -70,4 +69,8 @@ export const getDoctorInfoById = (id) => {
 
 export const saveBulkScheduleDoctor = (data) => {
   return axios.post(`/api/bulk-create-schedule`, data);
+};
+
+export const savePatientBooking = (data) => {
+  return axios.post(`/api/patient-book-appointment`, data);
 };

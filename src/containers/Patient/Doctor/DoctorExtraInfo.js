@@ -20,19 +20,18 @@ class DoctorExtraInfo extends Component {
 
   componentDidMount = async () => {
     let res = await getDoctorInfoById(this.props.doctorId);
-    console.log(res);
     this.setState({
       dataRes: res.data,
     });
   };
 
   componentDidUpdate = async (prevProps, prevState, snapshot) => {
-    if (prevState.dataRes !== this.state.dataRes) {
-      let res = await getDoctorInfoById(this.props.doctorId);
-      this.setState({
-        dataRes: res.data,
-      });
-    }
+    // if (prevState.dataRes !== this.state.dataRes) {
+    //   let res = await getDoctorInfoById(this.props.doctorId);
+    //   this.setState({
+    //     dataRes: res.data,
+    //   });
+    // }
   };
 
   showTableContainer = () => {

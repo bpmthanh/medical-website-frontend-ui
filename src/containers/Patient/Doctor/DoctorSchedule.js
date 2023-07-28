@@ -15,12 +15,14 @@ class DoctorSchedule extends Component {
       allDays: [],
       allAvailableTime: [],
       isShowModal: false,
+      dataSchedule: {},
     };
   }
 
-  showModal = () => {
+  showModal = (item) => {
     this.setState((prevState) => ({
       isShowModal: !prevState.isShowModal,
+      dataSchedule: item,
     }));
   };
 
@@ -124,7 +126,7 @@ class DoctorSchedule extends Component {
   };
 
   render() {
-    let { allDays, allAvailableTime, isShowModal } = this.state;
+    let { allDays, allAvailableTime, isShowModal, dataSchedule } = this.state;
     return (
       <>
         <div className="doctor-schedule-container">
@@ -162,7 +164,7 @@ class DoctorSchedule extends Component {
                       <button
                         key={index}
                         className="btn btn-success"
-                        onClick={this.showModal}
+                        onClick={() => this.showModal(item)}
                       >
                         {this.props.language === languages.VI
                           ? item.timeTypeData.value_vi
@@ -189,8 +191,10 @@ class DoctorSchedule extends Component {
           </div>
         </div>
         <BookingModal
+          doctorId={this.props.doctorId}
           isOpen={isShowModal}
           sendDataToParent={this.receiveDataFromChild}
+          dataSchedule={dataSchedule}
         />
       </>
     );

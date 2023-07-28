@@ -131,6 +131,26 @@
       "detail": "View details",
       "hidden": "Hide price table",
       "payment-method": "The recipient can pay by: "
+    },
+    "modal-schedule-doctor": {
+      "modal-title": "Schedule appointment",
+      "modal-price": "Appointment price",
+      "modal-time": "Appointment time:",
+      "gender": "Gender",
+      "birthday": "Day of birth",
+      "gender-male": "Male",
+      "gender-female": "Female",
+      "gender-other": "Other",
+      "book-for": "Book for",
+      "book-for-me": "Myself",
+      "book-for-other": "Someone else",
+      "name": "Full name",
+      "phone": "Phone number",
+      "mail": "Email address",
+      "address": "Contact address",
+      "reason": "Reason for appointment",
+      "save": "Save",
+      "cancel": "Cancel"
     }
   }
 }

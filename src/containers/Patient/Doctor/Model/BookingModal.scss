@@ -5,10 +5,11 @@
   min-width: 100vw;
   margin: 0 auto;
   .modal-content {
-    width: 80%;
+    width: 50%;
     .modal-header {
       .modal-title {
-        color:#000
+        color: #000;
+        text-transform: uppercase;
       }
       .close {
         border: none;
@@ -16,12 +17,50 @@
         font-size: 29px;
       }
     }
-    .modal-footer {
-      .btn {
-        padding-left: 5px;
-        padding-right: 5px;
+    .modal-body {
+      .doctor-info {
       }
-      .btn-secondary{
+      .doctor-price {
+        margin-top: 15px;
+        .row {
+          margin-top: 15px;
+          .form-group {
+            margin-top: 5px;
+          }
+          .name {
+          }
+          .gender {
+            .gender-container {
+              display: flex !important;
+              .gender-wrap {
+                margin-right: 10px;
+                margin-top: 5px;
+              }
+            }
+          }
+          .about {
+            .about-container {
+              display: flex !important;
+              .about-wrap {
+                margin-right: 5px;
+              }
+            }
+          }
+          .birthday{
+            label{
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+    .modal-footer {
+      border-top: none !important;
+      .btn {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      .btn-secondary {
         background-color: red;
       }
     }

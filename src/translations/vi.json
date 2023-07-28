@@ -131,6 +131,26 @@
       "detail": "Xem chi tiết",
       "hidden": "Ẩn bảng giá",
       "payment-method": "Người nhận có thể thanh toán bằng: "
+    },
+    "modal-schedule-doctor": {
+      "modal-title": "Đặt lịch khám",
+      "modal-price": "Giá khám",
+      "modal-time": "Thời gian khám:",
+      "gender": "Giới tính",
+      "birthday": "Ngày sinh",
+      "gender-male": "Nam",
+      "gender-female": "Nữ",
+      "gender-other": "Khác",
+      "book-for": "Đặt cho ai",
+      "book-for-me": "Bản thân",
+      "book-for-other": "Người khác",
+      "name": "Họ và tên",
+      "phone": "Số điện thoại",
+      "mail": "Địa chỉ email",
+      "address": "Địa chỉ liên hệ",
+      "reason": "Lý do khám",
+      "save": "Lưu",
+      "cancel": "Hủy"
     }
   }
 }
