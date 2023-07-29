@@ -5,7 +5,10 @@ import { languages, CRUD_ACTIONS, CommonUtils } from '../../../../utils';
 import moment from 'moment';
 import 'moment/locale/vi';
 import { FormattedMessage } from 'react-intl';
-import { savePatientBooking } from '../../../../services/userService';
+import {
+  savePatientBooking,
+  getDetailInfoDoctor,
+} from '../../../../services/userService';
 import NumberFormat, { PatternFormat } from 'react-number-format';
 import { NumericFormat } from 'react-number-format';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -28,7 +31,9 @@ class BookingModal extends Component {
       reason: '',
       timeType: '',
       selectedGender: 'M',
+      timeString: '',
       doctorId: this.props.doctorId,
+      infoDoctor: [],
       birthday: new Date(),
       genders: [],
     };
@@ -88,7 +93,91 @@ class BookingModal extends Component {
     this.props.sendDataToParent(data);
   };
 
+  formatDateVi = (timestamp) => {
+    const daysOfWeek = [
+      'Chủ nhật',
+      'Thứ hai',
+      'Thứ ba',
+      'Thứ tư',
+      'Thứ năm',
+      'Thứ sáu',
+      'Thứ bảy',
+    ];
+    const date = new Date(parseInt(timestamp));
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${dayOfWeek}, ${day}/${month}/${year}`;
+  };
+
+  formatDateEn = (timestamp) => {
+    const daysOfWeek = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+    const date = new Date(parseInt(timestamp));
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${dayOfWeek}, ${day}/${month}/${year}`;
+  };
+
   handleConfirmBooking = async () => {
+    // timeString
+    if (this.props.language === languages.VI) {
+      this.setState({
+        timeString: `${
+          this.props.dataSchedule.timeTypeData &&
+          this.props.dataSchedule.timeTypeData.value_vi
+        }, ${this.formatDateVi(this.props.dataSchedule.date)}`,
+      });
+    } else {
+      this.setState({
+        timeString: `${
+          this.props.dataSchedule.timeTypeData &&
+          this.props.dataSchedule.timeTypeData.value_en
+        }, ${this.formatDateEn(this.props.dataSchedule.date)}`,
+      });
+    }
+
+    //info doctor
+    const infoDoctor = {
+      fullName:
+        this.props.language === languages.VI
+          ? `${
+              this.state.infoDoctor.positionData &&
+              this.state.infoDoctor.positionData.value_vi
+            }, ${this.state.infoDoctor.lastName} ${
+              this.state.infoDoctor.firstName
+            }`
+          : `${
+              this.state.infoDoctor.positionData &&
+              this.state.infoDoctor.positionData.value_en
+            }, ${this.state.infoDoctor.firstName} ${
+              this.state.infoDoctor.lastName
+            }`,
+      experiment:
+        this.state.infoDoctor.Markdown &&
+        this.state.infoDoctor.Markdown.description,
+      price:
+        this.state.infoDoctor && this.props.language === languages.VI
+          ? this.state.infoDoctor.Doctor_Infor &&
+            Number(
+              this.state.infoDoctor.Doctor_Infor.priceTypeData.value_vi
+            ).toLocaleString(['vi-VN', 'vi', 'vn'], {
+              maximumFractionDigits: 0,
+            }) + ' VNĐ'
+          : this.state.infoDoctor.Doctor_Infor &&
+            this.state.infoDoctor.Doctor_Infor.priceTypeData.value_en + ' USD',
+    };
+
     let checkIsValid = this.checkValid();
     if (checkIsValid === false) {
       return;
@@ -104,6 +193,9 @@ class BookingModal extends Component {
       birthday: this.state.birthday,
       date: this.props.dataSchedule.date,
       timeType: this.props.dataSchedule.timeType,
+      language: this.props.language,
+      timeString: this.state.timeString,
+      infoDoctor: infoDoctor,
     });
     if (res.errCode === 0) {
       this.toggle();
@@ -138,9 +230,11 @@ class BookingModal extends Component {
     }
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
     this.props.getGenderStart();
-  }
+    let res = await getDetailInfoDoctor(this.props.doctorId);
+    this.setState({ infoDoctor: res.data });
+  };
 
   handleOnchangeInput(event, inputName) {
     this.setState({
