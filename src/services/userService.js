@@ -74,3 +74,18 @@ export const saveBulkScheduleDoctor = (data) => {
 export const savePatientBooking = (data) => {
   return axios.post(`/api/patient-book-appointment`, data);
 };
+
+export const postVerifyBookAppointment = (data) => {
+  return axios.post(`/api/patient-verify-book-appointment`, data);
+};
+
+export const createNewSpecialty = (data) => {
+  return axios.post(`/api/create-new-specialty`, data);
+};
+
+export const getAllSpecialty = () => {
+  return axios.get(`/api/get-all-specialty`);
+};
+export const getDetailSpecialtyById = (id,location) => {
+  return axios.get(`/api/get-detail-specialty-by-id?specialtyId=${id}&location=${location}`);
+};

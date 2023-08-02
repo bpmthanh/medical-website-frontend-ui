@@ -57,6 +57,12 @@
                 font-size: medium;
                 margin-top: 10px;
               }
+              &:hover{
+                cursor: pointer;
+                .detail-title {
+                  color: $colormain;
+                }
+              }
             }
           }
         }

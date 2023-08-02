@@ -94,49 +94,55 @@ class ProfileDoctor extends Component {
               </div>
             )}
 
-            <div className="doctor-schedule">
-              <FormattedMessage
-                id={'patient.modal-schedule-doctor.modal-time'}
-              />
-              &nbsp;
-              {this.props.language === languages.VI
-                ? `${
-                    dataSchedule.timeTypeData &&
-                    dataSchedule.timeTypeData.value_vi
-                  }, ${this.formatDateVi(dataSchedule.date)}`
-                : `${
-                    dataSchedule.timeTypeData &&
-                    dataSchedule.timeTypeData.value_en
-                  }, ${this.formatDateEn(dataSchedule.date)}`}
-            </div>
-            <div className="doctor-price">
-              <FormattedMessage
-                id={'patient.modal-schedule-doctor.modal-price'}
-              />
-              :&nbsp;
-              {infoDoctor &&
-                (this.props.language === languages.VI ? (
-                  <NumberFormat
-                    value={
-                      infoDoctor.Doctor_Infor &&
-                      infoDoctor.Doctor_Infor.priceTypeData.value_vi
-                    }
-                    displayType={'text'}
-                    thousandSeparator={true}
-                    suffix={' VND'}
-                  />
-                ) : (
-                  <NumberFormat
-                    value={
-                      infoDoctor.Doctor_Infor &&
-                      infoDoctor.Doctor_Infor.priceTypeData.value_en
-                    }
-                    displayType={'text'}
-                    thousandSeparator={true}
-                    suffix={' USD'}
-                  />
-                ))}
-            </div>
+            {this.props.isShowScheduleDoctor || (
+              <div className="doctor-schedule">
+                <FormattedMessage
+                  id={'patient.modal-schedule-doctor.modal-time'}
+                />
+                &nbsp;
+                {this.props.language === languages.VI
+                  ? `${
+                      dataSchedule.timeTypeData &&
+                      dataSchedule.timeTypeData.value_vi
+                    }, ${this.formatDateVi(dataSchedule.date)}`
+                  : `${
+                      dataSchedule.timeTypeData &&
+                      dataSchedule.timeTypeData.value_en
+                    }, ${this.formatDateEn(dataSchedule.date)}`}
+              </div>
+            )}
+
+            {this.props.isShowPriceDoctor || (
+              <div className="doctor-price">
+                <FormattedMessage
+                  id={'patient.modal-schedule-doctor.modal-price'}
+                />
+                :&nbsp;
+                {infoDoctor &&
+                  (this.props.language === languages.VI ? (
+                    <NumberFormat
+                      value={
+                        infoDoctor.Doctor_Infor &&
+                        infoDoctor.Doctor_Infor.priceTypeData.value_vi
+                      }
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      suffix={' VND'}
+                    />
+                  ) : (
+                    <NumberFormat
+                      value={
+                        infoDoctor.Doctor_Infor &&
+                        infoDoctor.Doctor_Infor.priceTypeData.value_en
+                      }
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      suffix={' USD'}
+                    />
+                  ))}
+              </div>
+            )}
+
           </div>
         </div>
       </>

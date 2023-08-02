@@ -5,8 +5,38 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Specialty.scss';
 import '../../../styles/global-class.scss';
+import { getAllSpecialty } from '../../../services/userService';
+import { withRouter } from 'react-router-dom';
 
 class Specialty extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSpecialty: [],
+    };
+  }
+
+  componentDidMount = async () => {
+    let res = await getAllSpecialty();
+    if (res && res.data.length > 0) {
+      this.setState({ dataSpecialty: res.data });
+    }
+  };
+
+  componentDidUpdate = async (prevProps, prevState, snapshot) => {
+    // if (this.state.dataSpecialty !== prevState.dataSpecialty) {
+    //   let res = await getAllSpecialty();
+    //   if (res && res.data.length > 0) {
+    //     this.setState({ dataSpecialty: res.data });
+    //   }
+    // }
+  };
+
+  handleViewDetailDoctor = (data) => {
+    const { history } = this.props;
+    history.push(`detail-specialty/${data.id}`);
+  };
+
   render() {
     let settings = {
       dots: true,
@@ -45,66 +75,22 @@ class Specialty extends Component {
             <button className="specialty-header-des">Xem thêm</button>
           </div>
           <Slider {...settings}>
-            <div className="specialty-content-detail">
-              <div className="image-container">
-                <img
-                  src={
-                    require('../../../assets/images/HomePage/chuyen-khoa-pho-bien/120331-co-xuong-khop.jpg')
-                      .default
-                  }
-                  alt=""
-                />
-              </div>
-              <h3 className="detail-title">Cơ xương khớp</h3>
-            </div>
-            <div className="specialty-content-detail">
-              <div className="image-container">
-                <img
-                  src={
-                    require('../../../assets/images/HomePage/chuyen-khoa-pho-bien/120741-tim-mach.jpg')
-                      .default
-                  }
-                  alt=""
-                />
-              </div>
-              <h3 className="detail-title">Cơ xương khớp</h3>
-            </div>
-            <div className="specialty-content-detail">
-              <div className="image-container">
-                <img
-                  src={
-                    require('../../../assets/images/HomePage/chuyen-khoa-pho-bien/121146-tai-mui-hong.jpg')
-                      .default
-                  }
-                  alt=""
-                />
-              </div>
-              <h3 className="detail-title">Cơ xương khớp</h3>
-            </div>
-            <div className="specialty-content-detail">
-              <div className="image-container">
-                <img
-                  src={
-                    require('../../../assets/images/HomePage/chuyen-khoa-pho-bien/120933-tieu-hoa.jpg')
-                      .default
-                  }
-                  alt=""
-                />
-              </div>
-              <h3 className="detail-title">Cơ xương khớp</h3>
-            </div>
-            <div className="specialty-content-detail">
-              <div className="image-container">
-                <img
-                  src={
-                    require('../../../assets/images/HomePage/chuyen-khoa-pho-bien/121042-than-kinh.jpg')
-                      .default
-                  }
-                  alt=""
-                />
-              </div>
-              <h3 className="detail-title">Cơ xương khớp</h3>
-            </div>
+            {this.state.dataSpecialty &&
+              this.state.dataSpecialty.length > 0 &&
+              this.state.dataSpecialty.map((item, index) => {
+                return (
+                  <div
+                    className="specialty-content-detail"
+                    key={index}
+                    onClick={() => this.handleViewDetailDoctor(item)}
+                  >
+                    <div className="image-container">
+                      <img src={item.image} default alt="" />
+                    </div>
+                    <h3 className="detail-title">{item.name}</h3>
+                  </div>
+                );
+              })}
           </Slider>
         </div>
       </div>
@@ -132,4 +118,7 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Specialty));

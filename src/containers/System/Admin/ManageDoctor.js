@@ -11,6 +11,7 @@ import {
   getDetailInfoDoctor,
   getAllCodeService,
   saveDetailDoctor,
+  getAllSpecialty,
 } from '../../../services/userService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,11 +22,16 @@ class ManageDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      detailDoctor: {},
       allDoctorRedux: [],
       contentMarkdown: '',
       contentHTML: '',
       descriptionDoctor: '',
       doctorId: '',
+      selectedSpecialty: '',
+      listSpecialty: [],
+      selectedClinic: '',
+      listClinic: [],
       actionSaveData: true,
       action: CRUD_ACTIONS.CREATE,
       listPrice: [],
@@ -37,6 +43,7 @@ class ManageDoctor extends Component {
       nameClinic: '',
       addressClinic: '',
       note: '',
+      clinicId: '',
     };
   }
 
@@ -49,10 +56,13 @@ class ManageDoctor extends Component {
     let resPriceFetch = await getAllCodeService('price');
     let resPaymentFetch = await getAllCodeService('payment');
     let resProvinceFetch = await getAllCodeService('province');
+    let resSpecialtyFetch = await getAllSpecialty();
+    // let resClinicFetch = await getAllCodeService();
     this.setState({
       listPrice: resPriceFetch.data,
       listPayment: resPaymentFetch.data,
       listProvince: resProvinceFetch.data,
+      listSpecialty: resSpecialtyFetch.data,
     });
   };
 
@@ -62,13 +72,6 @@ class ManageDoctor extends Component {
         allDoctorRedux: this.props.allDoctors.reverse(),
         // doctorId: this.props.allDoctors[0].id,
       });
-    }
-    if (
-      prevState.resPriceFetch !== this.state.resPriceFetch ||
-      prevState.resPaymentFetch !== this.state.resPaymentFetch ||
-      prevState.resProvinceFetch !== this.state.resProvinceFetch
-    ) {
-      this.fetchMoreInforDoctor();
     }
   };
 
@@ -93,6 +96,8 @@ class ManageDoctor extends Component {
       nameClinic: this.state.nameClinic,
       addressClinic: this.state.addressClinic,
       note: this.state.note,
+      clinicId: this.state.selectedClinic || '',
+      specialtyId: this.state.selectedSpecialty || this.state.specialtyId,
 
       action: actionSaveData === true ? CRUD_ACTIONS.CREATE : CRUD_ACTIONS.EDIT,
     });
@@ -114,6 +119,8 @@ class ManageDoctor extends Component {
         selectedPrice: '',
         selectedPayment: '',
         selectedProvince: '',
+        selectedSpecialty: '',
+        specialtyId: '',
         nameClinic: '',
         addressClinic: '',
         note: '',
@@ -136,21 +143,27 @@ class ManageDoctor extends Component {
       doctorId: e.target.value,
     });
     let res = await getDetailInfoDoctor(e.target.value);
-    console.log(res.data);
     if (res.data.Markdown) {
       this.setState({
+        detailDoctor: res.data,
         descriptionDoctor: res.data.Markdown.description,
         contentMarkdown: res.data.Markdown.contentMarkdown,
         contentHTML: res.data.Markdown.contentHTML,
         doctorId: res.data.Markdown.doctorId,
 
-        selectedPrice: res.data.Doctor_Infor.priceTypeData.keyMap,
-        selectedPayment: res.data.Doctor_Infor.paymentTypeData.keyMap,
-        selectedProvince: res.data.Doctor_Infor.provinceTypeData.keyMap,
-        nameClinic: res.data.Doctor_Infor.nameClinic,
-        addressClinic: res.data.Doctor_Infor.addressClinic,
-        note: res.data.Doctor_Infor.note,
+        selectedPrice:
+          res.data.Doctor_Infor && res.data.Doctor_Infor.priceTypeData.keyMap,
+        selectedPayment:
+          res.data.Doctor_Infor && res.data.Doctor_Infor.paymentTypeData.keyMap,
+        selectedProvince:
+          res.data.Doctor_Infor &&
+          res.data.Doctor_Infor.provinceTypeData.keyMap,
+        nameClinic: res.data.Doctor_Infor && res.data.Doctor_Infor.nameClinic,
+        addressClinic:
+          res.data.Doctor_Infor && res.data.Doctor_Infor.addressClinic,
+        note: res.data.Doctor_Infor && res.data.Doctor_Infor.note,
 
+        specialtyId: res.data.Doctor_Infor && res.data.Doctor_Infor.specialtyId,
         action: CRUD_ACTIONS.EDIT,
         actionSaveData: false,
       });
@@ -170,7 +183,7 @@ class ManageDoctor extends Component {
       event.target.selectedOptions[0].getAttribute('data-item')
     );
     let stateCopy = { ...this.state };
-    stateCopy[event.target.name] = selectedObject.keyMap;
+    stateCopy[event.target.name] = selectedObject.keyMap || selectedObject.id;
     this.setState({
       ...stateCopy,
     });
@@ -185,7 +198,7 @@ class ManageDoctor extends Component {
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.state.detailDoctor);
     return (
       <div className="container manage-doctor-container">
         <p className="manage-doctor-title">
@@ -301,6 +314,66 @@ class ManageDoctor extends Component {
                 {this.state.listProvince &&
                   this.state.listProvince.length > 0 &&
                   this.state.listProvince.map((item, index) => {
+                    return (
+                      <option
+                        key={index}
+                        value={item.keyMap}
+                        data-item={JSON.stringify(item)}
+                      >
+                        {this.props.language === languages.VI
+                          ? item.value_vi
+                          : item.value_en}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div className="col-12 choose-specialty">
+              <label>Chọn chuyên khoa</label>
+              <select
+                className="form-select"
+                onChange={(event) => this.handleOnchangeSelectedInfor(event)}
+                name="selectedSpecialty"
+                value={this.state.selectedSpecialty || this.state.specialtyId}
+              >
+                <option value="" disabled selected>
+                  {this.props.language === languages.VI
+                    ? 'Chọn chuyên khoa'
+                    : 'Choose specialty'}
+                </option>
+                {this.state.listSpecialty &&
+                  this.state.listSpecialty.length > 0 &&
+                  this.state.listSpecialty.map((item, index) => {
+                    return (
+                      <option
+                        key={index}
+                        value={item.id}
+                        data-item={JSON.stringify(item)}
+                      >
+                        {this.props.language === languages.VI
+                          ? item.name
+                          : item.name}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div className="col-12 choose-clinic">
+              <label>Chọn phòng khám</label>
+              <select
+                className="form-select"
+                onChange={(event) => this.handleOnchangeSelectedInfor(event)}
+                value={this.state.selectedClinic}
+                name="selectedClinic"
+              >
+                <option value="" disabled selected>
+                  {this.props.language === languages.VI
+                    ? 'Chọn phòng khám'
+                    : 'Choose clinic'}
+                </option>
+                {this.state.listClinic &&
+                  this.state.listClinic.length > 0 &&
+                  this.state.listClinic.map((item, index) => {
                     return (
                       <option
                         key={index}

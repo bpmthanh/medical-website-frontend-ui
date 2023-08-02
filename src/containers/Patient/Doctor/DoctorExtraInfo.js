@@ -55,18 +55,16 @@ class DoctorExtraInfo extends Component {
             <div className="detail-address">{dataRes.addressClinic}</div>
           </div>
           <div className="content-down">
-            <div className="price">
+            <div
+              className="price"
+              style={{
+                display: this.state.hiddenTableContainer
+                  ? 'inline-block'
+                  : 'none',
+              }}
+            >
               <FormattedMessage id={'patient.extra-info-doctor.clinic-price'} />
-              <span
-                className="icon"
-                style={{
-                  display: this.state.hiddenTableContainer
-                    ? 'inline-block'
-                    : 'none',
-                }}
-              >
-                :&nbsp;
-              </span>
+              <span className="icon">:&nbsp;</span>
               <span
                 className="price-detail"
                 style={{
